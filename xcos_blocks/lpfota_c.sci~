@@ -1,0 +1,38 @@
+global Ut_sim Kappa_sim;
+
+function block=lpfota_c(block,flag)
+    c2 = 160e-15 * ones(block.ipar(1),1)
+    c1 = 64e-15 
+    cw = 160e-15 * ones(block.ipar(1),1)
+    cL = 600e-15 * ones(block.ipar(1),1)
+    Ceq = ((cL+c2).*(c1+c2+cw)-c2^2)./c2
+    Alpha =(c1./c2).*((cL+c2)./Ceq)
+    Beta = c1./Ceq
+    if flag ==1
+        in_out_num = block.ipar(1); //Vectorized
+        row_vec_io = 1:in_out_num;  // Row vector for input & output 
+        //block.outptr(1)(row_vec_io)=block.x(row_vec_io); //Output
+        //block.outptr(1)(1)=block.x(1);
+        block.outptr(1)(1)=block.x(2*1-1)+ Beta.*block.inptr(2)(1)
+    elseif flag ==0
+        in_out_num = block.ipar(1);
+        row_vec_io = 1:in_out_num;  // Row vector for input & output 
+        C = 5e-12;
+        VL=1;
+        tau=1 ./(2*%pi*block.rpar(row_vec_io));
+        Ibias= (2*C*Ut_sim)./(Kappa_sim*tau);
+               //block.xd(1)=(100e-9/C).*tanh((Kappa_sim*(block.inptr(1)(1)-block.x(1)))/(2*Ut_sim));
+               block.xd(1)=((1e-7).*tanh(block.inptr(1)(1)/VL)-((1e-7).*tanh(block.x(2)/VL)))/C;
+                              block.xd(2)=((1e-7).*tanh(block.inptr(1)(1)/VL)-((1e-7).*tanh(block.x(1)/VL)))/C;
+        block.xd(1)=((1e-7).*tanh(block.inptr(1)(1)/VL)-((1e-7).*tanh(block.x(1)/VL) +(1e-7).*tanh(block.x(2)/VL) + (1e-7).*tanh(block.x(3)/VL)+(1e-7).*tanh(block.x(4)/VL) ))/C;
+        block.xd(2)=((1e-7).*tanh(block.inptr(1)(1)/VL)-((1e-7).*tanh(block.x(1)/VL) +(1e-7).*tanh(block.x(2)/VL) + (1e-7).*tanh(block.x(3)/VL)+(1e-7).*tanh(block.x(4)/VL) ))/C;
+        block.xd(3)=((1e-7).*tanh(block.inptr(1)(1)/VL)-((1e-7).*tanh(block.x(1)/VL) +(1e-7).*tanh(block.x(2)/VL) + (1e-7).*tanh(block.x(3)/VL)+(1e-7).*tanh(block.x(4)/VL) ))/C;
+        block.xd(4)=((1e-7).*tanh(block.inptr(1)(1)/VL)-((1e-7).*tanh(block.x(1)/VL) +(1e-7).*tanh(block.x(2)/VL) + (1e-7).*tanh(block.x(3)/VL)+(1e-7).*tanh(block.x(4)/VL) ))/C;
+           
+
+         I1 = Ibias1.*tanh((kap/(2*Ut))*(Vref-(block.x(2*1)+Alpha.*block.inptr(1)(1))))
+        I2 = Ibias2.*tanh((1/VL)*(block.x(2*1-1)-block.x(2*1)-(Alpha-Beta).*block.inptr(1)(1)))
+        //block.xd(2*1-1)=(1 ./Ceq).*(I2+((c1+c2+cw)./c2).*I1); //Vouta
+        //block.xd(2*1)=(1 ./Ceq).*(I1+((cL+c2)./c2).*I2); //V2 = V1-Alpha*Vin
+    end
+endfunction

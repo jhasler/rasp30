@@ -1,0 +1,159 @@
+<block name="/home/ubuntu/RASP_Workspace/RASP_Workspace/DAC_calibration1//DAC.net" instance="FPGA_packed_netlist[0]">
+	<inputs>
+		net1_1 net3_1 
+	</inputs>
+
+	<outputs>
+		out:net2_1 out:net3_1 
+	</outputs>
+
+	<globals>
+		
+	</globals>
+
+	<block name="net2_1" instance="cab[0]" mode="cab">
+		<inputs>
+			<port name="I">open open open open open open open open net2_1 open open net1_1 open open open open </port>
+		</inputs>
+		<outputs>
+			<port name="O">open open open open ota[0].out[0]->crossbar  open open open </port>
+		</outputs>
+		<globals>
+			<port name="gnd">open </port>
+			<port name="vdd">open </port>
+		</globals>
+		<block name="open" instance="fgota[0]"/>
+		<block name="open" instance="fgota[1]"/>
+		<block name="open" instance="ota_buf[0]"/>
+		<block name="net2_1" instance="ota[0]">
+			<inputs>
+				<port name="in">cab.I[11]->crossbar  cab.I[8]->crossbar  </port>
+			</inputs>
+			<outputs>
+				<port name="out">net2_1 </port>
+			</outputs>
+			<globals>
+			</globals>
+		</block>
+		<block name="open" instance="cap[0]"/>
+		<block name="open" instance="cap[1]"/>
+		<block name="open" instance="cap[2]"/>
+		<block name="open" instance="cap[3]"/>
+		<block name="open" instance="c4_blk[0]"/>
+		<block name="open" instance="speech[0]"/>
+		<block name="open" instance="cap_sense[0]"/>
+		<block name="open" instance="lpf_2[0]"/>
+		<block name="open" instance="hhneuron[0]"/>
+		<block name="open" instance="peak_detector[0]"/>
+		<block name="open" instance="nfet[0]"/>
+		<block name="open" instance="nfet[1]"/>
+		<block name="open" instance="pfet[0]"/>
+		<block name="open" instance="pfet[1]"/>
+		<block name="open" instance="tgate[0]"/>
+		<block name="open" instance="tgate[1]"/>
+		<block name="open" instance="tgate[2]"/>
+		<block name="open" instance="tgate[3]"/>
+		<block name="open" instance="nmirror[0]"/>
+		<block name="open" instance="nmirror[1]"/>
+		<block name="open" instance="volt_div[0]"/>
+		<block name="open" instance="volt_div[1]"/>
+		<block name="open" instance="volswc[0]"/>
+		<block name="open" instance="volswc[1]"/>
+		<block name="open" instance="lpf[0]"/>
+		<block name="open" instance="h_rect[0]"/>
+		<block name="open" instance="ramp_fe[0]"/>
+		<block name="open" instance="ramp_gen[0]"/>
+		<block name="open" instance="sigma_delta_fe[0]"/>
+		<block name="open" instance="HOP_bif[0]"/>
+		<block name="open" instance="ladder_filter[0]"/>
+		<block name="open" instance="hh_neuron_b_debug[0]"/>
+		<block name="open" instance="gnd_out[0]"/>
+		<block name="open" instance="vdd_out[0]"/>
+		<block name="open" instance="in2in_x1[0]"/>
+		<block name="open" instance="in2in_x6[0]"/>
+		<block name="open" instance="integrator[0]"/>
+		<block name="open" instance="integrator_nmirror[0]"/>
+		<block name="open" instance="vco[0]"/>
+	</block>
+	<block name="out:net3_1" instance="io[1]" mode="outpad">
+		<inputs>
+			<port name="outpad">net3_1 </port>
+		</inputs>
+		<outputs>
+			<port name="inpad">open </port>
+		</outputs>
+		<globals>
+			<port name="clock">open </port>
+		</globals>
+		<block name="out:net3_1" instance="outpad[0]">
+			<inputs>
+				<port name="outpad">io.outpad[0]->outpad  </port>
+			</inputs>
+			<outputs>
+			</outputs>
+			<globals>
+			</globals>
+		</block>
+	</block>
+	<block name="out:net2_1" instance="io[2]" mode="outpad">
+		<inputs>
+			<port name="outpad">net2_1 </port>
+		</inputs>
+		<outputs>
+			<port name="inpad">open </port>
+		</outputs>
+		<globals>
+			<port name="clock">open </port>
+		</globals>
+		<block name="out:net2_1" instance="outpad[0]">
+			<inputs>
+				<port name="outpad">io.outpad[0]->outpad  </port>
+			</inputs>
+			<outputs>
+			</outputs>
+			<globals>
+			</globals>
+		</block>
+	</block>
+	<block name="net3_1" instance="io[3]" mode="inpad">
+		<inputs>
+			<port name="outpad">open </port>
+		</inputs>
+		<outputs>
+			<port name="inpad">inpad[0].inpad[0]->inpad  </port>
+		</outputs>
+		<globals>
+			<port name="clock">open </port>
+		</globals>
+		<block name="net3_1" instance="inpad[0]">
+			<inputs>
+			</inputs>
+			<outputs>
+				<port name="inpad">net3_1 </port>
+			</outputs>
+			<globals>
+			</globals>
+		</block>
+	</block>
+	<block name="net1_1" instance="io[4]" mode="inpad">
+		<inputs>
+			<port name="outpad">open </port>
+		</inputs>
+		<outputs>
+			<port name="inpad">inpad[0].inpad[0]->inpad  </port>
+		</outputs>
+		<globals>
+			<port name="clock">open </port>
+		</globals>
+		<block name="net1_1" instance="inpad[0]">
+			<inputs>
+			</inputs>
+			<outputs>
+				<port name="inpad">net1_1 </port>
+			</outputs>
+			<globals>
+			</globals>
+		</block>
+	</block>
+</block>
+

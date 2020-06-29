@@ -1,0 +1,10 @@
+Netlist file: /home/ubuntu/RASP_Workspace/RASP_Workspace/DAC_calibration1//DAC.net   Architecture file: /home/ubuntu/rasp30/vpr2swcs/./arch/rasp3_arch.xml
+Array size: 14 x 14 logic blocks
+
+#block name	x	y	subblk	block number
+#----------	--	--	------	------------
+net2_1		11	1	0	#0
+out:net3_1	9	0	0	#1
+out:net2_1	12	0	0	#2
+net3_1		10	0	2	#3
+net1_1		11	0	0	#4

@@ -1,0 +1,12 @@
+# Benchmark "div_by_2" written by ABC on Wed May 22 15:44:51 2013
+.model div_by_2
+.inputs top^ip1 top^reset
+.outputs top^op1
+
+.latch         n7 top^FF_NODE~3  re top^ip1 0
+
+.names top^reset top^FF_NODE~3 n7
+00 1
+.names top^FF_NODE~3 top^op1
+1 1
+.end

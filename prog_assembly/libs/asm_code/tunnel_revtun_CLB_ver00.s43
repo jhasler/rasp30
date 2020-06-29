@@ -1,0 +1,147 @@
+.include "pmem_defs.asm"
+.include "chip_para_TR.asm"
+
+.global main
+
+main:
+        mov     #DMEM_250, r1           ; Initialize stack pointer
+	mov	#0x5000, r7
+	mov	#0, r10			; Initialize time
+	mov     #8000, r5             	; Number of ms
+init_wait:
+        dec.w   r5 
+        jnz     init_wait
+	mov	#0x0010, &BCSCTL2	; Divide clock 20MHz
+	mov	#0x5A80, &WDTCTL	; Watchdog controller 
+	dint
+	mov	#0x0002, &TUN_MUX
+        mov     #0xBE04, &GP_PER_3      ; Vtun_ext = 5V, enable 6V, esd=6v
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+        mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+	mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+	mov     #0,    &ROW_SEL
+        mov     #0,    &COL_SEL
+
+	call 	#tunnel
+	call 	#reverse_tunnel
+
+        mov	#0x0000, &BCSCTL2	; Divide clock 20MHz
+	jmp     end_of_test
+
+tunnel:
+	mov	#1, r11			; Max loop 
+tunnel_s:
+	mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+     	mov     #0xAE04, &GP_PER_3      ; VTUN_EXT = 12V
+        mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+	mov     #0,    &ROW_SEL
+        mov     #0,    &COL_SEL
+        mov     #5, r5             	; Number of ms
+        call    #wait_ms                ; Call the waiting function
+	mov	#0x0040, &GATE_S	; gate_s = gnd
+	mov	#0x0040, &GATE_US_P	; gate_us_p = gnd
+	mov	#0x0040, &GATE_US_N	; gate_us_n = gnd
+	mov     #0x0026, &DRAIN_CTRL    ; drain = gnd, no use DAC, i2v mux control = No connection  
+	mov     #0x0004, &GP_PER_1      ; IVDD to gnd, Set vtun_ext = 12V
+	;mov     #0xFFFF, &TUN_MUX       ; Set tunnel mux, <3>:switch <4>:cab <5>:ble
+	mov     #0x0020, &TUN_MUX       ; Set CAB tunnel mux, <3>:switch <4>:cab <5>:ble
+        mov     #TUN_TIME_TP_CAB, r5          	; Number of 10us to tunnel
+	call    #wait_ms 	        ; Call the waiting function
+	add     #TUN_TIME_TP_CAB, r10        		; Calculate time
+	mov     #0x0002, &TUN_MUX       ; Reset tunnel mux (gnd)
+	mov     #0xBE04, &GP_PER_3    	; VTUN_EXT = 5V
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+        mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+	mov     #20, r5             	; Number of ms
+        call    #wait_ms                ; Call the waiting function
+        dec.w   r11
+        jz      tunnel_e
+	jmp	tunnel_s
+tunnel_e:
+	ret
+
+reverse_tunnel:
+	mov	#1, r11			; Max loop
+reverse_tunnel_s:
+        mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+        ;mov     #0x0020, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = Off
+        mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+	;mov     #0x0002, &TUN_MUX       ; ReSet tunnel mux (gnd), <3>:switch <4>:cab <5>:ble
+	mov     #0x0018, &TUN_MUX       ; ReSet tunnel mux (gnd), <3>:switch <4>:cab <5>:ble
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+	mov	#0x0060, &GATE_S
+	mov	#0x0060, &GATE_US_P
+	mov	#0x0060, &GATE_US_N
+	mov     #0,    &ROW_SEL
+        mov     #0,    &COL_SEL
+        mov     #5, r5             	; Number of ms
+        call    #wait_ms                ; Call the waiting function
+        mov     #0x0010, &GP_PER_1      ; IVDD to 6.0V, Set vtun_ext = Off(0V)
+        mov     #R_TUN_TIME_SP, r5	         	; Number of 10us to reverse_tunnel
+	call    #wait_ms              	; Call the waiting function
+	add     #R_TUN_TIME_SP, r10	        	; Calculate time
+        mov     #0x0020, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = Off(0V)
+        mov     #5, r5             	; Number of ms
+        call    #wait_ms                ; Call the waiting function
+	mov	#0x0040, &GATE_S	; gate_s = gnd
+	mov	#0x0040, &GATE_US_P	; gate_us_p = gnd
+	mov	#0x0040, &GATE_US_N	; gate_us_n = gnd
+	mov     #0x0026, &DRAIN_CTRL    ; drain = gnd, no use DAC, i2v mux control = No connection  
+	mov     #0x0004, &GP_PER_1      ; IVDD to 0V, Set vtun_ext = On
+	mov     #2, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+        mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+	mov     #0x0002, &TUN_MUX       ; ReSet tunnel mux (gnd), <3>:switch <4>:cab <5>:ble
+        mov     #1, r5             	; Number of ms
+        call    #wait_ms                ; Call the waiting function
+        dec.w   r11
+        jz      reverse_tunnel_e
+	jmp	reverse_tunnel_s
+reverse_tunnel_e:
+	ret
+
+wait_ms:
+        mov     #3324, r4               ; Number of clock cycles in a ms (chariterized by pulse measure)
+        mov     r4, r6                  ; Get number of inner loop iterations
+wait_ms_loop:
+        dec.w   r6                      ; Subtract from number of clk cycles.Execution takes 2 clock cycles
+        jnz     wait_ms_loop            ; Test for loop termination. Execution takes 2 clock cycles
+        mov     r4, r6                  ; Reset number of clock cycles
+        dec.w   r5                      ; Decrement number of ms total
+        jnz     wait_ms_loop            ; Keep looping if necessary
+        ret    
+ 
+wait_10us:
+        mov     #34, r4                 ; Number of clock cycles in 100 us (3324 was divided by 100)
+        mov     r4, r6                  ; Get number of inner loop iterations
+wait_10us_loop:
+        dec.w   r6                      ; Subtract from number of clk cycles.Execution takes 2 clock cycles
+        jnz     wait_10us_loop          ; Test for loop termination. Execution takes 2 clock cycles
+        mov     r4, r6                  ; Reset number of clock cycles
+        dec.w   r5                      ; Decrement number of ms total
+        jnz     wait_10us_loop          ; Keep looping if necessary
+        ret   
+
+end_of_test:
+	mov	#0x0000, &BCSCTL2
+	nop
+	br #0xffff
+
+/* ----------------------         INTERRUPT VECTORS  --------------- */
+.section .vectors, "a"
+.word end_of_test  ; Interrupt  0 (lowest priority)    <unused>
+.word end_of_test  ; Interrupt  1                      <unused>
+.word end_of_test  ; Interrupt  2                      <unused>
+.word end_of_test  ; Interrupt  3                      <unused>
+.word end_of_test  ; Interrupt  4                      <unused>
+.word end_of_test  ; Interrupt  5                      <unused>
+.word end_of_test  ; Interrupt  6                      <unused>
+.word end_of_test  ; Interrupt  7                      <unused>
+.word end_of_test  ; Interrupt  8                      <unused>
+.word end_of_test  ; Interrupt  9                      <unused>
+.word end_of_test  ; Interrupt 10                      Watchdog timer
+.word end_of_test  ; Interrupt 11                      <unused>
+.word end_of_test  ; Interrupt 12                      <unused>
+.word end_of_test  ; Interrupt 13                      <unused>
+.word end_of_test  ; Interrupt 14                      NMI
+.word main         ; Interrupt 15 (highest priority)   RESET

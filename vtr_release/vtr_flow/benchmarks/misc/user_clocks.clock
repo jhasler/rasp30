@@ -1,0 +1,5 @@
+# [bench_name] [top-level clk name]  filelist for regression tests assumed filename is *.map4.blif 
+div2 ip1
+atest  ip1 ip11 ip12
+divBy2 ip1
+div_by_n ip1

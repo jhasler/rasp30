@@ -1,0 +1,187 @@
+/home/ubuntu/Downloads/vtr_release/vtr_flow/../vpr/vpr k6_N10_memDepth16384_memData64_40nm_timing.xml ch_intrinsics --place_file ch_intrinsics.place --route --route_chan_width 66 --cluster_seed_type timing --nodisp
+
+VPR FPGA Placement and Routing.
+Version: Version 6.0 Full Release
+Compiled: Mar 26 2013.
+Original VPR by V. Betz.
+Timing-driven placement enhancements by A. Marquardt.
+Single-drivers enhancements by Andy Ye with additions by.
+Mark Fang, Jason Luu, Ted Campbell
+Heterogeneous stucture support by Jason Luu and Ted Campbell.
+T-VPack clustering integration by Jason Luu.
+Area-driven AAPack added by Jason Luu.
+This is free open source code under MIT license.
+
+Building complex block graph 
+Begin parsing packed FPGA netlist file
+Finished parsing packed FPGA netlist file
+Netlist generated from file ch_intrinsics.net
+top^memory_controller_out~31 is a constant generator 
+top^memory_controller_out~30 is a constant generator 
+top^memory_controller_out~29 is a constant generator 
+top^memory_controller_out~28 is a constant generator 
+top^memory_controller_out~27 is a constant generator 
+top^memory_controller_out~26 is a constant generator 
+top^memory_controller_out~25 is a constant generator 
+top^memory_controller_out~24 is a constant generator 
+top^memory_controller_out~23 is a constant generator 
+top^memory_controller_out~22 is a constant generator 
+top^memory_controller_out~21 is a constant generator 
+top^memory_controller_out~20 is a constant generator 
+top^memory_controller_out~19 is a constant generator 
+top^memory_controller_out~18 is a constant generator 
+top^memory_controller_out~17 is a constant generator 
+top^memory_controller_out~16 is a constant generator 
+top^memory_controller_out~15 is a constant generator 
+top^memory_controller_out~14 is a constant generator 
+top^memory_controller_out~13 is a constant generator 
+top^memory_controller_out~12 is a constant generator 
+top^memory_controller_out~11 is a constant generator 
+top^memory_controller_out~10 is a constant generator 
+top^memory_controller_out~9 is a constant generator 
+top^memory_controller_out~8 is a constant generator 
+Timing analysis: ON
+
+Circuit netlist file: ch_intrinsics.net
+Circuit placement file: ch_intrinsics.place
+Circuit routing file: ch_intrinsics.route
+Operation:  RUN_FLOW
+
+Placer: DISABLED
+Router: ENABLED
+RouterOpts.route_type:  DETAILED
+RouterOpts.router_algorithm:  TIMING_DRIVEN
+RouterOpts.base_cost_type:  DELAY_NORMALIZED
+RouterOpts.fixed_channel_width:  66
+RouterOpts.acc_fac:  1.000000
+RouterOpts.bb_factor:  3
+RouterOpts.bend_cost:  0.000000
+RouterOpts.first_iter_pres_fac:  0.500000
+RouterOpts.initial_pres_fac:  0.500000
+RouterOpts.pres_fac_mult:  1.300000
+RouterOpts.max_router_iterations:  50
+RouterOpts.astar_fac:  1.200000
+RouterOpts.criticality_exp:  1.000000
+RouterOpts.max_criticality:  0.990000
+
+RoutingArch.directionality:  UNI_DIRECTIONAL
+RoutingArch.switch_block_type:  WILTON
+RoutingArch.Fs:  3
+
+
+Netlist num_nets:  428
+Netlist num_blocks:  264
+Netlist <EMPTY> blocks:  0
+Netlist clb blocks:  34
+Netlist mult_36 blocks:  0
+Netlist memory blocks:  1
+Netlist inputs pins:  99
+Netlist output pins:  130
+
+Auto-sizing FPGA, try x = 16 y = 16
+Auto-sizing FPGA, try x = 8 y = 8
+Auto-sizing FPGA, try x = 4 y = 4
+Auto-sizing FPGA, try x = 6 y = 6
+Auto-sizing FPGA, try x = 7 y = 7
+Auto-sizing FPGA, try x = 7 y = 7
+FPGA auto-sized to, x = 8 y = 8
+The circuit will be mapped into a 8 x 8 array of clbs.
+
+Resource Usage:
+Netlist      0	blocks of type <EMPTY>
+Architecture 6	blocks of type <EMPTY>
+Netlist      229	blocks of type io
+Architecture 256	blocks of type io
+Netlist      34	blocks of type clb
+Architecture 48	blocks of type clb
+Netlist      0	blocks of type mult_36
+Architecture 2	blocks of type mult_36
+Netlist      1	blocks of type memory
+Architecture 1	blocks of type memory
+
+build rr_graph took 0.05 seconds
+Confirming Router Algorithm: TIMING_DRIVEN.
+wirelength after first iteration 3666, total available wirelength 9504, ratio 0.385732
+T_crit: 3.79286e-09.
+T_crit: 3.79286e-09.
+T_crit: 3.79286e-09.
+T_crit: 3.79286e-09.
+T_crit: 3.79286e-09.
+T_crit: 3.79286e-09.
+T_crit: 3.79286e-09.
+T_crit: 3.79286e-09.
+T_crit: 3.79286e-09.
+T_crit: 3.79286e-09.
+T_crit: 3.79286e-09.
+Successfully routed after 12 routing iterations.
+Completed net delay value cross check successfully.
+
+Checking to ensure routing is legal ...
+Completed routing consistency check successfully.
+
+Serial number (magic cookie) for the routing is: -338630773
+Circuit successfully routed with a channel width factor of 66.
+
+
+Average number of bends per net: 1.59251  Maximum # of bends: 10
+
+
+The number of routed nets (nonglobal): 427
+Wirelength results (all in units of 1 clb segments):
+	Total wirelength: 3935   Average net length: 9.21546
+	Maximum net length: 50
+
+Wirelength results in terms of physical segments:
+	Total wiring segments used: 1208   Av. wire segments per net: 2.82904
+	Maximum segments used by a net: 15
+
+	Total local nets with reserved CLB opins: 0
+
+
+X - Directed channels:
+
+j	max occ	av_occ		capacity
+0	58	45.2500  	66
+1	36	29.7500  	66
+2	32	25.6250  	66
+3	34	26.5000  	66
+4	33	22.6250  	66
+5	30	18.5000  	66
+6	32	22.3750  	66
+7	23	16.2500  	66
+8	40	27.7500  	66
+
+Y - Directed channels:
+
+i	max occ	av_occ		capacity
+0	42	27.2500  	66
+1	25	17.1250  	66
+2	23	15.5000  	66
+3	22	14.8750  	66
+4	32	26.2500  	66
+5	52	40.8750  	66
+6	46	34.7500  	66
+7	46	35.8750  	66
+8	58	44.7500  	66
+
+Total Tracks in X-direction: 594  in Y-direction: 594
+
+Logic Area (in minimum width transistor areas, excludes I/Os and empty grid tiles):
+Total Logic Block Area (Warning, need to add pitch of routing to blocks with height > 3): 948057 
+Total Used Logic Block Area: 592536 
+
+Routing area (in minimum width transistor areas):
+Total Routing Area: 537740.  Per logic tile: 8402.19
+
+Segment usage by type (index):
+Segment type       Fractional utilization
+------------       ----------------------
+       0                   0.37
+
+Segment usage by length:
+Segment length       Fractional utilization
+--------------       ----------------------
+        4                    0.37
+
+Critical Path: 3.79286e-09 (s)
+Routing took 0.2 seconds

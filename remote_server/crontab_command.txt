@@ -1,0 +1,2 @@
+* * * * * /home/cadsp/rasp30/remote_server/execute.sh
+* * * * * /home/ubuntu/rasp30/remote_server/execute01.sh

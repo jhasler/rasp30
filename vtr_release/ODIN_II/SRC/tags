@@ -1,0 +1,879 @@
+!_TAG_FILE_FORMAT	2	/supported features/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted/
+!_TAG_PROGRAM_AUTHOR	Steve Kirkendall	/kirkenda@cs.pdx.edu/
+!_TAG_PROGRAM_NAME	Elvis Ctags	//
+!_TAG_PROGRAM_URL	ftp://ftp.cs.pdx.edu/pub/elvis/README.html	/official site/
+!_TAG_PROGRAM_VERSION	2.2.0	//
+ACTIVATION	types.h	82;"	d	ln:82
+ACTIVATION_ERROR	types.h	65;"	d	ln:65
+ACT_NUM_ITER	activity_estimation.c	40;"	d	file:	ln:40
+ADD	types.h	222;"	ln:222	enum:operation_list
+ADDER_FUNC	types.h	222;"	ln:222	enum:operation_list
+ADDER_FUNC_string	node_creation_library.c	/^char *ADDER_FUNC_string = "ADDER_FUNC";$/;"	v	ln:256
+ADD_string	node_creation_library.c	/^char *ADD_string = "ADD"; $/;"	v	ln:227
+ALIAS_INPUTS	netlist_create_from_ast.c	50;"	d	file:	ln:50
+ALWAYS	types.h	285;"	ln:285	enum:ids
+ARRAY_REF	types.h	285;"	ln:285	enum:ids
+ASSIGN	types.h	285;"	ln:285	enum:ids
+AST_TYPES_H	types.h	162;"	d	ln:162
+Arch	odin_ii.c	/^t_arch Arch;$/;"	v	ln:54
+BIN	types.h	171;"	ln:171	enum:bases
+BINARY_OPERATION	types.h	285;"	ln:285	enum:ids
+BITWISE_AND	types.h	222;"	ln:222	enum:operation_list
+BITWISE_AND_string	node_creation_library.c	/^char *BITWISE_AND_string = "BITWISE_AND"; $/;"	v	ln:230
+BITWISE_NAND	types.h	222;"	ln:222	enum:operation_list
+BITWISE_NAND_string	node_creation_library.c	/^char *BITWISE_NAND_string = "BITWISE_NAND"; $/;"	v	ln:232
+BITWISE_NOR	types.h	222;"	ln:222	enum:operation_list
+BITWISE_NOR_string	node_creation_library.c	/^char *BITWISE_NOR_string = "BITWISE_NOR"; $/;"	v	ln:233
+BITWISE_NOT	types.h	222;"	ln:222	enum:operation_list
+BITWISE_NOT_string	node_creation_library.c	/^char *BITWISE_NOT_string = "BITWISE_NOT"; $/;"	v	ln:229
+BITWISE_OR	types.h	222;"	ln:222	enum:operation_list
+BITWISE_OR_string	node_creation_library.c	/^char *BITWISE_OR_string = "BITWISE_OR"; $/;"	v	ln:231
+BITWISE_XNOR	types.h	222;"	ln:222	enum:operation_list
+BITWISE_XNOR_string	node_creation_library.c	/^char *BITWISE_XNOR_string = "BITWISE_XNOR"; $/;"	v	ln:234
+BITWISE_XOR	types.h	222;"	ln:222	enum:operation_list
+BITWISE_XOR_string	node_creation_library.c	/^char *BITWISE_XOR_string = "BITWISE_XOR"; $/;"	v	ln:235
+BLIF_ERROR	types.h	61;"	d	ln:61
+BLIF_FUNCTION	types.h	222;"	ln:222	enum:operation_list
+BLIF_ONE_STRING	read_blif.c	/^char *BLIF_ONE_STRING    = "ONE_VCC_CNS";$/;"	v	ln:46
+BLIF_PAD_STRING	read_blif.c	/^char *BLIF_PAD_STRING    = "ZERO_PAD_ZERO";$/;"	v	ln:48
+BLIF_ZERO_STRING	read_blif.c	/^char *BLIF_ZERO_STRING   = "ZERO_GND_ZERO";$/;"	v	ln:47
+BLOCK	types.h	285;"	ln:285	enum:ids
+BLOCKING_STATEMENT	types.h	285;"	ln:285	enum:ids
+BUFFER_MAX_SIZE	simulate_blif.h	34;"	d	ln:34
+BUF_NODE	types.h	222;"	ln:222	enum:operation_list
+BUF_NODE_string	node_creation_library.c	/^char *BUF_NODE_string = "BUF_NODE"; $/;"	v	ln:221
+CARRY_FUNC	types.h	222;"	ln:222	enum:operation_list
+CARRY_FUNC_string	node_creation_library.c	/^char *CARRY_FUNC_string = "CARRY_FUNC";$/;"	v	ln:257
+CASE	types.h	285;"	ln:285	enum:ids
+CASE_DEFAULT	types.h	285;"	ln:285	enum:ids
+CASE_EQUAL	types.h	222;"	ln:222	enum:operation_list
+CASE_EQUAL_string	node_creation_library.c	/^char *CASE_EQUAL_string = "CASE_EQUAL"; $/;"	v	ln:254
+CASE_ITEM	types.h	285;"	ln:285	enum:ids
+CASE_LIST	types.h	285;"	ln:285	enum:ids
+CASE_NOT_EQUAL	types.h	222;"	ln:222	enum:operation_list
+CASE_NOT_EQUAL_string	node_creation_library.c	/^char *CASE_NOT_EQUAL_string = "CASE_NOT_EQUAL";$/;"	v	ln:255
+CLOCK_NODE	types.h	222;"	ln:222	enum:operation_list
+CLOCK_NODE_string	node_creation_library.c	/^char *CLOCK_NODE_string = "CLOCK_NODE"; $/;"	v	ln:223
+COMBINATIONAL	netlist_create_from_ast.c	52;"	d	file:	ln:52
+COMBO_LOOP	types.h	73;"	d	ln:73
+COMBO_LOOP_ERROR	types.h	74;"	d	ln:74
+CONCATENATE	types.h	285;"	ln:285	enum:ids
+COUNT_NODES	types.h	72;"	d	ln:72
+DEC	types.h	171;"	ln:171	enum:bases
+DEFAULT_CLOCK_NAME	read_blif.c	/^char *DEFAULT_CLOCK_NAME = "top^clock";$/;"	v	ln:49
+DEFAULT_STATIC_PROBABILITY	activity_estimation.c	37;"	d	file:	ln:37
+DEFAULT_TRANSITION_DENSITY	activity_estimation.c	38;"	d	file:	ln:38
+DELAY_CONTROL	types.h	285;"	ln:285	enum:ids
+DIVIDE	types.h	222;"	ln:222	enum:operation_list
+DIVIDE_string	node_creation_library.c	/^char *DIVIDE_string = "DIVIDE"; $/;"	v	ln:244
+DUAL_PORT_MEMORY_NAME	simulate_blif.h	58;"	d	ln:58
+DefaultSize	verilog_preprocessor.h	4;"	d	ln:4
+FALSE	types.h	33;"	d	ln:33
+FF_NODE	types.h	222;"	ln:222	enum:operation_list
+FF_NODE_string	node_creation_library.c	/^char *FF_NODE_string = "FF_NODE"; $/;"	v	ln:220
+FILE_ITEMS	types.h	285;"	ln:285	enum:ids
+GATE	types.h	285;"	ln:285	enum:ids
+GATE_INSTANCE	types.h	285;"	ln:285	enum:ids
+GENERATE_VECTORS	types.h	118;"	ln:118	enum:simulation_type
+GENERIC	types.h	222;"	ln:222	enum:operation_list
+GLOBALS_H	globals.h	2;"	d	ln:2
+GND_NAME	read_blif.c	40;"	d	file:	ln:40
+GND_NODE	types.h	222;"	ln:222	enum:operation_list
+GND_NODE_string	node_creation_library.c	/^char *GND_NODE_string = "GND_NODE"; $/;"	v	ln:225
+GRAPH_CRUNCH	types.h	75;"	d	ln:75
+GT	types.h	222;"	ln:222	enum:operation_list
+GTE	types.h	222;"	ln:222	enum:operation_list
+GTE_string	node_creation_library.c	/^char *GTE_string = "GTE"; $/;"	v	ln:251
+GT_string	node_creation_library.c	/^char *GT_string = "GT"; $/;"	v	ln:247
+HARD_BLOCK	types.h	285;"	ln:285	enum:ids
+HARD_BLOCKS_H	hard_blocks.h	25;"	d	ln:25
+HARD_BLOCK_CONNECT	types.h	285;"	ln:285	enum:ids
+HARD_BLOCK_CONNECT_LIST	types.h	285;"	ln:285	enum:ids
+HARD_BLOCK_NAMED_INSTANCE	types.h	285;"	ln:285	enum:ids
+HARD_IP	types.h	222;"	ln:222	enum:operation_list
+HARD_IP_string	node_creation_library.c	/^char *HARD_IP_string = "HARD_IP";$/;"	v	ln:259
+HASHTABLE_H	hashtable.h	24;"	d	ln:24
+HBPAD_NAME	read_blif.c	42;"	d	file:	ln:42
+HEX	types.h	171;"	ln:171	enum:bases
+IDENTIFIERS	types.h	285;"	ln:285	enum:ids
+IF	types.h	285;"	ln:285	enum:ids
+IF_Q	types.h	285;"	ln:285	enum:ids
+INOUT	types.h	285;"	ln:285	enum:ids
+INPUT	types.h	285;"	ln:285	enum:ids
+INPUT_NODE	types.h	222;"	ln:222	enum:operation_list
+INPUT_NODE_string	node_creation_library.c	/^char *INPUT_NODE_string = "INPUT_NODE"; $/;"	v	ln:222
+INPUT_VECTOR_FILE_NAME	simulate_blif.h	54;"	d	ln:54
+INSTANTIATE_DRIVERS	netlist_create_from_ast.c	49;"	d	file:	ln:49
+LEVELIZE	types.h	81;"	d	ln:81
+LOGICAL_AND	types.h	222;"	ln:222	enum:operation_list
+LOGICAL_AND_string	node_creation_library.c	/^char *LOGICAL_AND_string = "LOGICAL_AND"; $/;"	v	ln:238
+LOGICAL_EQUAL	types.h	222;"	ln:222	enum:operation_list
+LOGICAL_EQUAL_string	node_creation_library.c	/^char *LOGICAL_EQUAL_string = "LOGICAL_EQUAL"; $/;"	v	ln:248
+LOGICAL_NAND	types.h	222;"	ln:222	enum:operation_list
+LOGICAL_NAND_string	node_creation_library.c	/^char *LOGICAL_NAND_string = "LOGICAL_NAND"; $/;"	v	ln:239
+LOGICAL_NOR	types.h	222;"	ln:222	enum:operation_list
+LOGICAL_NOR_string	node_creation_library.c	/^char *LOGICAL_NOR_string = "LOGICAL_NOR"; $/;"	v	ln:240
+LOGICAL_NOT	types.h	222;"	ln:222	enum:operation_list
+LOGICAL_NOT_string	node_creation_library.c	/^char *LOGICAL_NOT_string = "LOGICAL_NOT"; $/;"	v	ln:236
+LOGICAL_OR	types.h	222;"	ln:222	enum:operation_list
+LOGICAL_OR_string	node_creation_library.c	/^char *LOGICAL_OR_string = "LOGICAL_OR"; $/;"	v	ln:237
+LOGICAL_XNOR	types.h	222;"	ln:222	enum:operation_list
+LOGICAL_XNOR_string	node_creation_library.c	/^char *LOGICAL_XNOR_string = "LOGICAL_XNOR"; $/;"	v	ln:242
+LOGICAL_XOR	types.h	222;"	ln:222	enum:operation_list
+LOGICAL_XOR_string	node_creation_library.c	/^char *LOGICAL_XOR_string = "LOGICAL_XOR"; $/;"	v	ln:241
+LONG_LONG	types.h	171;"	ln:171	enum:bases
+LT	types.h	222;"	ln:222	enum:operation_list
+LTE	types.h	222;"	ln:222	enum:operation_list
+LTE_string	node_creation_library.c	/^char *LTE_string = "LTE"; $/;"	v	ln:250
+LT_string	node_creation_library.c	/^char *LT_string = "LT"; $/;"	v	ln:246
+MAX_BUF	odin_util.h	5;"	d	ln:5
+MEMORIES_H	memories.h	25;"	d	ln:25
+MEMORY	types.h	222;"	ln:222	enum:operation_list
+MEMORY_string	node_creation_library.c	/^char *MEMORY_string = "MEMORY";$/;"	v	ln:260
+MINUS	types.h	222;"	ln:222	enum:operation_list
+MINUS_string	node_creation_library.c	/^char *MINUS_string = "MINUS"; $/;"	v	ln:228
+MODULE	types.h	285;"	ln:285	enum:ids
+MODULE_CONNECT	types.h	285;"	ln:285	enum:ids
+MODULE_CONNECT_LIST	types.h	285;"	ln:285	enum:ids
+MODULE_INSTANCE	types.h	285;"	ln:285	enum:ids
+MODULE_ITEMS	types.h	285;"	ln:285	enum:ids
+MODULE_NAMED_INSTANCE	types.h	285;"	ln:285	enum:ids
+MODULE_PARAMETER	types.h	285;"	ln:285	enum:ids
+MODULE_PARAMETER_LIST	types.h	285;"	ln:285	enum:ids
+MODULO	types.h	222;"	ln:222	enum:operation_list
+MODULO_string	node_creation_library.c	/^char *MODULO_string = "MODULO"; $/;"	v	ln:245
+MULTIPLIERS_H	multipliers.h	24;"	d	ln:24
+MULTIPLY	types.h	222;"	ln:222	enum:operation_list
+MULTIPLY_string	node_creation_library.c	/^char *MULTIPLY_string = "MULTIPLY"; $/;"	v	ln:243
+MULTI_PORT_MUX	types.h	222;"	ln:222	enum:operation_list
+MULTI_PORT_MUX_string	node_creation_library.c	/^char *MULTI_PORT_MUX_string = "MULTI_PORT_MUX";$/;"	v	ln:219
+MUX_2	types.h	222;"	ln:222	enum:operation_list
+MUX_2_string	node_creation_library.c	/^char *MUX_2_string = "MUX_2";$/;"	v	ln:258
+MaxLine	verilog_preprocessor.h	5;"	d	ln:5
+NEGEDGE	types.h	285;"	ln:285	enum:ids
+NETLIST_CREATE_FROM_AST_H	netlist_create_from_ast.h	2;"	d	ln:2
+NETLIST_ERROR	types.h	59;"	d	ln:59
+NETLIST_FILE_ERROR	types.h	63;"	d	ln:63
+NETLIST_FUNCTION	types.h	222;"	ln:222	enum:operation_list
+NETLIST_UTILS_H	types.h	361;"	d	ln:361
+NON_BLOCKING_STATEMENT	types.h	285;"	ln:285	enum:ids
+NOT_EQUAL	types.h	222;"	ln:222	enum:operation_list
+NOT_EQUAL_string	node_creation_library.c	/^char *NOT_EQUAL_string = "NOT_EQUAL"; $/;"	v	ln:249
+NO_ID	types.h	285;"	ln:285	enum:ids
+NO_OP	types.h	222;"	ln:222	enum:operation_list
+NO_SIMULATION	types.h	118;"	ln:118	enum:simulation_type
+NUMBERS	types.h	285;"	ln:285	enum:ids
+OCT	types.h	171;"	ln:171	enum:bases
+ODIN_UTIL_H	odin_util.h	2;"	d	ln:2
+OUTPUT	types.h	285;"	ln:285	enum:ids
+OUTPUT_BLIF_H	output_blif.h	2;"	d	ln:2
+OUTPUT_NODE	types.h	222;"	ln:222	enum:operation_list
+OUTPUT_NODE_string	node_creation_library.c	/^char *OUTPUT_NODE_string = "OUTPUT_NODE"; $/;"	v	ln:224
+OUTPUT_TRAVERSE_VALUE	types.h	71;"	d	ln:71
+OUTPUT_VECTOR_FILE_NAME	simulate_blif.h	55;"	d	ln:55
+PAD_NODE	types.h	222;"	ln:222	enum:operation_list
+PARAMETER	types.h	285;"	ln:285	enum:ids
+PARSE_ERROR	types.h	57;"	d	ln:57
+PARTIAL_MAP_H	partial_map.h	27;"	d	ln:27
+PARTIAL_MAP_TRAVERSE_VALUE	types.h	70;"	d	ln:70
+PORT	types.h	285;"	ln:285	enum:ids
+POSEDGE	types.h	285;"	ln:285	enum:ids
+QUEUE_H	queue.h	24;"	d	ln:24
+RAM	types.h	285;"	ln:285	enum:ids
+RANGE_REF	types.h	285;"	ln:285	enum:ids
+READ_BLIF_H	read_blif.h	2;"	d	ln:2
+READ_XML_CONFIG_FILE_H	read_xml_config_file.h	27;"	d	ln:27
+REG	types.h	285;"	ln:285	enum:ids
+RESET	types.h	80;"	d	ln:80
+SEQUENTIAL	netlist_create_from_ast.c	53;"	d	file:	ln:53
+SEQUENTIAL_LEVELIZE	types.h	77;"	d	ln:77
+SIMULATE_BLIF_H	simulate_blif.h	24;"	d	ln:24
+SIMULATION_ERROR	types.h	67;"	d	ln:67
+SIM_WAVE_LENGTH	simulate_blif.h	33;"	d	ln:33
+SINGLE_PORT_MEMORY_NAME	simulate_blif.h	57;"	d	ln:57
+SL	types.h	222;"	ln:222	enum:operation_list
+SL_string	node_creation_library.c	/^char *SL_string = "SL"; $/;"	v	ln:253
+SR	types.h	222;"	ln:222	enum:operation_list
+SR_string	node_creation_library.c	/^char *SR_string = "SR"; $/;"	v	ln:252
+STATS	types.h	76;"	d	ln:76
+STRING_CACHE	string_cache.h	/^} STRING_CACHE;$/;"	t	ln:34
+TEST_EXISTING_VECTORS	types.h	118;"	ln:118	enum:simulation_type
+TOKENS	read_blif.c	39;"	d	file:	ln:39
+TRUE	types.h	30;"	d	ln:30
+TYPES_H	types.h	37;"	d	ln:37
+UNARY_OPERATION	types.h	285;"	ln:285	enum:ids
+VAR_DECLARE	types.h	285;"	ln:285	enum:ids
+VAR_DECLARE_LIST	types.h	285;"	ln:285	enum:ids
+VCC_NAME	read_blif.c	41;"	d	file:	ln:41
+VCC_NODE	types.h	222;"	ln:222	enum:operation_list
+VCC_NODE_string	node_creation_library.c	/^char *VCC_NODE_string = "VCC_NODE"; $/;"	v	ln:226
+WIRE	types.h	285;"	ln:285	enum:ids
+_NETLIST_STATS_H	netlist_stats.h	24;"	d	ln:24
+__STRING_CACHE_H__	string_cache.h	2;"	d	ln:2
+___hashtable_add	hashtable.c	/^void  ___hashtable_add(hashtable_t *h, void *key, size_t key_length, void *item)$/;"	f	ln:101
+___hashtable_compare_keys	hashtable.c	/^int ___hashtable_compare_keys(void *key, size_t key_len, void* key1, size_t key_len1)$/;"	f	ln:185
+___hashtable_destroy	hashtable.c	/^void ___hashtable_destroy(hashtable_t *h)$/;"	f	ln:64
+___hashtable_destroy_free_items	hashtable.c	/^void ___hashtable_destroy_free_items(hashtable_t *h)$/;"	f	ln:82
+___hashtable_get	hashtable.c	/^void* ___hashtable_get(hashtable_t *h, void *key, size_t key_length)$/;"	f	ln:148
+___hashtable_get_all	hashtable.c	/^void** ___hashtable_get_all(hashtable_t *h) {		$/;"	f	ln:163
+___hashtable_hash	hashtable.c	/^unsigned int ___hashtable_hash(void *key, size_t key_len, int max_key)$/;"	f	ln:191
+___hashtable_is_empty	hashtable.c	/^int ___hashtable_is_empty (hashtable_t *h)$/;"	f	ln:180
+___hashtable_remove	hashtable.c	/^void* ___hashtable_remove(hashtable_t *h, void *key, size_t key_length)$/;"	f	ln:123
+___queue_add	queue.c	/^void ___queue_add(queue_t *q, void *item)$/;"	f	ln:58
+___queue_destroy	queue.c	/^void ___queue_destroy(queue_t *q)$/;"	f	ln:52
+___queue_is_empty	queue.c	/^int ___queue_is_empty (queue_t *q)$/;"	f	ln:110
+___queue_remove	queue.c	/^void* ___queue_remove(queue_t *q)$/;"	f	ln:76
+___queue_remove_all	queue.c	/^void **___queue_remove_all(queue_t *q)$/;"	f	ln:96
+activation_t	activity_estimation.c	42;"	d	file:	ln:42
+activation_t	activity_estimation.c	/^activation_t$/;"	u	file:	ln:43
+activity_estimation	activity_estimation.c	/^void activity_estimation(char *input_filename, char *output_filename, int lut_size, netlist_t *LUT_netlist, netlist_t *CLUSTER_netlist)$/;"	f	ln:61
+add_a_driver_pin_to_net	netlist_utils.c	/^void add_a_driver_pin_to_net(nnet_t *net, npin_t *pin)$/;"	f	ln:402
+add_a_fanout_pin_to_net	netlist_utils.c	/^void add_a_fanout_pin_to_net(nnet_t *net, npin_t *pin)$/;"	f	ln:368
+add_a_input_pin_to_node_spot_idx	netlist_utils.c	/^void add_a_input_pin_to_node_spot_idx(nnode_t *node, npin_t *pin, int pin_idx)$/;"	f	ln:352
+add_a_output_pin_to_node_spot_idx	netlist_utils.c	/^void add_a_output_pin_to_node_spot_idx(nnode_t *node, npin_t *pin, int pin_idx)$/;"	f	ln:386
+add_additional_items_to_lines	simulate_blif.c	/^void add_additional_items_to_lines(nnode_t *node, pin_names *p, lines_t *l)$/;"	f	ln:2626
+add_block	read_netlist.c	/^add_block (char *node_name, char **pin_tokens, t_type_ptr type, short pass, netlist_t *netlist)$/;"	f	ln:319
+add_child_to_node	ast_util.c	/^void add_child_to_node(ast_node_t* node, ast_node_t *child) $/;"	f	ln:345
+add_hard_block_model	read_blif.c	/^void add_hard_block_model(hard_block_model *m, hard_block_ports *ports, hard_block_models *models)$/;"	f	ln:1512
+add_input_port_information	netlist_utils.c	/^void add_input_port_information(nnode_t *node, int port_width)$/;"	f	ln:194
+add_io_node_and_driver	read_netlist.c	/^add_io_node_and_driver ($/;"	f	file:	ln:253
+add_node_to_netlist	netlist_utils.c	/^void add_node_to_netlist(netlist_t *netlist, nnode_t *node, short special_node)$/;"	f	ln:901
+add_output_port_information	netlist_utils.c	/^void add_output_port_information(nnode_t *node, int port_width)$/;"	f	ln:184
+add_pin_to_signal_list	netlist_utils.c	/^void add_pin_to_signal_list(signal_list_t *list, npin_t* pin)$/;"	f	ln:578
+add_subblock_to_node	read_netlist.c	/^add_subblock_to_node(nnode_t *current_block, char ***tokens_list, int num_subblocks, t_type_ptr type)$/;"	f	ln:449
+add_tag_data	high_level_data.c	/^void add_tag_data()$/;"	f	ln:25
+add_test_vector_to_lines	simulate_blif.c	/^void add_test_vector_to_lines(test_vector *v, lines_t *l, int cycle)$/;"	f	ln:2119
+add_the_blackbox_for_mults	multipliers.c	/^void add_the_blackbox_for_mults(FILE *out)$/;"	f	ln:413
+add_to_distribution	netlist_stats.c	/^void add_to_distribution(int **distrib_ptr, int *distrib_size, int new_element)$/;"	f	ln:423
+add_top_input_nodes	read_blif.c	/^void add_top_input_nodes(FILE *file, hashtable_t *output_nets_hash)$/;"	f	ln:971
+add_veri_define	verilog_preprocessor.c	/^int add_veri_define(char *symbol, char *value, int line, veri_include *defined_in) $/;"	f	ln:113
+add_veri_include	verilog_preprocessor.c	/^veri_include* add_veri_include(char *path, int line, veri_include *included_from) $/;"	f	ln:182
+alias_output_assign_pins_to_inputs	netlist_create_from_ast.c	/^int alias_output_assign_pins_to_inputs(char_list_t *output_list, signal_list_t *input_list, ast_node_t *node)$/;"	f	ln:2135
+all_file_items_list	parse_making_ast.c	/^ast_node_t **all_file_items_list;$/;"	v	ln:58
+allocate_children_to_node	ast_util.c	/^void allocate_children_to_node(ast_node_t* node, int num_children, ...) $/;"	f	ln:324
+allocate_more_node_input_pins	netlist_utils.c	/^void allocate_more_node_input_pins(nnode_t *node, int width)$/;"	f	ln:141
+allocate_more_node_output_pins	netlist_utils.c	/^void allocate_more_node_output_pins(nnode_t *node, int width)$/;"	f	ln:163
+allocate_netlist	netlist_utils.c	/^netlist_t* allocate_netlist()$/;"	f	ln:842
+allocate_nnet	netlist_utils.c	/^nnet_t* allocate_nnet()$/;"	f	ln:279
+allocate_nnode	netlist_utils.c	/^nnode_t* allocate_nnode() {$/;"	f	ln:39
+allocate_npin	netlist_utils.c	/^npin_t* allocate_npin() {$/;"	f	ln:204
+append_string	odin_util.c	/^char *append_string(char *string, char *appendage, ...)$/;"	f	ln:521
+assign_node_to_line	simulate_blif.c	/^void assign_node_to_line(nnode_t *node, lines_t *l, int type, int single_pin)$/;"	f	ln:1842
+assign_node_type_from_node_name	read_blif.c	/^short assign_node_type_from_node_name(char * output_name)$/;"	f	ln:244
+assignment_alias	netlist_create_from_ast.c	/^signal_list_t *assignment_alias(ast_node_t* assignment, char *instance_name_prefix)$/;"	f	ln:1920
+associate_names	read_blif.c	/^hashtable_t *associate_names(char **names1, char **names2, int count)$/;"	f	ln:1349
+ast_modules	parse_making_ast.c	/^ast_node_t **ast_modules;$/;"	v	ln:56
+ast_node_t	types.h	/^typedef struct ast_node_t_t ast_node_t;$/;"	t	ln:44
+ast_node_t_t	types.h	/^struct ast_node_t_t$/;"	s	ln:287
+backward_traversal_net_graph_display	netlist_visualizer.c	/^void backward_traversal_net_graph_display(FILE *fp, short marker_value, nnode_t *node)$/;"	f	ln:305
+bases	types.h	/^} bases;$/;"	v	ln:171
+block_instantiations_instance	parse_making_ast.c	/^ast_node_t **block_instantiations_instance;$/;"	v	ln:49
+block_tag	odin_ii.c	/^int block_tag;$/;"	v	ln:56
+boolean_difference	activity_estimation.c	/^short *boolean_difference(nnode_t *node, int variable_spot)$/;"	f	ln:393
+cache_hard_block_names	hard_blocks.c	/^void cache_hard_block_names()$/;"	f	ln:51
+calc_density	activity_estimation.c	/^double calc_density(nnode_t *node, int variable_spot, short *boolean_difference)$/;"	f	ln:444
+calc_probabilities_and_init_act_data	activity_estimation.c	/^void calc_probabilities_and_init_act_data(netlist_t *netlist)$/;"	f	ln:275
+calc_transition_density	activity_estimation.c	/^void calc_transition_density(netlist_t *netlist)$/;"	f	ln:88
+calculate_avg_fanin	netlist_stats.c	/^void calculate_avg_fanin(netlist_t *netlist)$/;"	f	ln:230
+calculate_avg_fanout	netlist_stats.c	/^void calculate_avg_fanout(netlist_t *netlist)$/;"	f	ln:152
+calculate_combinational_shapes	netlist_stats.c	/^void calculate_combinational_shapes(netlist_t *netlist)$/;"	f	ln:281
+char_list_t	types.h	/^typedef struct char_list_t_t char_list_t;$/;"	t	ln:52
+char_list_t_t	types.h	/^struct char_list_t_t $/;"	s	ln:461
+check_netlist	netlist_check.c	/^void check_netlist(netlist_t *netlist)$/;"	f	ln:53
+clean_memories	memories.c	/^void clean_memories()$/;"	f	ln:1390
+clean_multipliers	multipliers.c	/^void clean_multipliers()$/;"	f	ln:1132
+clean_signal_list_structure	netlist_utils.c	/^void clean_signal_list_structure(signal_list_t *list)$/;"	f	ln:678
+clean_up_parser_for_file	parse_making_ast.c	/^void clean_up_parser_for_file()$/;"	f	ln:278
+clean_veri_define	verilog_preprocessor.c	/^void clean_veri_define(veri_define *current) $/;"	f	ln:76
+clean_veri_include	verilog_preprocessor.c	/^void clean_veri_include(veri_include *current) $/;"	f	ln:96
+cleanup_activation	activity_estimation.c	/^void cleanup_activation(netlist_t *netlist)$/;"	f	ln:852
+cleanup_hard_blocks	parse_making_ast.c	/^void cleanup_hard_blocks()$/;"	f	ln:198
+cleanup_parser	parse_making_ast.c	/^void cleanup_parser()$/;"	f	ln:245
+cleanup_veri_preproc	verilog_preprocessor.c	/^int cleanup_veri_preproc() $/;"	f	ln:42
+combine_lists	netlist_utils.c	/^signal_list_t *combine_lists(signal_list_t **signal_lists, int num_signal_lists)$/;"	f	ln:588
+combine_lists_without_freeing_originals	netlist_utils.c	/^signal_list_t *combine_lists_without_freeing_originals(signal_list_t **signal_lists, int num_signal_lists)$/;"	f	ln:607
+combine_nets	netlist_utils.c	/^void combine_nets(nnet_t *output_net, nnet_t* input_net, netlist_t *netlist)$/;"	f	ln:420
+compare_hard_block_pin_names	read_blif.c	/^static int compare_hard_block_pin_names(const void *p1, const void *p2)$/;"	f	file:	ln:1306
+compare_npin_t_names	netlist_utils.c	/^static int compare_npin_t_names(const void *p1, const void *p2)$/;"	f	file:	ln:629
+compare_test_vectors	simulate_blif.c	/^int compare_test_vectors(test_vector *v1, test_vector *v2)$/;"	f	ln:2147
+compute_and_store_value	simulate_blif.c	/^void compute_and_store_value(nnode_t *node, int cycle)$/;"	f	ln:518
+compute_dual_port_memory	simulate_blif.c	/^void compute_dual_port_memory($/;"	f	ln:1695
+compute_flipflop_node	simulate_blif.c	/^void compute_flipflop_node(nnode_t *node, int cycle)$/;"	f	ln:1225
+compute_generic_node	simulate_blif.c	/^void compute_generic_node(nnode_t *node, int cycle)$/;"	f	ln:1420
+compute_hard_ip_node	simulate_blif.c	/^void compute_hard_ip_node(nnode_t *node, int cycle)$/;"	f	ln:1318
+compute_memory_address	simulate_blif.c	/^long compute_memory_address(npin_t **out, int data_width, npin_t **addr, int addr_width, int cycle)$/;"	f	ln:1762
+compute_memory_node	simulate_blif.c	/^void compute_memory_node(nnode_t *node, int cycle)$/;"	f	ln:1489
+compute_multiply_node	simulate_blif.c	/^void compute_multiply_node(nnode_t *node, int cycle)$/;"	f	ln:1374
+compute_mux_2_node	simulate_blif.c	/^void compute_mux_2_node(nnode_t *node, int cycle)$/;"	f	ln:1245
+compute_single_port_memory	simulate_blif.c	/^void compute_single_port_memory($/;"	f	ln:1648
+concatenate_signal_lists	netlist_create_from_ast.c	/^signal_list_t *concatenate_signal_lists(signal_list_t **signal_lists, int num_signal_lists)$/;"	f	ln:674
+config_t	types.h	/^typedef struct config_t_t config_t;$/;"	t	ln:39
+config_t_t	types.h	/^struct config_t_t$/;"	s	ln:89
+configuration	read_xml_config_file.c	/^config_t configuration;$/;"	v	ln:33
+connect_hard_block_and_alias	netlist_create_from_ast.c	/^void connect_hard_block_and_alias(ast_node_t* hb_instance, char *instance_name_prefix)$/;"	f	ln:1391
+connect_memory_and_alias	netlist_create_from_ast.c	/^void connect_memory_and_alias(ast_node_t* hb_instance, char *instance_name_prefix)$/;"	f	ln:1249
+connect_module_instantiation_and_alias	netlist_create_from_ast.c	/^void connect_module_instantiation_and_alias(short PASS, ast_node_t* module_instance, char *instance_name_prefix)$/;"	f	ln:1530
+connect_nodes	netlist_utils.c	/^void connect_nodes(nnode_t *out_node, int out_idx, nnode_t *in_node, int in_idx)$/;"	f	ln:521
+constantFold	ast_optimizations.c	/^info_ast_visit_t *constantFold(ast_node_t *node)$/;"	f	ln:116
+convert_ast_to_netlist_recursing_via_modules	netlist_create_from_ast.c	/^void convert_ast_to_netlist_recursing_via_modules(ast_node_t* current_module, char *instance_name, int level)$/;"	f	ln:365
+convert_binary_string_of_size_to_bit_string	odin_util.c	/^char *convert_binary_string_of_size_to_bit_string(char *orig_string, int binary_size)$/;"	f	ln:279
+convert_dec_string_of_size_to_long_long	odin_util.c	/^long long convert_dec_string_of_size_to_long_long(char *orig_string, int size)$/;"	f	ln:151
+convert_hex_string_of_size_to_bit_string	odin_util.c	/^char *convert_hex_string_of_size_to_bit_string(char *orig_string, int binary_size)$/;"	f	ln:173
+convert_long_long_to_bit_string	odin_util.c	/^char *convert_long_long_to_bit_string(long long orig_long, int num_bits)$/;"	f	ln:130
+convert_oct_string_of_size_to_bit_string	odin_util.c	/^char *convert_oct_string_of_size_to_bit_string(char *orig_string, int binary_size)$/;"	f	ln:226
+copy_input_npin	netlist_utils.c	/^npin_t* copy_input_npin(npin_t* copy_pin)$/;"	f	ln:248
+copy_output_npin	netlist_utils.c	/^npin_t* copy_output_npin(npin_t* copy_pin)$/;"	f	ln:231
+count	read_blif.c	57;"	ln:57	struct:hard_block_pins
+count	read_blif.c	67;"	ln:67	struct:hard_block_ports
+count	read_blif.c	86;"	ln:86	struct:hard_block_models
+count	simulate_blif.h	63;"	ln:63	struct:pin_names
+count	simulate_blif.h	78;"	ln:78	struct:lines_t
+count	simulate_blif.h	92;"	ln:92	struct:stages
+count	simulate_blif.h	98;"	ln:98	struct:test_vector
+count_blif_lines	read_blif.c	/^int count_blif_lines(FILE *file)$/;"	f	ln:1553
+count_nodes_in_netlist	netlist_utils.c	/^int count_nodes_in_netlist(netlist_t *netlist)$/;"	f	ln:777
+count_test_vectors	simulate_blif.c	/^int count_test_vectors(FILE *in)$/;"	f	ln:2802
+counts	simulate_blif.h	92;"	ln:92	struct:stages
+counts	simulate_blif.h	98;"	ln:98	struct:test_vector
+create_all_driver_nets_in_this_module	netlist_create_from_ast.c	/^void create_all_driver_nets_in_this_module(char *instance_name_prefix)$/;"	f	ln:703
+create_case	netlist_create_from_ast.c	/^signal_list_t *create_case(ast_node_t *case_ast, char *instance_name_prefix)$/;"	f	ln:2707
+create_case_control_signals	netlist_create_from_ast.c	/^void create_case_control_signals(ast_node_t *case_list_of_items, ast_node_t *compare_against, nnode_t *case_node, char *instance_name_prefix)$/;"	f	ln:2739
+create_case_mux_statements	netlist_create_from_ast.c	/^signal_list_t *create_case_mux_statements(ast_node_t *case_list_of_items, nnode_t *case_node, char *instance_name_prefix)$/;"	f	ln:2807
+create_dual_port_ram_block	netlist_create_from_ast.c	/^signal_list_t *create_dual_port_ram_block(ast_node_t* block, char *instance_name_prefix, t_model* hb_model)$/;"	f	ln:3119
+create_gate	netlist_create_from_ast.c	/^signal_list_t *create_gate(ast_node_t* gate, char *instance_name_prefix)$/;"	f	ln:2176
+create_hard_block	netlist_create_from_ast.c	/^signal_list_t *create_hard_block(ast_node_t* block, char *instance_name_prefix)$/;"	f	ln:3549
+create_hard_block_models	read_blif.c	/^hard_block_models *create_hard_block_models()$/;"	f	ln:1539
+create_hard_block_nodes	read_blif.c	/^void create_hard_block_nodes(hard_block_models *models, FILE *file, hashtable_t *output_nets_hash)$/;"	f	ln:475
+create_hashtable	hashtable.c	/^hashtable_t* create_hashtable(int store_size)$/;"	f	ln:39
+create_if	netlist_create_from_ast.c	/^signal_list_t *create_if(ast_node_t *if_ast, char *instance_name_prefix)$/;"	f	ln:2589
+create_if_control_signals	netlist_create_from_ast.c	/^void create_if_control_signals(ast_node_t *if_expression, nnode_t *if_node, char *instance_name_prefix)$/;"	f	ln:2613
+create_if_for_question	netlist_create_from_ast.c	/^signal_list_t *create_if_for_question(ast_node_t *if_ast, char *instance_name_prefix)$/;"	f	ln:2533
+create_if_mux_statements	netlist_create_from_ast.c	/^signal_list_t *create_if_mux_statements(ast_node_t *if_ast, nnode_t *if_node, char *instance_name_prefix)$/;"	f	ln:2673
+create_if_question_mux_expressions	netlist_create_from_ast.c	/^signal_list_t *create_if_question_mux_expressions(ast_node_t *if_ast, nnode_t *if_node, char *instance_name_prefix)$/;"	f	ln:2557
+create_internal_node_and_driver	read_blif.c	/^void create_internal_node_and_driver(FILE *file, hashtable_t *output_nets_hash)$/;"	f	ln:623
+create_latch_node_and_driver	read_blif.c	/^void create_latch_node_and_driver(FILE *file, hashtable_t *output_nets_hash)$/;"	f	ln:314
+create_line	simulate_blif.c	/^line_t *create_line(char *name)$/;"	f	ln:2072
+create_lines	simulate_blif.c	/^lines_t *create_lines(netlist_t *netlist, int type)$/;"	f	ln:1929
+create_mux_expressions	netlist_create_from_ast.c	/^signal_list_t *create_mux_expressions(signal_list_t **expression_lists, nnode_t *mux_node, int num_expression_lists, char *instance_name_prefix)$/;"	f	ln:2953
+create_mux_statements	netlist_create_from_ast.c	/^signal_list_t *create_mux_statements(signal_list_t **statement_lists, nnode_t *mux_node, int num_statement_lists, char *instance_name_prefix)$/;"	f	ln:2846
+create_netlist	netlist_create_from_ast.c	/^void create_netlist()$/;"	f	ln:214
+create_node_w_type	ast_util.c	/^ast_node_t* create_node_w_type(ids id, int line_number, int file_number)$/;"	f	ln:42
+create_operation_node	netlist_create_from_ast.c	/^signal_list_t *create_operation_node(ast_node_t *op, signal_list_t **input_lists, int list_size, char *instance_name_prefix)$/;"	f	ln:2256
+create_output_pin	netlist_create_from_ast.c	/^signal_list_t *create_output_pin(ast_node_t* var_declare, char *instance_name_prefix)$/;"	f	ln:1897
+create_param_table_for_module	netlist_create_from_ast.c	/^void create_param_table_for_module(ast_node_t* parent_parameter_list, ast_node_t *module_items, char *module_name)$/;"	f	ln:137
+create_pins	netlist_create_from_ast.c	/^signal_list_t *create_pins(ast_node_t* var_declare, char *name, char *instance_name_prefix)$/;"	f	ln:1799
+create_queue	queue.c	/^queue_t* create_queue()$/;"	f	ln:35
+create_single_port_ram_block	netlist_create_from_ast.c	/^signal_list_t *create_single_port_ram_block(ast_node_t* block, char *instance_name_prefix, t_model* hb_model)$/;"	f	ln:3331
+create_symbol_table_for_module	netlist_create_from_ast.c	/^void create_symbol_table_for_module(ast_node_t* module_items, char *module_name)$/;"	f	ln:1151
+create_top_driver_nets	netlist_create_from_ast.c	/^void create_top_driver_nets(ast_node_t* module, char *instance_name_prefix)$/;"	f	ln:742
+create_top_output_nodes	netlist_create_from_ast.c	/^void create_top_output_nodes(ast_node_t* module, char *instance_name_prefix)$/;"	f	ln:849
+create_tree_node_id	ast_util.c	/^ast_node_t* create_tree_node_id(char* string, int line_number, int file_number)$/;"	f	ln:168
+create_tree_node_long_long_number	ast_util.c	/^ast_node_t *create_tree_node_long_long_number(long long number, int constant_bit_size, int line_number, int file_number)$/;"	f	ln:179
+create_tree_node_number	ast_util.c	/^ast_node_t *create_tree_node_number(char* number, int line_number, int file_number)$/;"	f	ln:205
+current_parse_file	odin_ii.c	/^int current_parse_file;$/;"	v	ln:53
+data	string_cache.h	34;"	ln:34	struct:STRING_CACHE
+declare_hard_multiplier	multipliers.c	/^void declare_hard_multiplier(nnode_t *node)$/;"	f	ln:329
+define_decoded_mux	output_blif.c	/^void define_decoded_mux(nnode_t *node, FILE *out)$/;"	f	ln:657
+define_ff	output_blif.c	/^void define_ff(nnode_t *node, FILE *out)$/;"	f	ln:630
+define_hard_block	hard_blocks.c	/^void define_hard_block(nnode_t *node, short type, FILE *out)$/;"	f	ln:178
+define_logical_function	output_blif.c	/^void define_logical_function(nnode_t *node, short type, FILE *out)$/;"	f	ln:390
+define_mult_function	multipliers.c	/^void define_mult_function(nnode_t *node, short type, FILE *out)$/;"	f	ln:494
+define_nets_with_driver	netlist_create_from_ast.c	/^nnet_t* define_nets_with_driver(ast_node_t* var_declare, char *instance_name_prefix)$/;"	f	ln:970
+define_nodes_and_nets_with_driver	netlist_create_from_ast.c	/^nnet_t* define_nodes_and_nets_with_driver(ast_node_t* var_declare, char *instance_name_prefix)$/;"	f	ln:1042
+define_set_input_logical_function	output_blif.c	/^void define_set_input_logical_function(nnode_t *node, char *bit_output, FILE *out)$/;"	f	ln:554
+defined_in	verilog_preprocessor.h	23;"	ln:23	struct:veri_define
+defines_for_file_sc	parse_making_ast.c	/^STRING_CACHE *defines_for_file_sc;$/;"	v	ln:42
+defines_for_module_sc	parse_making_ast.c	/^STRING_CACHE **defines_for_module_sc;$/;"	v	ln:43
+depth_first_traversal_check_if_forward_leveled	netlist_check.c	/^void depth_first_traversal_check_if_forward_leveled(short marker_value, netlist_t *netlist)$/;"	f	ln:244
+depth_first_traversal_graph_display	netlist_visualizer.c	/^void depth_first_traversal_graph_display(FILE *out, short marker_value, netlist_t *netlist)$/;"	f	ln:64
+depth_first_traversal_graphcrunch_display	output_graphcrunch_format.c	/^void depth_first_traversal_graphcrunch_display(nnode_t *node, FILE *fp, int traverse_mark_number)$/;"	f	ln:79
+depth_first_traversal_graphcrunch_stats	netlist_stats.c	/^void depth_first_traversal_graphcrunch_stats(nnode_t *node, FILE *fp, int traverse_mark_number)$/;"	f	ln:329
+depth_first_traversal_to_output	output_blif.c	/^void depth_first_traversal_to_output(short marker_value, FILE *fp, netlist_t *netlist)$/;"	f	ln:224
+depth_first_traversal_to_partial_map	partial_map.c	/^void depth_first_traversal_to_partial_map(short marker_value, netlist_t *netlist)$/;"	f	ln:74
+depth_first_traverse_check_if_forward_leveled	netlist_check.c	/^void depth_first_traverse_check_if_forward_leveled(nnode_t *node, int traverse_mark_number)$/;"	f	ln:266
+depth_first_traverse_graphcrunch	output_graphcrunch_format.c	/^void depth_first_traverse_graphcrunch(FILE *out, short marker_value, netlist_t *netlist)$/;"	f	ln:57
+depth_first_traverse_parital_map	partial_map.c	/^void depth_first_traverse_parital_map(nnode_t *node, int traverse_mark_number, netlist_t *netlist)$/;"	f	ln:95
+depth_first_traverse_stats	netlist_stats.c	/^void depth_first_traverse_stats(FILE *out, short marker_value, netlist_t *netlist)$/;"	f	ln:307
+depth_first_traverse_until_next_ff_or_output	netlist_check.c	/^void depth_first_traverse_until_next_ff_or_output(nnode_t *node, nnode_t *calling_node, int traverse_mark_number, int seq_level, netlist_t *netlist)$/;"	f	ln:166
+depth_first_traverse_visualize	netlist_visualizer.c	/^void depth_first_traverse_visualize(nnode_t *node, FILE *fp, int traverse_mark_number)$/;"	f	ln:86
+depth_traverse_count	netlist_utils.c	/^void depth_traverse_count(nnode_t *node, int *count, int traverse_mark_number)$/;"	f	ln:800
+depth_traverse_output_blif	output_blif.c	/^void depth_traverse_output_blif(nnode_t *node, int traverse_mark_number, FILE *fp)$/;"	f	ln:249
+deregister_hard_blocks	hard_blocks.c	/^void deregister_hard_blocks()$/;"	f	ln:158
+display_node_stats	netlist_stats.c	/^void display_node_stats(FILE *fp, nnode_t* node)$/;"	f	ln:143
+display_per_node_stats	netlist_stats.c	/^void display_per_node_stats(FILE *fp, netlist_t *netlist)$/;"	f	ln:80
+do_activation_estimation	odin_ii.c	/^void do_activation_estimation($/;"	f	ln:411
+do_high_level_synthesis	odin_ii.c	/^void do_high_level_synthesis()$/;"	f	ln:321
+do_simulation_of_netlist	odin_ii.c	/^void do_simulation_of_netlist()$/;"	f	ln:393
+dp_memory_list	memories.c	/^struct s_linked_vptr *dp_memory_list;$/;"	t	ln:36
+dual_port_rams	hard_blocks.c	/^t_model *dual_port_rams = NULL;$/;"	v	ln:35
+dual_port_rams	memories.c	/^t_model *dual_port_rams;$/;"	v	ln:33
+dum_parse	read_blif.c	/^static void dum_parse (char *buffer, FILE *file)$/;"	f	file:	ln:1150
+enqueue_node_if_ready	simulate_blif.c	/^int enqueue_node_if_ready(queue_t* queue, nnode_t* node, int cycle)$/;"	f	ln:925
+error_message	errors.c	/^void error_message(short error_type, int line_number, int file, char *message, ...)$/;"	f	ln:36
+evaluate_sensitivity_list	netlist_create_from_ast.c	/^signal_list_t *evaluate_sensitivity_list(ast_node_t *delay_control, char *instance_name_prefix)$/;"	f	ln:2466
+find_hard_block	hard_blocks.c	/^t_model* find_hard_block(char *name)$/;"	f	ln:164
+find_hard_multipliers	multipliers.c	/^void find_hard_multipliers()$/;"	f	ln:306
+find_node_at_top_of_combo_loop	netlist_check.c	/^nnode_t *find_node_at_top_of_combo_loop(nnode_t *start_node)$/;"	f	ln:793
+find_portname_in_lines	simulate_blif.c	/^int find_portname_in_lines(char* port_name, lines_t *l)$/;"	f	ln:2059
+find_smallest_non_numerical	netlist_create_from_ast.c	/^int find_smallest_non_numerical(ast_node_t *node, signal_list_t **input_list, int num_input_lists)$/;"	f	ln:3028
+find_top_module	netlist_create_from_ast.c	/^ast_node_t *find_top_module()$/;"	f	ln:303
+flag	verilog_preprocessor.h	67;"	ln:67	struct:veri_flag_node
+flag_undriven_input_pins	simulate_blif.c	/^void flag_undriven_input_pins(nnode_t *node)$/;"	f	ln:859
+for	print_netlist.c	/^  for(j=0;j<netlist->num_top_output_nodes;j++)$/;"	f	ln:193
+for	print_netlist.c	/^  for(j=0;j<netlist->num_ff_nodes;j++)$/;"	f	ln:268
+forward_traversal_net_graph_display	netlist_visualizer.c	/^void forward_traversal_net_graph_display(FILE *fp, short marker_value, nnode_t *node)$/;"	f	ln:203
+free	string_cache.h	34;"	ln:34	struct:STRING_CACHE
+free_ast_node	ast_util.c	/^void free_ast_node(ast_node_t *child)$/;"	f	ln:107
+free_ast_node_only	ast_util.c	/^void free_ast_node_only(ast_node_t *child)$/;"	f	ln:143
+free_child_in_tree	ast_util.c	/^void free_child_in_tree(ast_node_t *from, int idx_removal)$/;"	f	ln:69
+free_hard_block_model	read_blif.c	/^void free_hard_block_model(hard_block_model *model)$/;"	f	ln:1586
+free_hard_block_models	read_blif.c	/^void free_hard_block_models(hard_block_models *models)$/;"	f	ln:1571
+free_hard_block_pins	read_blif.c	/^void free_hard_block_pins(hard_block_pins *p)$/;"	f	ln:1600
+free_hard_block_ports	read_blif.c	/^void free_hard_block_ports(hard_block_ports *p)$/;"	f	ln:1614
+free_lines	simulate_blif.c	/^void free_lines(lines_t *l)$/;"	f	ln:2858
+free_netlist	netlist_utils.c	/^void free_netlist(netlist_t *to_free)$/;"	f	ln:891
+free_nnet	netlist_utils.c	/^void free_nnet(nnet_t *to_free)$/;"	f	ln:301
+free_nnode	netlist_utils.c	/^void free_nnode(nnode_t *to_free) $/;"	f	ln:88
+free_npin	netlist_utils.c	/^void free_npin(npin_t *to_free)$/;"	f	ln:269
+free_pin_name_list	simulate_blif.c	/^void free_pin_name_list(pin_names *p)$/;"	f	ln:2899
+free_stages	simulate_blif.c	/^void free_stages(stages *s)$/;"	f	ln:2875
+free_test_vector	simulate_blif.c	/^void free_test_vector(test_vector* v)$/;"	f	ln:2887
+function_to_print_node_and_its_pin	print_netlist.c	/^void function_to_print_node_and_its_pin(npin_t * temp_pin)  $/;"	f	ln:299
+generate_hard_block_ports_signature	read_blif.c	/^char *generate_hard_block_ports_signature(hard_block_ports *ports)$/;"	f	ln:1448
+generate_random_test_vector	simulate_blif.c	/^test_vector *generate_random_test_vector(lines_t *l, int cycle, hashtable_t *hold_high_index, hashtable_t *hold_low_index)$/;"	f	ln:2253
+generate_sc_hash	string_cache.c	/^generate_sc_hash(STRING_CACHE * sc)$/;"	f	ln:24
+generate_tag	high_level_data.c	/^int generate_tag()$/;"	f	ln:122
+generate_vector_header	simulate_blif.c	/^char *generate_vector_header(lines_t *l)$/;"	f	ln:2090
+get_a_one_pin	node_creation_library.c	/^npin_t *get_a_one_pin(netlist_t *netlist)$/;"	f	ln:64
+get_a_pad_pin	node_creation_library.c	/^npin_t *get_a_pad_pin(netlist_t *netlist)$/;"	f	ln:40
+get_a_zero_pin	node_creation_library.c	/^npin_t *get_a_zero_pin(netlist_t *netlist)$/;"	f	ln:52
+get_children_of	simulate_blif.c	/^nnode_t **get_children_of(nnode_t *node, int *num_children)$/;"	f	ln:1009
+get_circuit_filename	simulate_blif.c	/^char *get_circuit_filename()$/;"	f	ln:3196
+get_hard_block_model	read_blif.c	/^hard_block_model *get_hard_block_model(char *name, hard_block_ports *ports, hard_block_models *models)$/;"	f	ln:1527
+get_hard_block_pin_number	read_blif.c	/^long get_hard_block_pin_number(char *original_name)$/;"	f	ln:1490
+get_hard_block_port_name	read_blif.c	/^char *get_hard_block_port_name(char *name)$/;"	f	ln:1473
+get_hard_block_ports	read_blif.c	/^hard_block_ports *get_hard_block_ports(char **pins, int count)$/;"	f	ln:1365
+get_input_pin_index_from_mapping	netlist_utils.c	/^int get_input_pin_index_from_mapping(nnode_t *node, char *name)$/;"	f	ln:1020
+get_input_port_index_from_mapping	netlist_utils.c	/^int get_input_port_index_from_mapping(nnode_t *node, char *name)$/;"	f	ln:1037
+get_line_pin_value	simulate_blif.c	/^signed char get_line_pin_value(line_t *line, int pin_num, int cycle)$/;"	f	ln:2771
+get_linenumber	high_level_data.c	/^int get_linenumber(ast_node_t *node)$/;"	f	ln:134
+get_memory_port_size	memories.c	/^get_memory_port_size(char *name)$/;"	f	ln:49
+get_mif_filename	simulate_blif.c	/^char *get_mif_filename(nnode_t *node)$/;"	f	ln:2707
+get_model_port	hard_blocks.c	/^t_model_ports *get_model_port(t_model_ports *ports, char *name)$/;"	f	ln:42
+get_name_of_pin_at_bit	ast_util.c	/^char *get_name_of_pin_at_bit(ast_node_t *var_node, int bit, char *instance_name_prefix)$/;"	f	ln:529
+get_name_of_pins	ast_util.c	/^char_list_t *get_name_of_pins(ast_node_t *var_node, char *instance_name_prefix)$/;"	f	ln:663
+get_name_of_pins_number	ast_util.c	/^char **get_name_of_pins_number(ast_node_t *var_node, int start, int width)$/;"	f	ln:631
+get_name_of_pins_with_prefix	ast_util.c	/^char_list_t *get_name_of_pins_with_prefix(ast_node_t *var_node, char *instance_name_prefix)$/;"	f	ln:804
+get_name_of_var_declare_at_bit	ast_util.c	/^char *get_name_of_var_declare_at_bit(ast_node_t *var_declare, int bit)$/;"	f	ln:500
+get_next_vector	simulate_blif.c	/^int get_next_vector(FILE *file, char *buffer)$/;"	f	ln:2846
+get_num_covered_nodes	simulate_blif.c	/^int get_num_covered_nodes(stages *s)$/;"	f	ln:890
+get_options	odin_ii.c	/^void get_options(int argc, char **argv)$/;"	f	ln:132
+get_output_pin_index_from_mapping	netlist_utils.c	/^int get_output_pin_index_from_mapping(nnode_t *node, char *name)$/;"	f	ln:983
+get_output_port_index_from_mapping	netlist_utils.c	/^int get_output_port_index_from_mapping(nnode_t *node, char *name)$/;"	f	ln:1000
+get_pin_cycle	simulate_blif.c	/^inline int get_pin_cycle(npin_t *pin)$/;"	f	ln:1123
+get_pin_name	odin_util.c	/^char *get_pin_name(char *name)$/;"	f	ln:369
+get_pin_number	odin_util.c	/^int get_pin_number(char *name)$/;"	f	ln:399
+get_pin_value	simulate_blif.c	/^signed char get_pin_value(npin_t *pin, int cycle)$/;"	f	ln:1105
+get_port_name	odin_util.c	/^char *get_port_name(char *name)$/;"	f	ln:382
+get_range	ast_util.c	/^int get_range(ast_node_t* first_node) $/;"	f	ln:356
+get_type_by_name	read_netlist.c	/^get_type_by_name ($/;"	f	file:	ln:654
+get_values_offset	simulate_blif.c	/^inline int get_values_offset(int cycle)$/;"	f	ln:1115
+global_args	netlist_utils.c	/^global_args_t global_args;$/;"	v	ln:35
+global_args	odin_ii.c	/^global_args_t global_args;$/;"	v	ln:52
+global_args_read_blif_t	types.h	/^typedef struct global_args_read_blif_t_t global_args_read_blif_t;$/;"	t	ln:42
+global_args_t	types.h	/^typedef struct global_args_t_t global_args_t;$/;"	t	ln:40
+global_args_t_t	types.h	/^struct global_args_t_t$/;"	s	ln:121
+global_param_table_sc	netlist_create_from_ast.c	/^STRING_CACHE *global_param_table_sc;$/;"	v	ln:59
+graphVizOutputAst	parse_making_ast.c	/^void graphVizOutputAst(char* path, ast_node_t *top)$/;"	f	ln:1050
+graphVizOutputAst_traverse_node	parse_making_ast.c	/^void graphVizOutputAst_traverse_node(FILE *fp, ast_node_t *node, ast_node_t *from, int from_num)$/;"	f	ln:1075
+graphVizOutputCombinationalNet	netlist_visualizer.c	/^void graphVizOutputCombinationalNet(char* path, char* name, short marker_value, nnode_t *current_node)$/;"	f	ln:180
+graphVizOutputNetlist	netlist_visualizer.c	/^void graphVizOutputNetlist(char* path, char* name, short marker_value, netlist_t *netlist)$/;"	f	ln:42
+graphVizOutputPreproc	parse_making_ast.c	/^void graphVizOutputPreproc(FILE *yyin, char* path, char *file)$/;"	f	ln:63
+graphcrunch_output	output_graphcrunch_format.c	/^void graphcrunch_output(char* path, char* name, short marker_value, netlist_t *netlist)$/;"	f	ln:39
+hard_block_model	read_blif.c	/^} hard_block_model;$/;"	t	ln:78
+hard_block_models	read_blif.c	/^} hard_block_models;$/;"	t	ln:86
+hard_block_names	hard_blocks.c	/^STRING_CACHE *hard_block_names = NULL;$/;"	v	ln:39
+hard_block_pins	read_blif.c	/^} hard_block_pins;$/;"	t	ln:57
+hard_block_port_direction	hard_blocks.c	/^hard_block_port_direction(t_model *hb, char *pname)$/;"	f	ln:371
+hard_block_port_size	hard_blocks.c	/^hard_block_port_size(t_model *hb, char *pname)$/;"	f	ln:336
+hard_block_ports	read_blif.c	/^} hard_block_ports;$/;"	t	ln:67
+hard_multipliers	multipliers.c	/^t_model *hard_multipliers = NULL;$/;"	v	ln:37
+hard_node_name	node_creation_library.c	/^char *hard_node_name(nnode_t *node, char *instance_name_prefix, char *hb_name, char *hb_inst)$/;"	f	ln:410
+hashtable_node_t	hashtable.h	26;"	d	ln:26
+hashtable_node_t_t	hashtable.h	/^struct hashtable_node_t_t$/;"	s	ln:55
+hashtable_t	hashtable.h	25;"	d	ln:25
+hashtable_t_t	hashtable.h	/^struct hashtable_t_t$/;"	s	ln:33
+hook_up_nets	read_blif.c	/^void hook_up_nets(hashtable_t *output_nets_hash)$/;"	f	ln:1162
+hook_up_node	read_blif.c	/^void hook_up_node(nnode_t *node, hashtable_t *output_nets_hash)$/;"	f	ln:1185
+hookup_hb_input_pins_from_signal_list	netlist_utils.c	/^void hookup_hb_input_pins_from_signal_list(nnode_t *node, int n_start_idx, signal_list_t* input_list, int il_start_idx, int width, netlist_t *netlist) $/;"	f	ln:722
+hookup_input_pins_from_signal_list	netlist_utils.c	/^void hookup_input_pins_from_signal_list(nnode_t *node, int n_start_idx, signal_list_t* input_list, int il_start_idx, int width, netlist_t *netlist) $/;"	f	ln:693
+hookup_output_pins_from_signal_list	netlist_utils.c	/^void hookup_output_pins_from_signal_list(nnode_t *node, int n_start_idx, signal_list_t* output_list, int ol_start_idx, int width) $/;"	f	ln:748
+ids	types.h	/^} ids;$/;"	v	ln:285
+included_from	verilog_preprocessor.h	15;"	ln:15	struct:veri_include
+index	read_blif.c	57;"	ln:57	struct:hard_block_pins
+index	read_blif.c	67;"	ln:67	struct:hard_block_ports
+index	read_blif.c	86;"	ln:86	struct:hard_block_models
+index_names	read_blif.c	/^hashtable_t *index_names(char **names, int count)$/;"	f	ln:1334
+index_pin_name_list	simulate_blif.c	/^hashtable_t *index_pin_name_list(pin_names *list)$/;"	f	ln:2582
+info_ast_visit_t	types.h	/^typedef struct info_ast_visit_t_t info_ast_visit_t;$/;"	t	ln:45
+info_ast_visit_t_t	types.h	/^struct info_ast_visit_t_t$/;"	s	ln:346
+init_cascade_adder	multipliers.c	/^void init_cascade_adder(nnode_t *node, nnode_t *a, int b)$/;"	f	ln:638
+init_mult_distribution	multipliers.c	/^void init_mult_distribution()$/;"	f	ln:245
+init_parser	parse_making_ast.c	/^void init_parser()$/;"	f	ln:222
+init_parser_for_file	parse_making_ast.c	/^void init_parser_for_file()$/;"	f	ln:264
+init_signal_list_structure	netlist_utils.c	/^signal_list_t *init_signal_list_structure()$/;"	f	ln:561
+init_split_multiplier	multipliers.c	/^void init_split_multiplier(nnode_t *node, nnode_t *ptr, int offa, int a, int offb, int b)$/;"	f	ln:590
+init_veri_preproc	verilog_preprocessor.c	/^int init_veri_preproc()$/;"	f	ln:17
+initialize_pin	simulate_blif.c	/^void initialize_pin(npin_t *pin)$/;"	f	ln:1159
+initialize_probabilities	activity_estimation.c	/^void initialize_probabilities(char *input_file, netlist_t *netlist)$/;"	f	ln:188
+input_nets_sc	netlist_create_from_ast.c	/^STRING_CACHE *input_nets_sc;$/;"	v	ln:56
+input_ports	read_blif.c	78;"	ln:78	struct:hard_block_model
+inputs	read_blif.c	78;"	ln:78	struct:hard_block_model
+insert_pin_into_line	simulate_blif.c	/^void insert_pin_into_line(npin_t *pin, int pin_number, line_t *line, int type)$/;"	f	ln:1894
+instantiate_EQUAL	partial_map.c	/^void instantiate_EQUAL(nnode_t *node, short type, short mark, netlist_t *netlist)$/;"	f	ln:837
+instantiate_GE	partial_map.c	/^void instantiate_GE(nnode_t *node, short type, short mark, netlist_t *netlist)$/;"	f	ln:1070
+instantiate_GT	partial_map.c	/^void instantiate_GT(nnode_t *node, short type, short mark, netlist_t *netlist)$/;"	f	ln:923
+instantiate_add_w_carry	partial_map.c	/^void instantiate_add_w_carry(nnode_t *node, short mark, netlist_t *netlist)$/;"	f	ln:591
+instantiate_bitwise_logic	partial_map.c	/^void instantiate_bitwise_logic(nnode_t *node, operation_list op, short mark, netlist_t *netlist)$/;"	f	ln:496
+instantiate_bitwise_reduction	partial_map.c	/^void instantiate_bitwise_reduction(nnode_t *node, operation_list op, short mark, netlist_t *netlist)$/;"	f	ln:428
+instantiate_buffer	partial_map.c	/^void instantiate_buffer(nnode_t *node, short mark, netlist_t *netlist)$/;"	f	ln:344
+instantiate_hard_block	hard_blocks.c	/^instantiate_hard_block(nnode_t *node, short mark, netlist_t *netlist)$/;"	f	ln:312
+instantiate_hard_multiplier	multipliers.c	/^void instantiate_hard_multiplier(nnode_t *node, short mark, netlist_t *netlist)$/;"	f	ln:370
+instantiate_logical_logic	partial_map.c	/^void instantiate_logical_logic(nnode_t *node, operation_list op, short mark, netlist_t *netlist)$/;"	f	ln:365
+instantiate_memory	simulate_blif.c	/^void instantiate_memory(nnode_t *node, int data_width, int addr_width)$/;"	f	ln:1783
+instantiate_multi_port_mux	partial_map.c	/^void instantiate_multi_port_mux(nnode_t *node, short mark, netlist_t *netlist)$/;"	f	ln:267
+instantiate_not_logic	partial_map.c	/^void instantiate_not_logic(nnode_t *node, short mark, netlist_t *netlist)$/;"	f	ln:316
+instantiate_shift_left_or_right	partial_map.c	/^void instantiate_shift_left_or_right(nnode_t *node, short type, short mark, netlist_t *netlist)$/;"	f	ln:1151
+instantiate_simple_soft_multiplier	multipliers.c	/^void instantiate_simple_soft_multiplier(nnode_t *node, short mark, netlist_t *netlist)$/;"	f	ln:62
+instantiate_sub_w_carry	partial_map.c	/^void instantiate_sub_w_carry(nnode_t *node, short mark, netlist_t *netlist)$/;"	f	ln:679
+instantiate_unary_sub	partial_map.c	/^void instantiate_unary_sub(nnode_t *node, short mark, netlist_t *netlist)$/;"	f	ln:769
+is_binary_string	odin_util.c	/^int is_binary_string(char *string)$/;"	f	ln:353
+is_clock_node	simulate_blif.c	/^inline int is_clock_node(nnode_t *node)$/;"	f	ln:1201
+is_decimal_string	odin_util.c	/^int is_decimal_string(char *string)$/;"	f	ln:327
+is_even_cycle	simulate_blif.c	/^inline int is_even_cycle(int cycle)$/;"	f	ln:1144
+is_hex_string	odin_util.c	/^int is_hex_string(char *string)$/;"	f	ln:314
+is_node_complete	simulate_blif.c	/^int is_node_complete(nnode_t* node, int cycle)$/;"	f	ln:942
+is_node_ready	simulate_blif.c	/^int is_node_ready(nnode_t* node, int cycle)$/;"	f	ln:955
+is_octal_string	odin_util.c	/^int is_octal_string(char *string)$/;"	f	ln:340
+is_posedge	simulate_blif.c	/^int is_posedge(npin_t *pin, int cycle)$/;"	f	ln:1214
+is_vector	simulate_blif.c	/^int is_vector(char *buffer)$/;"	f	ln:2823
+iterate_memories	memories.c	/^iterate_memories(netlist_t *netlist)$/;"	f	ln:1272
+iterate_multipliers	multipliers.c	/^void iterate_multipliers(netlist_t *netlist)$/;"	f	ln:1054
+join_nets	netlist_utils.c	/^void join_nets(nnet_t *join_to_net, nnet_t* other_net)$/;"	f	ln:452
+last_tag	high_level_data.c	/^int last_tag;$/;"	v	ln:18
+levelize_and_check_for_combinational_loop_and_liveness	netlist_check.c	/^void levelize_and_check_for_combinational_loop_and_liveness(short ast_based, netlist_t *netlist)$/;"	f	ln:67
+levelize_backwards	netlist_check.c	/^void levelize_backwards(netlist_t *netlist)$/;"	f	ln:577
+levelize_backwards_clean_checking_for_liveness	netlist_check.c	/^void levelize_backwards_clean_checking_for_liveness(short ast_based, netlist_t *netlist)$/;"	f	ln:709
+levelize_forwards	netlist_check.c	/^void levelize_forwards(netlist_t *netlist)$/;"	f	ln:315
+levelize_forwards_clean_checking_for_combo_loop_and_liveness	netlist_check.c	/^void levelize_forwards_clean_checking_for_combo_loop_and_liveness(short ast_based, netlist_t *netlist)$/;"	f	ln:476
+line	verilog_preprocessor.h	15;"	ln:15	struct:veri_include
+line	verilog_preprocessor.h	23;"	ln:23	struct:veri_define
+line_has_unknown_pin	simulate_blif.c	/^int line_has_unknown_pin(line_t *line, int cycle)$/;"	f	ln:2752
+line_t	simulate_blif.h	/^} line_t;$/;"	t	ln:72
+linenum	read_blif.c	/^int linenum;$/;"	v	ln:44
+linenum	read_blif.c	/^int linenum;\/* keeps track of the present line, used for printing the error line : line number *\/$/;"	v	ln:90
+linenum	read_netlist.c	/^int linenum;$/;"	v	ln:43
+lines	simulate_blif.h	78;"	ln:78	struct:lines_t
+lines_t	simulate_blif.h	/^} lines_t;$/;"	t	ln:78
+local_clock_found	netlist_create_from_ast.c	/^short local_clock_found;$/;"	v	ln:63
+local_clock_idx	netlist_create_from_ast.c	/^int local_clock_idx;$/;"	v	ln:64
+local_clock_list	netlist_create_from_ast.c	/^signal_list_t *local_clock_list;$/;"	v	ln:62
+local_symbol_table	netlist_create_from_ast.c	/^ast_node_t** local_symbol_table;$/;"	v	ln:60
+local_symbol_table_sc	netlist_create_from_ast.c	/^STRING_CACHE *local_symbol_table_sc;$/;"	v	ln:58
+look_for_clocks	netlist_create_from_ast.c	/^void look_for_clocks(netlist_t *netlist)$/;"	f	ln:285
+main	odin_ii.c	/^int main(int argc, char **argv)$/;"	f	ln:64
+make_1port_gate	node_creation_library.c	/^nnode_t *make_1port_gate(operation_list type, int width_input, int width_output, nnode_t *node, short mark)$/;"	f	ln:115
+make_1port_logic_gate	node_creation_library.c	/^nnode_t *make_1port_logic_gate(operation_list type, int width, nnode_t *node, short mark)$/;"	f	ln:138
+make_1port_logic_gate_with_inputs	node_creation_library.c	/^nnode_t *make_1port_logic_gate_with_inputs(operation_list type, int width, signal_list_t *pin_list, nnode_t *node, short mark)$/;"	f	ln:151
+make_2port_gate	node_creation_library.c	/^nnode_t *make_2port_gate(operation_list type, int width_port1, int width_port2, int width_output, nnode_t *node, short mark)$/;"	f	ln:198
+make_3port_gate	node_creation_library.c	/^nnode_t *make_3port_gate(operation_list type, int width_port1, int width_port2, int width_port3, int width_output, nnode_t *node, short mark)$/;"	f	ln:171
+make_concat_into_list_of_strings	ast_util.c	/^void make_concat_into_list_of_strings(ast_node_t *concat_top, char *instance_name_prefix)$/;"	f	ln:385
+make_full_ref_name	odin_util.c	/^char *make_full_ref_name(char *previous, char *module_name, char *module_instance_name, char *signal_name, long bit)$/;"	f	ln:59
+make_module_param_name	ast_util.c	/^char *make_module_param_name(ast_node_t *module_param_list, char *module_name)$/;"	f	ln:892
+make_mult_block	node_creation_library.c	/^nnode_t *make_mult_block(nnode_t *node, short mark)$/;"	f	ln:444
+make_not_gate	node_creation_library.c	/^nnode_t *make_not_gate(nnode_t *node, short mark)$/;"	f	ln:94
+make_not_gate_with_input	node_creation_library.c	/^nnode_t *make_not_gate_with_input(npin_t *input_pin, nnode_t *node, short mark)$/;"	f	ln:77
+make_output_pins_for_existing_node	netlist_utils.c	/^signal_list_t *make_output_pins_for_existing_node(nnode_t* node, int width)$/;"	f	ln:645
+make_signal_name	odin_util.c	/^char *make_signal_name(char *signal_name, int bit)$/;"	f	ln:39
+make_simple_name	odin_util.c	/^char *make_simple_name(char *input, char *flatten_string, char flatten_char)$/;"	f	ln:445
+make_string_based_on_id	odin_util.c	/^char *make_string_based_on_id(nnode_t *node)$/;"	f	ln:433
+markAndProcessSymbolListWith	parse_making_ast.c	/^ast_node_t *markAndProcessSymbolListWith(ids id, ast_node_t *symbol_list)$/;"	f	ln:401
+mark_clock_node	netlist_utils.c	/^mark_clock_node ($/;"	f	ln:954
+max_number_of_pins	simulate_blif.h	72;"	ln:72	struct:line_t
+memory_instances	memories.c	/^struct s_linked_vptr *memory_instances = NULL;$/;"	t	ln:38
+memory_port_size_list	memories.c	/^struct s_linked_vptr *memory_port_size_list = NULL;$/;"	t	ln:39
+min_mult	multipliers.c	/^int min_mult = 0;$/;"	v	ln:39
+mod	string_cache.h	34;"	ln:34	struct:STRING_CACHE
+models	read_blif.c	86;"	ln:86	struct:hard_block_models
+module_instantiations_instance	parse_making_ast.c	/^ast_node_t **module_instantiations_instance;$/;"	v	ln:52
+module_names_to_idx	parse_making_ast.c	/^STRING_CACHE *module_names_to_idx;$/;"	v	ln:47
+modules_inputs_sc	parse_making_ast.c	/^STRING_CACHE *modules_inputs_sc;$/;"	v	ln:44
+modules_outputs_sc	parse_making_ast.c	/^STRING_CACHE *modules_outputs_sc;$/;"	v	ln:45
+move_a_input_pin	netlist_utils.c	/^void move_a_input_pin(nnode_t *node, int old_idx, int new_idx)$/;"	f	ln:332
+move_a_output_pin	netlist_utils.c	/^void move_a_output_pin(nnode_t *node, int old_idx, int new_idx)$/;"	f	ln:312
+mul	string_cache.h	34;"	ln:34	struct:STRING_CACHE
+mult_list	multipliers.c	/^struct s_linked_vptr *mult_list = NULL;$/;"	t	ln:38
+multiply_arrays	simulate_blif.c	/^int *multiply_arrays(int *a, int a_length, int *b, int b_length)$/;"	f	ln:1460
+mults	multipliers.c	/^int *mults = NULL;$/;"	v	ln:40
+my_malloc_struct	odin_util.c	/^void *my_malloc_struct(size_t bytes_to_alloc)$/;"	f	ln:475
+my_power	odin_util.c	/^long long int my_power(long long int x, long long int y)$/;"	f	ln:417
+name	memories.h	42;"	ln:42	struct:t_memory_port_sizes
+name	read_blif.c	78;"	ln:78	struct:hard_block_model
+name	simulate_blif.h	72;"	ln:72	struct:line_t
+names	read_blif.c	57;"	ln:57	struct:hard_block_pins
+names	read_blif.c	67;"	ln:67	struct:hard_block_ports
+net_file	read_netlist.c	/^static FILE *net_file;$/;"	v	file:	ln:42
+netlist_create_line_number	netlist_create_from_ast.c	/^int netlist_create_line_number = -2;$/;"	v	ln:75
+netlist_expand_ast_of_module	netlist_create_from_ast.c	/^signal_list_t *netlist_expand_ast_of_module(ast_node_t* node, char *instance_name_prefix)$/;"	f	ln:424
+netlist_one_string	read_netlist.c	/^char *netlist_one_string = "ONE_VCC_CNS";$/;"	v	ln:45
+netlist_optimizations_top	netlist_optimizations.c	/^void netlist_optimizations_top(netlist_t *netlist)$/;"	f	ln:39
+netlist_stats	netlist_stats.c	/^void netlist_stats(netlist_t *netlist, char *path, char *name)$/;"	f	ln:39
+netlist_stats_t	types.h	/^typedef struct netlist_stats_t_t netlist_stats_t;$/;"	t	ln:54
+netlist_stats_t_t	types.h	/^struct netlist_stats_t_t$/;"	s	ln:512
+netlist_t	types.h	/^typedef struct netlist_t_t netlist_t;$/;"	t	ln:53
+netlist_t_t	types.h	/^struct netlist_t_t$/;"	s	ln:467
+netlist_zero_string	read_netlist.c	/^char *netlist_zero_string = "ZERO_GND_ZERO";$/;"	v	ln:46
+newAlways	parse_making_ast.c	/^ast_node_t *newAlways(ast_node_t *delay_control, ast_node_t *statement, int line_number)$/;"	f	ln:732
+newArrayRef	parse_making_ast.c	/^ast_node_t *newArrayRef(char *id, ast_node_t *expression, int line_number)$/;"	f	ln:532
+newAssign	parse_making_ast.c	/^ast_node_t *newAssign(ast_node_t *statement, int line_number)$/;"	f	ln:922
+newBinaryOperation	parse_making_ast.c	/^ast_node_t *newBinaryOperation(operation_list op_id, ast_node_t *expression1, ast_node_t *expression2, int line_number)$/;"	f	ln:564
+newBlocking	parse_making_ast.c	/^ast_node_t *newBlocking(ast_node_t *expression1, ast_node_t *expression2, int line_number)$/;"	f	ln:681
+newCase	parse_making_ast.c	/^ast_node_t *newCase(ast_node_t *compare_expression, ast_node_t *case_list, int line_number)$/;"	f	ln:719
+newCaseItem	parse_making_ast.c	/^ast_node_t *newCaseItem(ast_node_t *expression, ast_node_t *statement, int line_number)$/;"	f	ln:642
+newConstant	parse_making_ast.c	/^void newConstant(char *id, char *number, int line_number)$/;"	f	ln:1021
+newDefaultCase	parse_making_ast.c	/^ast_node_t *newDefaultCase(ast_node_t *statement, int line_number)$/;"	f	ln:655
+newDefparam	parse_making_ast.c	/^void newDefparam(char *inst, char *param, char *val, int line_number)$/;"	f	ln:1012
+newGate	parse_making_ast.c	/^ast_node_t *newGate(operation_list op_id, ast_node_t *gate_instance, int line_number)$/;"	f	ln:907
+newGateInstance	parse_making_ast.c	/^ast_node_t *newGateInstance(char* gate_instance_name, ast_node_t *expression1, ast_node_t *expression2, ast_node_t *expression3, int line_number)$/;"	f	ln:887
+newHardBlockInstance	parse_making_ast.c	/^ast_node_t *newHardBlockInstance(char* module_ref_name, ast_node_t *module_named_instance, int line_number)$/;"	f	ln:817
+newIf	parse_making_ast.c	/^ast_node_t *newIf(ast_node_t *compare_expression, ast_node_t *true_expression, ast_node_t *false_expression, int line_number)$/;"	f	ln:694
+newIfQuestion	parse_making_ast.c	/^ast_node_t *newIfQuestion(ast_node_t *compare_expression, ast_node_t *true_expression, ast_node_t *false_expression, int line_number)$/;"	f	ln:707
+newList	parse_making_ast.c	/^ast_node_t *newList(ids node_type, ast_node_t *child)$/;"	f	ln:353
+newListReplicate	parse_making_ast.c	/^ast_node_t *newListReplicate(ast_node_t *exp, ast_node_t *child )$/;"	f	ln:379
+newList_entry	parse_making_ast.c	/^ast_node_t *newList_entry(ast_node_t *list, ast_node_t *child)$/;"	f	ln:366
+newModule	parse_making_ast.c	/^ast_node_t *newModule(char* module_name, ast_node_t *list_of_ports, ast_node_t *list_of_module_items, int line_number)$/;"	f	ln:951
+newModuleConnection	parse_making_ast.c	/^ast_node_t *newModuleConnection(char* id, ast_node_t *expression, int line_number)$/;"	f	ln:745
+newModuleInstance	parse_making_ast.c	/^ast_node_t *newModuleInstance(char* module_ref_name, ast_node_t *module_named_instance, int line_number)$/;"	f	ln:837
+newModuleNamedInstance	parse_making_ast.c	/^ast_node_t *newModuleNamedInstance(char* unique_name, ast_node_t *module_connect_list, ast_node_t *module_parameter_list, int line_number)$/;"	f	ln:802
+newModuleParameter	parse_making_ast.c	/^ast_node_t *newModuleParameter(char* id, ast_node_t *expression, int line_number)$/;"	f	ln:768
+newNegedgeSymbol	parse_making_ast.c	/^ast_node_t *newNegedgeSymbol(char *symbol, int line_number)$/;"	f	ln:612
+newNonBlocking	parse_making_ast.c	/^ast_node_t *newNonBlocking(ast_node_t *expression1, ast_node_t *expression2, int line_number)$/;"	f	ln:668
+newNumberNode	parse_making_ast.c	/^ast_node_t *newNumberNode(char *num, int line_number)$/;"	f	ln:344
+newPosedgeSymbol	parse_making_ast.c	/^ast_node_t *newPosedgeSymbol(char *symbol, int line_number)$/;"	f	ln:627
+newRangeRef	parse_making_ast.c	/^ast_node_t *newRangeRef(char *id, ast_node_t *expression1, ast_node_t *expression2, int line_number)$/;"	f	ln:547
+newSymbolNode	parse_making_ast.c	/^ast_node_t *newSymbolNode(char *id, int line_number)$/;"	f	ln:313
+newUnaryOperation	parse_making_ast.c	/^ast_node_t *newUnaryOperation(operation_list op_id, ast_node_t *expression, int line_number)$/;"	f	ln:588
+newVarDeclare	parse_making_ast.c	/^ast_node_t *newVarDeclare(char* symbol, ast_node_t *expression1, ast_node_t *expression2, ast_node_t *expression3, ast_node_t *expression4, ast_node_t *value, i/;"	f	ln:935
+next	memories.h	36;"	ln:36	struct:t_memory
+next	multipliers.h	35;"	ln:35	struct:t_multiplier
+next	verilog_preprocessor.h	67;"	ln:67	struct:veri_flag_node
+next_module	parse_making_ast.c	/^void next_module()$/;"	f	ln:989
+next_parsed_verilog_file	parse_making_ast.c	/^void next_parsed_verilog_file(ast_node_t *file_items_list)$/;"	f	ln:287
+next_string	string_cache.h	34;"	ln:34	struct:STRING_CACHE
+nnet_t	types.h	/^typedef struct nnet_t_t nnet_t;$/;"	t	ln:50
+nnet_t_t	types.h	/^struct nnet_t_t$/;"	s	ln:431
+nnode_t	types.h	/^typedef struct nnode_t_t nnode_t;$/;"	t	ln:48
+nnode_t_t	types.h	/^struct nnode_t_t$/;"	s	ln:366
+node_name	node_creation_library.c	/^char *node_name(nnode_t *node, char *instance_name_prefix)$/;"	f	ln:426
+node_name_based_on_op	node_creation_library.c	/^char *node_name_based_on_op(nnode_t *node)$/;"	f	ln:266
+npin_t	types.h	/^typedef struct npin_t_t npin_t;$/;"	t	ln:49
+npin_t_t	types.h	/^struct npin_t_t$/;"	s	ln:410
+num_children	simulate_blif.h	92;"	ln:92	struct:stages
+num_connections	simulate_blif.h	92;"	ln:92	struct:stages
+num_fanouts_on_output_pin	netlist_stats.c	/^int num_fanouts_on_output_pin(nnode_t *node, int output_pin_idx)$/;"	f	ln:396
+num_local_symbol_table	netlist_create_from_ast.c	/^int num_local_symbol_table;$/;"	v	ln:61
+num_modules	parse_making_ast.c	/^int num_modules;$/;"	v	ln:55
+num_nodes	simulate_blif.h	92;"	ln:92	struct:stages
+num_parallel_nodes	simulate_blif.h	92;"	ln:92	struct:stages
+number_of_pins	simulate_blif.h	72;"	ln:72	struct:line_t
+oassert	types.h	85;"	d	ln:85
+one_string	netlist_create_from_ast.c	/^char *one_string = "ONE_VCC_CNS";$/;"	v	ln:67
+open_source_file	verilog_preprocessor.c	/^FILE* open_source_file(char* filename)$/;"	f	ln:260
+operation_list	types.h	/^} operation_list;$/;"	v	ln:222
+optString	odin_ii.c	/^static const char *optString = "hc:V:WREh:o:a:B:b:N:f:s:S:p:g:t:T:L:H:GA3";$/;"	v	file:	ln:128
+optimizations_on_AST	ast_optimizations.c	/^void optimizations_on_AST(ast_node_t *top)$/;"	f	ln:49
+original_simulate_cycle	simulate_blif.c	/^void original_simulate_cycle(netlist_t *netlist, int cycle)$/;"	f	ln:327
+output_activation_file_ace_and_function_file	activity_estimation.c	/^void output_activation_file_ace_and_function_file(char *output_filename, int lut_size, netlist_t *LUT_netlist, netlist_t *CLUSTER_netlist)$/;"	f	ln:531
+output_blif	output_blif.c	/^void output_blif(char *file_name, netlist_t *netlist)$/;"	f	ln:51
+output_blif_pin_connect	output_blif.c	/^void output_blif_pin_connect(nnode_t *node, FILE *out)$/;"	f	ln:747
+output_hard_blocks	hard_blocks.c	/^void output_hard_blocks(FILE *out)$/;"	f	ln:250
+output_nets_sc	netlist_create_from_ast.c	/^STRING_CACHE *output_nets_sc;$/;"	v	ln:55
+output_node	output_blif.c	/^void output_node(nnode_t *node, short traverse_number, FILE *fp)$/;"	f	ln:295
+output_ports	read_blif.c	78;"	ln:78	struct:hard_block_model
+output_top	outputs.c	/^void output_top(netlist_t *netlist)$/;"	f	ln:41
+outputs	read_blif.c	78;"	ln:78	struct:hard_block_model
+pad_dp_memory_width	memories.c	/^void pad_dp_memory_width(nnode_t *node, netlist_t *netlist)$/;"	f	ln:1401
+pad_memory_input_port	memories.c	/^void pad_memory_input_port(nnode_t *node, netlist_t *netlist, t_model *model, char *port_name)$/;"	f	ln:1468
+pad_memory_output_port	memories.c	/^void pad_memory_output_port(nnode_t *node, netlist_t *netlist, t_model *model, char *port_name)$/;"	f	ln:1433
+pad_multiplier	multipliers.c	/^void pad_multiplier(nnode_t *node, netlist_t *netlist)$/;"	f	ln:949
+pad_sp_memory_width	memories.c	/^void pad_sp_memory_width(nnode_t *node, netlist_t *netlist)$/;"	f	ln:1418
+pad_string	netlist_create_from_ast.c	/^char *pad_string = "ZERO_PAD_ZERO";$/;"	v	ln:69
+pad_with_zeros	netlist_create_from_ast.c	/^void pad_with_zeros(ast_node_t* node, signal_list_t *list, int pad_size, char *instance_name_prefix)$/;"	f	ln:3091
+parallel_times	simulate_blif.h	92;"	ln:92	struct:stages
+parse_pin_name_list	simulate_blif.c	/^pin_names *parse_pin_name_list(char *list)$/;"	f	ln:2600
+parse_test_vector	simulate_blif.c	/^test_vector *parse_test_vector(char *buffer)$/;"	f	ln:2184
+parse_to_ast	parse_making_ast.c	/^void parse_to_ast()$/;"	f	ln:92
+partial_map_node	partial_map.c	/^void partial_map_node(nnode_t *node, short traverse_number, netlist_t *netlist)$/;"	f	ln:140
+partial_map_top	partial_map.c	/^void partial_map_top(netlist_t *netlist)$/;"	f	ln:61
+pass	read_netlist.c	/^enum pass { DRIVERS = 0, DRIVEN, STOP };$/;"	u	file:	ln:40
+path	verilog_preprocessor.h	15;"	ln:15	struct:veri_include
+pin_names	simulate_blif.h	/^} pin_names;$/;"	t	ln:63
+pin_numbers	simulate_blif.h	72;"	ln:72	struct:line_t
+pin_numbers	simulate_blif.h	78;"	ln:78	struct:lines_t
+pins	simulate_blif.h	63;"	ln:63	struct:pin_names
+pins	simulate_blif.h	72;"	ln:72	struct:line_t
+pop	verilog_preprocessor.c	/^int pop(veri_flag_stack *stack)$/;"	f	ln:655
+pow2	odin_util.c	/^long long int pow2(int to_the_power)$/;"	f	ln:501
+print_ancestry	simulate_blif.c	/^void print_ancestry(nnode_t *bottom_node, int n)$/;"	f	ln:3005
+print_netlist_for_checking	print_netlist.c	/^void print_netlist_for_checking (netlist_t *netlist, char *name)$/;"	f	ln:38
+print_netlist_stats	simulate_blif.c	/^void print_netlist_stats(stages *stages, int num_vectors)$/;"	f	ln:2958
+print_progress_bar	simulate_blif.c	/^int print_progress_bar(double completion, int position, int length, double time)$/;"	f	ln:2916
+print_simulation_stats	simulate_blif.c	/^void print_simulation_stats(stages *stages, int num_vectors, double total_time, double simulation_time)$/;"	f	ln:2976
+print_time	simulate_blif.c	/^void print_time(double time)$/;"	f	ln:2992
+print_update_trace	simulate_blif.c	/^nnode_t *print_update_trace(nnode_t *bottom_node, int cycle)$/;"	f	ln:3096
+print_usage	odin_ii.c	/^void print_usage()$/;"	f	ln:277
+push	verilog_preprocessor.c	/^void push(veri_flag_stack *stack, int flag)$/;"	f	ln:669
+queue_node_t	queue.h	26;"	d	ln:26
+queue_node_t_t	queue.h	/^struct queue_node_t_t$/;"	s	ln:49
+queue_t	queue.h	25;"	d	ln:25
+queue_t_t	queue.h	/^struct queue_t_t$/;"	s	ln:31
+rb_create_top_driver_nets	read_blif.c	/^void rb_create_top_driver_nets(char *instance_name_prefix, hashtable_t *output_nets_hash)$/;"	f	ln:1086
+rb_create_top_output_nodes	read_blif.c	/^void rb_create_top_output_nodes(FILE *file)$/;"	f	ln:1023
+rb_look_for_clocks	read_blif.c	/^void rb_look_for_clocks()$/;"	f	ln:1064
+read_bit_map_find_unknown_gate	read_blif.c	/^short read_bit_map_find_unknown_gate(int input_count, nnode_t *node, FILE *file)$/;"	f	ln:754
+read_blif	read_blif.c	/^void read_blif(char * blif_file)$/;"	f	ln:136
+read_config_file	read_xml_config_file.c	/^void read_config_file(char *file_name)$/;"	f	ln:47
+read_debug_switches	read_xml_config_file.c	/^void read_debug_switches(ezxml_t a_node, config_t *config)$/;"	f	ln:167
+read_hard_block_model	read_blif.c	/^hard_block_model *read_hard_block_model(char *name_subckt, hard_block_ports *ports, FILE *file)$/;"	f	ln:1206
+read_netlist	read_netlist.c	/^read_netlist ($/;"	f	ln:69
+read_optimizations	read_xml_config_file.c	/^void read_optimizations(ezxml_t a_node, config_t *config)$/;"	f	ln:231
+read_outputs	read_xml_config_file.c	/^void read_outputs(ezxml_t a_node, config_t *config)$/;"	f	ln:121
+read_tokens	read_blif.c	/^int read_tokens (char *buffer, hard_block_models *models, FILE *file, hashtable_t *output_nets_hash)$/;"	f	ln:186
+read_verilog_files	read_xml_config_file.c	/^void read_verilog_files(ezxml_t a_node, config_t *config)$/;"	f	ln:96
+record_mult_distribution	multipliers.c	/^void record_mult_distribution(nnode_t *node)$/;"	f	ln:260
+reduceAST_traverse_node	ast_optimizations.c	/^info_ast_visit_t *reduceAST_traverse_node(ast_node_t *node, ast_node_t *from, int position_idx)$/;"	f	ln:59
+register_hard_blocks	hard_blocks.c	/^void register_hard_blocks()$/;"	f	ln:66
+remap_pin_to_new_net	netlist_utils.c	/^void remap_pin_to_new_net(npin_t *pin, nnet_t *new_net)$/;"	f	ln:480
+remap_pin_to_new_node	netlist_utils.c	/^void remap_pin_to_new_node(npin_t *pin, nnode_t *new_node, int pin_idx)$/;"	f	ln:501
+remove_comments	verilog_preprocessor.c	/^FILE *remove_comments(FILE *source)$/;"	f	ln:344
+report_memory_distribution	memories.c	/^report_memory_distribution()$/;"	f	ln:65
+report_mult_distribution	multipliers.c	/^void report_mult_distribution()$/;"	f	ln:277
+resolve_node	ast_util.c	/^ast_node_t *resolve_node(char *module_name, ast_node_t *node)$/;"	f	ln:829
+ret_veri_definedval	verilog_preprocessor.c	/^char* ret_veri_definedval(char *symbol)$/;"	f	ln:225
+reverse_string	odin_util.c	/^void reverse_string(char *string, int length)$/;"	f	ln:542
+s_memory	memories.h	/^typedef struct s_memory$/;"	s	ln:27
+s_memory_port_sizes	memories.h	/^typedef struct s_memory_port_sizes$/;"	s	ln:38
+s_multiplier	multipliers.h	/^typedef struct s_multiplier$/;"	s	ln:29
+sc_add_string	string_cache.c	/^sc_add_string(STRING_CACHE * sc,$/;"	f	ln:84
+sc_do_alloc	string_cache.c	/^sc_do_alloc(long a,$/;"	f	ln:134
+sc_free_string_cache	string_cache.c	/^sc_free_string_cache(STRING_CACHE * sc)$/;"	f	ln:156
+sc_lookup_string	string_cache.c	/^sc_lookup_string(STRING_CACHE * sc,$/;"	f	ln:67
+sc_new_string_cache	string_cache.c	/^sc_new_string_cache(void)$/;"	f	ln:48
+sc_valid_id	string_cache.c	/^sc_valid_id(STRING_CACHE * sc,$/;"	f	ln:123
+search_clock_name	read_blif.c	/^char* search_clock_name(FILE* file)$/;"	f	ln:407
+sequential_levelized_dfs	netlist_check.c	/^void sequential_levelized_dfs(short marker_value, netlist_t *netlist)$/;"	f	ln:90
+sequential_times	simulate_blif.h	92;"	ln:92	struct:stages
+set_default_optimization_settings	read_xml_config_file.c	/^void set_default_optimization_settings(config_t *config)$/;"	f	ln:217
+set_pin_cycle	simulate_blif.c	/^inline void set_pin_cycle(npin_t *pin, int cycle)$/;"	f	ln:1136
+signal_list_t	types.h	/^typedef struct signal_list_t_t signal_list_t;$/;"	t	ln:51
+signal_list_t_t	types.h	/^struct signal_list_t_t $/;"	s	ln:452
+signature	read_blif.c	67;"	ln:67	struct:hard_block_ports
+sim_state_t	types.h	/^typedef struct sim_state_t_t sim_state_t;$/;"	t	ln:47
+simulate_cycle	simulate_blif.c	/^void simulate_cycle(int cycle, stages *s)$/;"	f	ln:246
+simulate_first_cycle	simulate_blif.c	/^stages *simulate_first_cycle(netlist_t *netlist, int cycle, pin_names *p, lines_t *l)$/;"	f	ln:373
+simulate_netlist	simulate_blif.c	/^void simulate_netlist(netlist_t *netlist)$/;"	f	ln:28
+simulation_type	types.h	/^}simulation_type;$/;"	v	ln:118
+single_port_rams	hard_blocks.c	/^t_model *single_port_rams = NULL;$/;"	v	ln:34
+single_port_rams	memories.c	/^t_model *single_port_rams;$/;"	v	ln:32
+size	memories.h	42;"	ln:42	struct:t_memory_port_sizes
+size	string_cache.h	34;"	ln:34	struct:STRING_CACHE
+size_a	multipliers.h	35;"	ln:35	struct:t_multiplier
+size_addr1	memories.h	36;"	ln:36	struct:t_memory
+size_addr2	memories.h	36;"	ln:36	struct:t_memory
+size_all_file_items_list	parse_making_ast.c	/^int size_all_file_items_list;$/;"	v	ln:59
+size_b	multipliers.h	35;"	ln:35	struct:t_multiplier
+size_block_instantiations	parse_making_ast.c	/^int size_block_instantiations;$/;"	v	ln:50
+size_d1	memories.h	36;"	ln:36	struct:t_memory
+size_d2	memories.h	36;"	ln:36	struct:t_memory
+size_module_instantiations	parse_making_ast.c	/^int size_module_instantiations;$/;"	v	ln:53
+size_out	multipliers.h	35;"	ln:35	struct:t_multiplier
+size_out1	memories.h	36;"	ln:36	struct:t_memory
+size_out2	memories.h	36;"	ln:36	struct:t_memory
+sizes	read_blif.c	67;"	ln:67	struct:hard_block_ports
+skip_reading_bit_map	read_blif.c	/^short static skip_reading_bit_map=FALSE; $/;"	v	file:	ln:91
+sort_signal_list_alphabetically	netlist_utils.c	/^void sort_signal_list_alphabetically(signal_list_t *list)$/;"	f	ln:635
+sp_memory_list	memories.c	/^struct s_linked_vptr *sp_memory_list;$/;"	t	ln:35
+special_blk	read_netlist.c	/^enum special_blk { NORMAL = 0, INPAD, OUTPAD };$/;"	u	file:	ln:39
+split_dp_memory_depth	memories.c	/^split_dp_memory_depth(nnode_t *node)$/;"	f	ln:364
+split_dp_memory_to_arch_width	memories.c	/^void split_dp_memory_to_arch_width(nnode_t *node)$/;"	f	ln:1082
+split_dp_memory_width	memories.c	/^split_dp_memory_width(nnode_t *node)$/;"	f	ln:768
+split_list	memories.c	/^struct s_linked_vptr *split_list;$/;"	t	ln:37
+split_multiplier	multipliers.c	/^void split_multiplier(nnode_t *node, int a0, int b0, int a1, int b1)$/;"	f	ln:700
+split_multiplier_a	multipliers.c	/^void split_multiplier_a(nnode_t *node, int a0, int a1, int b)$/;"	f	ln:806
+split_multiplier_b	multipliers.c	/^void split_multiplier_b(nnode_t *node, int a, int b1, int b0)$/;"	f	ln:882
+split_size	memories.c	/^int split_size = 0;$/;"	v	ln:40
+split_sp_memory_depth	memories.c	/^split_sp_memory_depth(nnode_t *node)$/;"	f	ln:176
+split_sp_memory_to_arch_width	memories.c	/^void split_sp_memory_to_arch_width(nnode_t *node)$/;"	f	ln:978
+split_sp_memory_width	memories.c	/^split_sp_memory_width(nnode_t *node)$/;"	f	ln:628
+stage_ordered_nodes	simulate_blif.c	/^stages *stage_ordered_nodes(nnode_t **ordered_nodes, int num_ordered_nodes) {$/;"	f	ln:432
+stages	simulate_blif.h	/^} stages;$/;"	t	ln:92
+stages	simulate_blif.h	92;"	ln:92	struct:stages
+string	string_cache.h	34;"	ln:34	struct:STRING_CACHE
+string_hash	string_cache.c	/^string_hash(STRING_CACHE * sc,$/;"	f	ln:10
+string_hash	string_cache.h	34;"	ln:34	struct:STRING_CACHE
+string_hash_size	string_cache.h	34;"	ln:34	struct:STRING_CACHE
+symbol	verilog_preprocessor.h	23;"	ln:23	struct:veri_define
+t_memory	memories.h	/^} t_memory;$/;"	t	ln:36
+t_memory_port_sizes	memories.h	/^} t_memory_port_sizes;$/;"	t	ln:42
+t_multiplier	multipliers.h	/^} t_multiplier;$/;"	t	ln:35
+terminate_continuous_assignment	netlist_create_from_ast.c	/^void terminate_continuous_assignment(ast_node_t *node, signal_list_t* assignment, char *instance_name_prefix)$/;"	f	ln:2074
+terminate_registered_assignment	netlist_create_from_ast.c	/^void terminate_registered_assignment(ast_node_t *always_node, signal_list_t* assignment, signal_list_t *potential_clocks, char *instance_name_prefix)$/;"	f	ln:1964
+test_vector	simulate_blif.h	/^} test_vector;$/;"	t	ln:98
+to_view_parse	parse_making_ast.c	/^short to_view_parse;$/;"	v	ln:61
+top	verilog_preprocessor.c	/^int top(veri_flag_stack *stack)$/;"	f	ln:645
+top	verilog_preprocessor.h	72;"	ln:72	struct:veri_flag_stack
+top_module	netlist_create_from_ast.c	/^ast_node_t *top_module;$/;"	v	ln:71
+trim	verilog_preprocessor.c	/^char* trim(char *string)$/;"	f	ln:618
+trim_string	simulate_blif.c	/^void trim_string(char* string, char *chars)$/;"	f	ln:2727
+twos_complement	odin_util.c	/^char *twos_complement(char *str)$/;"	f	ln:109
+type	simulate_blif.h	72;"	ln:72	struct:line_t
+type_descriptors	odin_ii.c	/^t_type_descriptor* type_descriptors;$/;"	v	ln:55
+type_of_circuit	netlist_create_from_ast.c	/^int type_of_circuit;$/;"	v	ln:77
+unique_label_count	parse_making_ast.c	/^int unique_label_count;$/;"	v	ln:1046
+unique_node_name_id	node_creation_library.c	/^long unique_node_name_id = 0;$/;"	v	ln:34
+update_pin_value	simulate_blif.c	/^void update_pin_value(npin_t *pin, signed char value, int cycle)$/;"	f	ln:1093
+update_tag	high_level_data.c	/^void update_tag(ast_node_t *node, int tag, int line)$/;"	f	ln:103
+update_tree	high_level_data.c	/^void update_tree(ast_node_t *node)$/;"	f	ln:38
+update_undriven_input_pins	simulate_blif.c	/^void update_undriven_input_pins(nnode_t *node, int cycle)$/;"	f	ln:816
+value	verilog_preprocessor.h	23;"	ln:23	struct:veri_define
+values	simulate_blif.h	98;"	ln:98	struct:test_vector
+vector_value_to_hex	simulate_blif.c	/^char *vector_value_to_hex(signed char *value, int length)$/;"	f	ln:2780
+veri_Defines	verilog_preprocessor.h	/^struct veri_Defines $/;"	s	ln:32
+veri_Includes	verilog_preprocessor.h	/^struct veri_Includes $/;"	s	ln:25
+veri_define	verilog_preprocessor.h	/^typedef struct veri_define$/;"	s	ln:17
+veri_define	verilog_preprocessor.h	/^} veri_define;$/;"	t	ln:23
+veri_defines	verilog_preprocessor.c	/^struct veri_Defines veri_defines;$/;"	t	ln:12
+veri_flag_node	verilog_preprocessor.h	/^typedef struct veri_flag_node$/;"	s	ln:63
+veri_flag_node	verilog_preprocessor.h	/^} veri_flag_node;$/;"	t	ln:67
+veri_flag_stack	verilog_preprocessor.h	/^} veri_flag_stack;$/;"	t	ln:72
+veri_include	verilog_preprocessor.h	/^typedef struct veri_include$/;"	s	ln:10
+veri_include	verilog_preprocessor.h	/^} veri_include;$/;"	t	ln:15
+veri_includes	verilog_preprocessor.c	/^struct veri_Includes veri_includes;$/;"	t	ln:11
+veri_is_defined	verilog_preprocessor.c	/^int veri_is_defined(char * symbol)$/;"	f	ln:239
+veri_preproc	verilog_preprocessor.c	/^FILE* veri_preproc(FILE *source)$/;"	f	ln:306
+veri_preproc_bootstraped	verilog_preprocessor.c	/^void veri_preproc_bootstraped(FILE *original_source, FILE *preproc_producer, veri_include *current_include)$/;"	f	ln:392
+verify_hard_block_ports_against_model	read_blif.c	/^int verify_hard_block_ports_against_model(hard_block_ports *ports, hard_block_model *model)$/;"	f	ln:1402
+verify_lines	simulate_blif.c	/^int verify_lines (lines_t *l)$/;"	f	ln:2037
+verify_output_vectors	simulate_blif.c	/^int verify_output_vectors(char* output_vector_file, int num_vectors)$/;"	f	ln:2485
+verify_test_vector_headers	simulate_blif.c	/^int verify_test_vector_headers(FILE *in, lines_t *l)$/;"	f	ln:1977
+verilog_netlist	netlist_create_from_ast.c	/^netlist_t *verilog_netlist;$/;"	v	ln:73
+verilog_preprocessor_h	verilog_preprocessor.h	2;"	d	ln:2
+wall_time	simulate_blif.c	/^inline double wall_time()$/;"	f	ln:3186
+warning_message	errors.c	/^void warning_message(short error_type, int line_number, int file, char *message, ...)$/;"	f	ln:63
+write_vector_headers	simulate_blif.c	/^void write_vector_headers(FILE *file, lines_t *l)$/;"	f	ln:1963
+write_vector_to_file	simulate_blif.c	/^void write_vector_to_file(lines_t *l, FILE *file, int cycle)$/;"	f	ln:2324
+write_vector_to_modelsim_file	simulate_blif.c	/^void write_vector_to_modelsim_file(lines_t *l, FILE *modelsim_out, int cycle)$/;"	f	ln:2433
+write_wave_to_file	simulate_blif.c	/^void write_wave_to_file(lines_t *l, FILE* file, int cycle_offset, int wave_length, int edge)$/;"	f	ln:2307
+write_wave_to_modelsim_file	simulate_blif.c	/^void write_wave_to_modelsim_file(netlist_t *netlist, lines_t *l, FILE* modelsim_out, int cycle_offset, int wave_length)$/;"	f	ln:2402
+zero_string	netlist_create_from_ast.c	/^char *zero_string = "ZERO_GND_ZERO";$/;"	v	ln:68

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=RASP Tools
+Comment=Open RASP Tools Configuration in Scilab
+Exec=/home/ubuntu/rasp30/scilab_config/startup
+Icon=/home/ubuntu/rasp30/scilab_config/logo.png
+Terminal=false
+Type=Application
+Categories=Utility;Application;

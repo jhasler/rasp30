@@ -1,0 +1,28 @@
+# Benchmark "div_by_n" written by ABC on Mon Jun 10 21:42:07 2013
+#.model div_by_n
+#.inputs net1 net2
+#.outputs net3
+
+.latch         n7 divn_testFF_NODE~10  re net1 0
+.latch        n12 divn_testFF_NODE~7  re net1 0
+.latch        n17 divn_testFF_NODE~8  re net1 0
+.latch        n22 divn_testFF_NODE~9  re net1 0
+
+.names net2 divn_testFF_NODE~10 divn_testFF_NODE~9 n17_1 n7
+0011 1
+010- 1
+01-0 1
+.names divn_testFF_NODE~7 divn_testFF_NODE~8 n17_1
+11 1
+.names net2 divn_testFF_NODE~7 n12
+00 1
+.names net2 divn_testFF_NODE~7 divn_testFF_NODE~8 n17
+001 1
+010 1
+.names net2 divn_testFF_NODE~9 divn_testFF_NODE~7 divn_testFF_NODE~8 n22
+0011 1
+010- 1
+01-0 1
+.names divn_testFF_NODE~10 net3
+1 1
+ 

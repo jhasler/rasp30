@@ -1,0 +1,59 @@
+.include "pmem_defs.asm"
+	
+.global main
+
+main:
+
+	mov	#0x0010, &BCSCTL2	; Divide clock 20MHz
+	mov	#0x5A80, &WDTCTL	; Watchdog controller 
+	dint
+	
+        ;mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = 12V, avdd_25 = 2.5V
+        mov     #0x0014, &GP_PER_1      ; IVDD to 6.0V, Set vtun_ext = 12V, avdd_25 = 6.0V
+	mov 	#0X0800, &GP_PER_3	; en_6V on the board
+	;mov	#0x0040, &GATE_S	;gate_s = gnd
+	;mov	#0x0060, &GATE_S	;gate_s = ivdd
+	;mov	#0x0030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0x1030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0x2030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0x3030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0x4030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0x5030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0x6030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0x7030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0x8030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0x9030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0xa030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0xb030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0xc030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0xd030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0xe030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	;mov	#0xf030, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+	mov	#0xfe30, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+
+        /* ----------------------         END OF TEST        --------------- */
+end_of_test:
+	mov	#0x0000, &BCSCTL2
+	nop
+	br #0xffff
+
+
+        /* ----------------------         INTERRUPT VECTORS  --------------- */
+
+.section .vectors, "a"
+.word end_of_test  ; Interrupt  0 (lowest priority)    <unused>
+.word end_of_test  ; Interrupt  1                      <unused>
+.word end_of_test  ; Interrupt  2                      <unused>
+.word end_of_test  ; Interrupt  3                      <unused>
+.word end_of_test  ; Interrupt  4                      <unused>
+.word end_of_test  ; Interrupt  5                      <unused>
+.word end_of_test  ; Interrupt  6                      <unused>
+.word end_of_test  ; Interrupt  7                      <unused>
+.word end_of_test  ; Interrupt  8                      <unused>
+.word end_of_test  ; Interrupt  9                      <unused>
+.word end_of_test  ; Interrupt 10                      Watchdog timer
+.word end_of_test  ; Interrupt 11                      <unused>
+.word end_of_test  ; Interrupt 12                      <unused>
+.word end_of_test  ; Interrupt 13                      <unused>
+.word end_of_test  ; Interrupt 14                      NMI
+.word main         ; Interrupt 15 (highest priority)   RESET

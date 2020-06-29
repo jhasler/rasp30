@@ -1,0 +1,610 @@
+<?xml version="1.0"?>
+<architecture>
+	<models>
+		<model name="fgota">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="ota">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="ota2">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="cap">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="cap2">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="nfet">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="pfet">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="tgate">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="tgate2">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="nmirror">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="mite">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="mite2">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="signalmult">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="gnd_out">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="vdd_out">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="in2in_x1">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="in2in_x6">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="meas_volt_mite">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>	
+		</model>
+		<model name="ramp_fe">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="ota_buffer">
+			<input_ports>
+				<port name="in"/>
+				<port name="clk" is_clock="1"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="ota_buf">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="lpf">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="c4_sp">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="TIA_blk">
+			<input_ports>
+				<port name="in"/>
+				<!--port name="fb" is_clock="1"/>-->
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="hhneuron"> 
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="nfet_i2v">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="pfet_i2v">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="i2v_pfet_gatefgota">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="mismatch_meas">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="mmap_local_swc">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="latch_custom">
+			<input_ports>
+				<port name="D"/>
+				<port name="clk"/>
+				<port name="reset"/>
+			</input_ports>
+			<output_ports>
+				<port name="Q"/>
+			</output_ports>
+		</model>
+		<model name="counter8">
+			<input_ports>
+				<port name="clk"/>
+				<port name="reset"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="volswc">
+			<input_ports>
+				<port name="in"/>
+				<port name="ci"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+				<port name="co"/>
+			</output_ports>
+		</model>
+		<model name="current_ref">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>	
+		</model>
+		<model name="ichar_nfet">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="tgate_so">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>	
+		<model name="DAC_sftreg">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="sftreg">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="sftreg2">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="sftreg3">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="sftreg4">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="ota_vmm">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="vmm_16x16">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="vmm_2x2">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="vmm4x4_SR">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="vmm4x4">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="vmm8x4">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="vmm8inx8in">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>		
+		<model name="vmm8x4_in">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="vmm4x4_SR2">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="vmm8x4_SR">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="vmm12x1">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="vmm12x1_wowta">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="SR4">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="Hyst_diff">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="Max_detect">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="Min_detect">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="hhn">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="fgswitch">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="common_drain">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="common_drain_nfet">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="hhn_debug">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="vmmoffset">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="wta_new">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="common_source">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="VolDivide1">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="I_SenseAmp">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="nmirror_w_bias">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="SubbandArray">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="HH_RG">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="HH_RG_2s">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="HH_RG_3s">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="SOSLPF">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="MSOS02">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>
+		<model name="vmm_offc">
+			<input_ports>
+				<port name="in"/>
+			</input_ports>
+			<output_ports>
+				<port name="out"/>
+			</output_ports>
+		</model>

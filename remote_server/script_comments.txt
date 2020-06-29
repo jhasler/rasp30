@@ -1,0 +1,38 @@
+# File Name: get_email.py
+# Author: Ishan Kumar Lal
+# Date Created: June 30th, 2014
+# Description:
+# - Coded using Python 3.4.1
+# - Uses POP3 protocol
+# - Authenticates into a users Google Email Account and pops off new email messages from the server
+# - Prints number of new messages received from server
+# - Parses and prints subject of each new message in a new line
+# - Successful/Unsuccessful connection close with gmail server
+# - Detects and Extracts attachments of any extension type and places them in a folder named after the subject line
+# - Can send email with or without attachments
+# - Can Zip files of a folder together
+# - Can Unzip files into a folder
+# - Can execute command line commands for USB access
+# CADSP Lab @ Georgia Institute of Technology. Copyright 2014. All Rights Reserved.
+
+# File Name: program_fpaa.py
+# Author: Ishan Kumar Lal
+# Date Created: June 30th, 2014
+# Description:
+# - Coded using Python 3.4.1
+# - Executes TCL scripts using system calls
+# - FPAA is programmed via system calls
+# CADSP Lab @ Georgia Institute of Technology. Copyright 2014. All Rights Reserved.
+
+# File Name: send_results.py
+# Author: Ishan Kumar Lal
+# Date Created: July 1st, 2014
+# Description:
+# - Coded using Python 3.4.1
+# - Reads in user email and results file name
+# - Creates new email, attaches file to it and send's the email to user's email address
+# CADSP Lab @ Georgia Institute of Technology. Copyright 2014. All Rights Reserved.
+
+
+change the modes of the python3-4-1
+

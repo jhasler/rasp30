@@ -1,0 +1,6 @@
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", ATTRS{bNumInterfaces}==" 2" , SYMLINK+="rasp301"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", SYMLINK+="rasp301"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", SYMLINK+="prologix"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{manufacturer}=="Ga. Tech CADSP Lab", ATTRS{product}=="RASP 3.0 Control Board",SYMLINK+="rasp301"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{manufacturer}=="FTDI", ATTRS{idProduct}=="6010", ATTRS{product}=="Dual RS232",ATTRS{bInterfaceNumber}=="01",SYMLINK+="rasp30a"
+SUBSYSTEM=="tty",ATTRS{bInterfaceNumber}=="01",SYMLINK+="rasp30"

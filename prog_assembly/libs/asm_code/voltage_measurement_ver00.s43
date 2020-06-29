@@ -1,0 +1,305 @@
+.include "pmem_defs.asm"
+	
+.set	DAC_01_00, 0x01D0
+.set	DAC_03_02, 0x01D2
+.set	DAC_05_04, 0x01D4
+.set	DAC_07_06, 0x01D6
+.set	DAC_09_08, 0x01D8
+
+.global main
+
+main:
+        mov     #DMEM_250, r1           ; Initialize stack pointer
+	mov	#0x6000, r7
+;	mov     #8000, r5             	; Number of ms
+;init_wait:
+;        dec.w   r5 
+;        jnz     init_wait
+        mov	#0x0010, &BCSCTL2	; Divide clock 20MHz
+	mov	#0x5A80, &WDTCTL	; Watchdog controller 
+	dint
+	mov	#0x0002, &TUN_MUX
+ 	mov     #473, &ROW_SEL
+        mov     #977, &COL_SEL
+        ;mov     #1009, &COL_SEL
+	;mov	#0x0040, &GATE_S	; gate_s = gnd
+	;mov	#0x0040, &GATE_US_P	; gate_us_p = gnd
+	;mov	#0x0040, &GATE_US_N	; gate_us_n = gnd
+	mov	#0x0000, &GATE_S	; gate_s = 0.6V (@ IVDD 2.5V)
+	mov	#0x0000, &GATE_US_P	; gate_us_p = 0.6V (@ IVDD 2.5V)
+	mov	#0x0000, &GATE_US_N	; gate_us_n = 0.6V (@ IVDD 2.5V)
+	mov     #0xBF04, &GP_PER_3      ; Vtun_ext = 5V, enable 6V, esd=6v, dvdd2.5=On,
+					; adc_pwd<1> = 0 (ADC_0, 0: normal, 1: power down)
+	mov	#0x00A4, &DRAIN_CTRL	; 101 cascode off, no use DAC, i2v mux control=fg_inn
+        mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+	mov     #0x0000, &PROG_BITS     ; PROG = 0, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+
+	mov	#0x4200, r11
+	mov	@r11, r12		; length of vector 
+	incd	r11
+	mov	@r11, r13		; DAC information
+        incd	r11
+	mov	@r11, r14		; Time interval (ms)
+loop_start:
+	mov     #0x0000, &PROG_BITS     ; PROG = 0, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+
+        mov     r13, r9
+	bic	#0xfffe, r9
+        cmp	#0, r9  	        ; If DAC0 = 0, skip setting DAC0
+	jeq	skip_DAC0_set
+        incd	r11
+        mov     @r11, r9
+        rlc     r9                     ; 4 rlc & 4 rrc to make the calculation same!
+        rlc     r9
+        rlc     r9
+        rlc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+skip_DAC0_set:
+        mov     r13, r10
+        rrc     r10
+	bic	#0xfffe, r10
+        cmp	#0, r10  	        ; If DAC1 = 0, skip setting DAC1
+	jeq	skip_DAC1_set
+        incd	r11
+        mov     @r11, r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+skip_DAC1_set:
+        add     r9, r10
+        mov	r10, &DAC_01_00	        ; get the DAC_01_00's value
+
+        mov     r13, r9
+        rrc     r9
+        rrc     r9
+	bic	#0xfffe, r9
+        cmp	#0, r9  	        ; If DAC2 = 0, skip setting DAC2
+	jeq	skip_DAC2_set
+        incd	r11
+        mov     @r11, r9
+        rlc     r9                     ; 4 rlc & 4 rrc to make the calculation same!
+        rlc     r9
+        rlc     r9
+        rlc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+skip_DAC2_set:
+        mov     r13, r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+	bic	#0xfffe, r10
+        cmp	#0, r10  	        ; If DAC3 = 0, skip setting DAC3
+	jeq	skip_DAC3_set
+        incd	r11
+        mov     @r11, r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+skip_DAC3_set:
+        add     r9, r10
+        mov	r10, &DAC_03_02	        ; get the DAC_03_02's value
+
+        mov     r13, r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+	bic	#0xfffe, r9
+        cmp	#0, r9  	        ; If DAC4 = 0, skip setting DAC4
+	jeq	skip_DAC4_set
+        incd	r11
+        mov     @r11, r9
+        rlc     r9                     ; 4 rlc & 4 rrc to make the calculation same!
+        rlc     r9
+        rlc     r9
+        rlc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+skip_DAC4_set:
+        mov     r13, r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+	bic	#0xfffe, r10
+        cmp	#0, r10  	        ; If DAC5 = 0, skip setting DAC5
+	jeq	skip_DAC5_set
+        incd	r11
+        mov     @r11, r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+skip_DAC5_set:
+        add     r9, r10
+        mov	r10, &DAC_05_04	        ; get the DAC_05_04's value
+
+        mov     r13, r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+	bic	#0xfffe, r9
+        cmp	#0, r9  	        ; If DAC6 = 0, skip setting DAC6
+	jeq	skip_DAC6_set
+        incd	r11
+        mov     @r11, r9
+        rlc     r9                     ; 4 rlc & 4 rrc to make the calculation same!
+        rlc     r9
+        rlc     r9
+        rlc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+skip_DAC6_set:
+        mov     r13, r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+	bic	#0xfffe, r10
+        cmp	#0, r10  	        ; If DAC7 = 0, skip setting DAC7
+	jeq	skip_DAC7_set
+        incd	r11
+        mov     @r11, r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+skip_DAC7_set:
+        add     r9, r10
+        mov	r10, &DAC_07_06	        ; get the DAC_07_06's value
+
+        mov     r13, r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+	bic	#0xfffe, r9
+        cmp	#0, r9  	        ; If DAC8 = 0, skip setting DAC8
+	jeq	skip_DAC8_set
+        incd	r11
+        mov     @r11, r9
+        rlc     r9                     ; 4 rlc & 4 rrc to make the calculation same!
+        rlc     r9
+        rlc     r9
+        rlc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+        rrc     r9
+skip_DAC8_set:
+        mov     r13, r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+        rrc     r10
+	bic	#0xfffe, r10
+        cmp	#0, r10  	        ; If DAC9 = 0, skip setting DAC9
+	jeq	skip_DAC9_set
+        incd	r11
+        mov     @r11, r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+        rlc     r10
+skip_DAC9_set:
+        add     r9, r10
+        mov	r10, &DAC_09_08	        ; get the DAC_09_08's value
+
+        mov     r14, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+	mov     #0x3000, &PROG_BITS     ; PROG = 0, OV_N = don't care, MEAS_ADC = 1, CLEAR_N = 1
+        mov     #5, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+        mov     #0, &ADC                ; Write counter value into ADC via dummy write
+	mov     &ADC, @r7	        ; Get value in counter
+        incd	r7
+        dec.w   r12
+        jz      loop_end
+	jmp	loop_start
+loop_end:
+        mov	#0xFFFF, @r7		; Data End
+
+        /* ----------------------         END OF TEST        --------------- */
+end_of_test:
+	mov	#0x0000, &BCSCTL2
+	nop
+	br #0xffff
+
+wait_ms:
+        mov     #3324, r4               ; Number of clock cycles in a ms (chariterized by pulse measure)
+        mov     r4, r6                  ; Get number of inner loop iterations
+wait_loop:
+        dec.w   r6                      ; Subtract from number of clk cycles.Execution takes 2 clock cycles
+        jnz     wait_loop               ; Test for loop termination. Execution takes 2 clock cycles
+        mov     r4, r6                  ; Reset number of clock cycles
+        dec.w   r5                      ; Decrement number of ms total
+        jnz     wait_loop               ; Keep looping if necessary
+        ret     
+
+        /* ----------------------         INTERRUPT VECTORS  --------------- */
+
+.section .vectors, "a"
+.word end_of_test  ; Interrupt  0 (lowest priority)    <unused>
+.word end_of_test  ; Interrupt  1                      <unused>
+.word end_of_test  ; Interrupt  2                      <unused>
+.word end_of_test  ; Interrupt  3                      <unused>
+.word end_of_test  ; Interrupt  4                      <unused>
+.word end_of_test  ; Interrupt  5                      <unused>
+.word end_of_test  ; Interrupt  6                      <unused>
+.word end_of_test  ; Interrupt  7                      <unused>
+.word end_of_test  ; Interrupt  8                      <unused>
+.word end_of_test  ; Interrupt  9                      <unused>
+.word end_of_test  ; Interrupt 10                      Watchdog timer
+.word end_of_test  ; Interrupt 11                      <unused>
+.word end_of_test  ; Interrupt 12                      <unused>
+.word end_of_test  ; Interrupt 13                      <unused>
+.word end_of_test  ; Interrupt 14                      NMI
+.word main         ; Interrupt 15 (highest priority)   RESET

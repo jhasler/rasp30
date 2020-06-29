@@ -1,0 +1,12 @@
+Preprocessing verilog.
+error in parsing: syntax error - on line number 4
+n_config.xml
+--------------------------------------------------------------------
+Welcome to ODIN II version 0.1 - the better High level synthesis tools++ targetting FPGAs (mainly VPR)
+Email: jamieson.peter@gmail.com and ken@unb.ca for support issues
+
+Reading Configuration file
+Reading FPGA Architecture file
+--------------------------------------------------------------------
+High-level synthesis Begin
+Parser starting - we'll create an abstract syntax tree.  Note this tree can be viewed using GraphViz (see documentation)

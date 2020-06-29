@@ -1,0 +1,254 @@
+/home/ubuntu/Downloads/vtr_release/vtr_flow/../vpr/vpr k6_N10_memDepth16384_memData64_40nm_timing.xml divBy2 --blif_file divBy2.pre-vpr.blif --timing_analysis on --timing_driven_clustering on --cluster_seed_type timing --nodisp
+
+VPR FPGA Placement and Routing.
+Version: Version 6.0 Full Release
+Compiled: Mar 26 2013.
+Original VPR by V. Betz.
+Timing-driven placement enhancements by A. Marquardt.
+Single-drivers enhancements by Andy Ye with additions by.
+Mark Fang, Jason Luu, Ted Campbell
+Heterogeneous stucture support by Jason Luu and Ted Campbell.
+T-VPack clustering integration by Jason Luu.
+Area-driven AAPack added by Jason Luu.
+This is free open source code under MIT license.
+
+Building complex block graph 
+Begin packing of divBy2.pre-vpr.blif 
+Swept away 0 nets with no fanout
+Removed 1 LUT buffers 
+Sweeped away 1 nodes
+
+After removing unused inputs:
+Total Blocks: 5.  Total Nets: 4.  Total inputs 2 ouptuts 1
+Not enough resources expand FPGA size to x = 2 y = 2
+Complex Block 1: cb.top^FF_NODE~3 type clb
+.
+
+0 LUTs of size 0
+0 LUTs of size 1
+1 LUTs of size 2
+0 LUTs of size 3
+0 LUTs of size 4
+0 LUTs of size 5
+0 LUTs of size 6
+1 LUTs in input netlist
+1 FFs in input netlist
+0 FFs in input netlist not absorbable
+	<EMPTY>: # blocks 0, avg # input + clock pins used 0, avg # output pins used 0
+	io: # blocks 3, avg # input + clock pins used 0.333333, avg # output pins used 0.666667
+	clb: # blocks 1, avg # input + clock pins used 2, avg # output pins used 1
+	mult_36: # blocks 0, avg # input + clock pins used 0, avg # output pins used 0
+	memory: # blocks 0, avg # input + clock pins used 0, avg # output pins used 0
+Absorbed logical nets 1 out of 4 nets, 3 nets not absorbed
+
+Netlist conversion complete.
+
+Packing took 0 seconds
+Begin parsing packed FPGA netlist file
+Finished parsing packed FPGA netlist file
+Netlist generated from file divBy2.net
+Timing analysis: ON
+
+Circuit netlist file: divBy2.net
+Circuit placement file: divBy2.place
+Circuit routing file: divBy2.route
+Operation:  RUN_FLOW
+
+Placer: ENABLED
+Router: ENABLED
+PlacerOpts.place_freq:  PLACE_ONCE
+PlacerOpts.place_algorithm:  PATH_TIMING_DRIVEN_PLACE
+PlacerOpts.place_cost_type:  LINEAR_CONG
+PlacerOpts.pad_loc_type:  FREE
+PlacerOpts.place_cost_exp:  1.000000
+PlacerOpts.place_chan_width:  100
+PlacerOpts.inner_loop_recompute_divider:  0
+PlacerOpts.recompute_crit_iter:  1
+PlacerOpts.timing_tradeoff:  0.500000
+PlacerOpts.td_place_exp_first:  1.000000
+PlacerOpts.td_place_exp_last:  8.000000
+PlaceOpts.seed:  1
+AnnealSched.type:  AUTO_SCHED
+AnnealSched.inner_num:  10.000000
+
+RouterOpts.route_type:  DETAILED
+RouterOpts.router_algorithm:  TIMING_DRIVEN
+RouterOpts.base_cost_type:  DELAY_NORMALIZED
+RouterOpts.fixed_channel_width:  NO_FIXED_CHANNEL_WIDTH
+RouterOpts.acc_fac:  1.000000
+RouterOpts.bb_factor:  3
+RouterOpts.bend_cost:  0.000000
+RouterOpts.first_iter_pres_fac:  0.500000
+RouterOpts.initial_pres_fac:  0.500000
+RouterOpts.pres_fac_mult:  1.300000
+RouterOpts.max_router_iterations:  50
+RouterOpts.astar_fac:  1.200000
+RouterOpts.criticality_exp:  1.000000
+RouterOpts.max_criticality:  0.990000
+
+RoutingArch.directionality:  UNI_DIRECTIONAL
+RoutingArch.switch_block_type:  WILTON
+RoutingArch.Fs:  3
+
+
+Netlist num_nets:  3
+Netlist num_blocks:  4
+Netlist <EMPTY> blocks:  0
+Netlist clb blocks:  1
+Netlist mult_36 blocks:  0
+Netlist memory blocks:  0
+Netlist inputs pins:  2
+Netlist output pins:  1
+
+Auto-sizing FPGA, try x = 2 y = 2
+Auto-sizing FPGA, try x = 1 y = 1
+FPGA auto-sized to, x = 1 y = 1
+The circuit will be mapped into a 1 x 1 array of clbs.
+
+Resource Usage:
+Netlist      0	blocks of type <EMPTY>
+Architecture 4	blocks of type <EMPTY>
+Netlist      3	blocks of type io
+Architecture 32	blocks of type io
+Netlist      1	blocks of type clb
+Architecture 1	blocks of type clb
+Netlist      0	blocks of type mult_36
+Architecture 0	blocks of type mult_36
+Netlist      0	blocks of type memory
+Architecture 0	blocks of type memory
+
+Computing delta_io_to_io lookup matrix, may take a few seconds, please wait...
+Computing delta_io_to_clb lookup matrix, may take a few seconds, please wait...
+Computing delta_clb_to_io lookup matrix, may take a few seconds, please wait...
+Computing delta_clb_to_clb lookup matrix, may take a few seconds, please wait...
+
+There are 2 point to point connections in this circuit
+
+Warning:  Starting t: 3 of 4 configurations accepted.
+Initial Placement Cost: 1 bb_cost: 0.04 td_cost: 1.73022e-10 delay_cost: 4.1842e-10
+
+          T        Cost Av. BB Cost  Av. TD Cost   Av Tot Del  P to P Del        d_max   Ac Rate  Std Dev  R limit      Exp  Tot. Moves    Alpha
+   --------  ---------- -----------  -----------    ---------  ----------        -----   -------  -------  -------  -------  ----------    -----
+          0    0.940493        0.04  2.40086e-10   3.5005e-10  2.0921e-10   7.775e-10    0.5714        0        1        1          63  
+
+BB estimate of min-dist (placement) wirelength is ;4
+bb_cost recomputed from scratch is 0.04.
+timing_cost recomputed from scratch is 2.40086e-10. 
+delay_cost recomputed from scratch is 3.5005e-10. 
+
+Completed placement consistency check successfully.
+
+Placement Estimated Crit Path Delay: 7.7751e-10
+
+Placement. Cost: 0.940493  bb_cost: 0.04  td_cost: 2.40086e-10  delay_cost: 3.5005e-10.
+Placement took 0.01 seconds
+low, high, current -1 -1 182
+build rr_graph took 0 seconds
+Confirming Router Algorithm: TIMING_DRIVEN.
+wirelength after first iteration 3, total available wirelength 728, ratio 0.00412088
+Successfully routed after 1 routing iterations.
+Completed net delay value cross check successfully.
+low, high, current -1 182 92
+build rr_graph took 0.01 seconds
+Confirming Router Algorithm: TIMING_DRIVEN.
+wirelength after first iteration 3, total available wirelength 368, ratio 0.00815217
+Successfully routed after 1 routing iterations.
+Completed net delay value cross check successfully.
+low, high, current -1 92 46
+build rr_graph took 0 seconds
+Confirming Router Algorithm: TIMING_DRIVEN.
+wirelength after first iteration 3, total available wirelength 184, ratio 0.0163043
+Successfully routed after 1 routing iterations.
+Completed net delay value cross check successfully.
+low, high, current -1 46 24
+build rr_graph took 0 seconds
+Confirming Router Algorithm: TIMING_DRIVEN.
+wirelength after first iteration 3, total available wirelength 96, ratio 0.03125
+Successfully routed after 1 routing iterations.
+Completed net delay value cross check successfully.
+low, high, current -1 24 12
+build rr_graph took 0 seconds
+Confirming Router Algorithm: TIMING_DRIVEN.
+wirelength after first iteration 3, total available wirelength 48, ratio 0.0625
+Successfully routed after 1 routing iterations.
+Completed net delay value cross check successfully.
+low, high, current -1 12 6
+build rr_graph took 0 seconds
+Confirming Router Algorithm: TIMING_DRIVEN.
+wirelength after first iteration 3, total available wirelength 24, ratio 0.125
+Successfully routed after 1 routing iterations.
+Completed net delay value cross check successfully.
+low, high, current -1 6 4
+build rr_graph took 0 seconds
+Confirming Router Algorithm: TIMING_DRIVEN.
+wirelength after first iteration 3, total available wirelength 16, ratio 0.1875
+Successfully routed after 1 routing iterations.
+Completed net delay value cross check successfully.
+low, high, current -1 4 2
+build rr_graph took 0 seconds
+Confirming Router Algorithm: TIMING_DRIVEN.
+wirelength after first iteration 3, total available wirelength 8, ratio 0.375
+Successfully routed after 1 routing iterations.
+Completed net delay value cross check successfully.
+low, high, current -1 2 2
+build rr_graph took 0 seconds
+Confirming Router Algorithm: TIMING_DRIVEN.
+wirelength after first iteration 3, total available wirelength 8, ratio 0.375
+Successfully routed after 1 routing iterations.
+Completed net delay value cross check successfully.
+
+Checking to ensure routing is legal ...
+Completed routing consistency check successfully.
+
+Serial number (magic cookie) for the routing is: -8435
+Best routing used a channel width factor of 2.
+
+
+Average number of bends per net: 0.500000  Maximum # of bends: 1
+
+
+The number of routed nets (nonglobal): 2
+Wirelength results (all in units of 1 clb segments):
+	Total wirelength: 3   Average net length: 1.50000
+	Maximum net length: 2
+
+Wirelength results in terms of physical segments:
+	Total wiring segments used: 3   Av. wire segments per net: 1.50000
+	Maximum segments used by a net: 2
+
+	Total local nets with reserved CLB opins: 0
+
+
+X - Directed channels:
+
+j	max occ	av_occ		capacity
+0	1	1.00000  	2
+1	0	0.00000  	2
+
+Y - Directed channels:
+
+i	max occ	av_occ		capacity
+0	1	1.00000  	2
+1	1	1.00000  	2
+
+Total Tracks in X-direction: 4  in Y-direction: 4
+
+Logic Area (in minimum width transistor areas, excludes I/Os and empty grid tiles):
+Total Logic Block Area (Warning, need to add pitch of routing to blocks with height > 3): 14813.4 
+Total Used Logic Block Area: 14813.4 
+
+Routing area (in minimum width transistor areas):
+Total Routing Area: 2386.09  Per logic tile: 2386.09
+
+Segment usage by type (index):
+Segment type       Fractional utilization
+------------       ----------------------
+       0                  0.375
+
+Segment usage by length:
+Segment length       Fractional utilization
+--------------       ----------------------
+        4                   0.375
+
+Critical Path: 7.7751e-10 (s)
+Routing took 0.02 seconds

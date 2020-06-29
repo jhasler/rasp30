@@ -1,0 +1,40 @@
+digraph G {
+	ranksep=.25;
+	"top_we" [shape=triangle];
+	"top_we" -> "top_single_port_ram_new_ram"[label="top^we"];
+	"top_single_port_ram_new_ram"
+	"top_single_port_ram_new_ram" -> "top_dataout~0_O";
+	"top_dataout~0_O" [shape=triangle];
+	"top_single_port_ram_new_ram" -> "top_dataout~1_O";
+	"top_dataout~1_O" [shape=triangle];
+	"top_addr~0" [shape=triangle];
+	"top_addr~0" -> "top_single_port_ram_new_ram"[label="top^addr~0"];
+	"top_addr~1" [shape=triangle];
+	"top_addr~1" -> "top_single_port_ram_new_ram"[label="top^addr~1"];
+	"top_addr~2" [shape=triangle];
+	"top_addr~2" -> "top_single_port_ram_new_ram"[label="top^addr~2"];
+	"top_addr~3" [shape=triangle];
+	"top_addr~3" -> "top_single_port_ram_new_ram"[label="top^addr~3"];
+	"top_addr~4" [shape=triangle];
+	"top_addr~4" -> "top_single_port_ram_new_ram"[label="top^addr~4"];
+	"top_addr~5" [shape=triangle];
+	"top_addr~5" -> "top_single_port_ram_new_ram"[label="top^addr~5"];
+	"top_addr~6" [shape=triangle];
+	"top_addr~6" -> "top_single_port_ram_new_ram"[label="top^addr~6"];
+	"top_addr~7" [shape=triangle];
+	"top_addr~7" -> "top_single_port_ram_new_ram"[label="top^addr~7"];
+	"top_addr~8" [shape=triangle];
+	"top_addr~8" -> "top_single_port_ram_new_ram"[label="top^addr~8"];
+	"top_addr~9" [shape=triangle];
+	"top_addr~9" -> "top_single_port_ram_new_ram"[label="top^addr~9"];
+	"top_addr~10" [shape=triangle];
+	"top_addr~10" -> "top_single_port_ram_new_ram"[label="top^addr~10"];
+	"top_datain~0" [shape=triangle];
+	"top_datain~0" -> "top_single_port_ram_new_ram"[label="top^datain~0"];
+	"top_datain~1" [shape=triangle];
+	"top_datain~1" -> "top_single_port_ram_new_ram"[label="top^datain~1"];
+	"top_clk" [shape=triangle];
+	"top_clk" -> "top_single_port_ram_new_ram"[label="top^clk"];
+	"top_ZERO_GND_ZERO"
+	"top_ONE_VCC_CNS"
+}

@@ -1,0 +1,5 @@
+obj divn_test
+numips 2
+numops 1
+inputs 1 2
+outputs 3

@@ -1,0 +1,20 @@
+#mkdir -p /home/ubuntu/RASP_Workspace/demo_files/LPF/version_wo_pad /home/ubuntu/RASP_Workspace/demo_files/LPF/version_w_pad /home/ubuntu/RASP_Workspace/demo_files/C4/version_wo_pad /home/ubuntu/RASP_Workspace/demo_files/C4/version_w_pad /home/ubuntu/RASP_Workspace/demo_files/VMM+WTA/version_wo_pad /home/ubuntu/RASP_Workspace/demo_files/VMM+WTA/version_w_pad /home/ubuntu/RASP_Workspace/demo_files/Pin2Pin_LPF /home/ubuntu/RASP_Workspace/demo_files/Digital /home/ubuntu/RASP_Workspace/demo_files/C4/version2 /home/ubuntu/RASP_Workspace/demo_files/C4+Amp /home/ubuntu/RASP_Workspace/demo_files/Sigma_Delta /home/ubuntu/RASP_Workspace/demo_files/HHneuron /home/ubuntu/RASP_Workspace/demo_files/SIM /home/ubuntu/RASP_Workspace/block_files/compile_files
+
+#cp -u /home/ubuntu/rasp30/xcos_blocks/newblock.sci /home/ubuntu/RASP_Workspace/block_files/
+#cp -u /home/ubuntu/rasp30/xcos_blocks/newblock_c.sci /home/ubuntu/RASP_Workspace/block_files/
+#cp -u /home/ubuntu/rasp30/sci2blif/create_palette.sce /home/ubuntu/RASP_Workspace/block_files/
+#cp -u /home/ubuntu/rasp30/sci2blif/cadsp.sci /home/ubuntu/RASP_Workspace/block_files/compile_files/
+
+cd; sudo chown ubuntu:ubuntu RASP_Workspace/ -R
+
+sudo cp -u /home/ubuntu/rasp30/scilab_config/99-usb-serial.rules /etc/udev/rules.d/
+
+if [ ! -f /usr/share/applications/rasp.desktop ];
+then
+   sudo cp /home/ubuntu/rasp30/scilab_config/rasp.desktop /usr/share/applications/rasp.desktop 
+fi
+
+
+/home/ubuntu/scilab-5.4.1/bin/scilab -f /home/ubuntu/rasp30/sci2blif/rasp_design.sce
+
+

@@ -1,0 +1,3 @@
+style.fontSize=12;
+style.displayedLabel="<table> <tr> <td align=left><b>Clk<br>CS<br>D<br>In</b></td> <td>Shift<br>Register<br>1input<br>n (%1$s) output</td><td align=right><b>Clk_out<br>CS_out<br>Q<br>Out</td></tr></table>";
+pal10 = xcosPalAddBlock(pal10,"sr_1i_no",[],style);

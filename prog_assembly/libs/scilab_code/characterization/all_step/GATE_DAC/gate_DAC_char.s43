@@ -1,0 +1,42 @@
+.include "pmem_defs.asm"
+	
+.global main
+
+main:
+    mov     #DMEM_250, r1           ; Initialize stack pointer
+	mov	#0x0010, &BCSCTL2	; Divide clock 20MHz
+	mov	#0x5A80, &WDTCTL	; Watchdog controller 
+	dint
+	
+    mov #0x5302, r5    
+    mov     @r5, &GP_PER_1      ; IVDD to 2.5v or 6.0V, Set vtun_ext = 12V, avdd_25 = 2.5 or 6.0V
+	mov 	#0X0800, &GP_PER_3	; en_6V on the board
+	mov #0x5300, r6
+	mov	@r6, &GATE_S	;gate_s = gate_dac, gate_offchip = gate_DAC
+
+        /* ----------------------         END OF TEST        --------------- */
+end_of_test:
+	mov	#0x0000, &BCSCTL2
+	nop
+	br #0xffff
+
+
+        /* ----------------------         INTERRUPT VECTORS  --------------- */
+
+.section .vectors, "a"
+.word end_of_test  ; Interrupt  0 (lowest priority)    <unused>
+.word end_of_test  ; Interrupt  1                      <unused>
+.word end_of_test  ; Interrupt  2                      <unused>
+.word end_of_test  ; Interrupt  3                      <unused>
+.word end_of_test  ; Interrupt  4                      <unused>
+.word end_of_test  ; Interrupt  5                      <unused>
+.word end_of_test  ; Interrupt  6                      <unused>
+.word end_of_test  ; Interrupt  7                      <unused>
+.word end_of_test  ; Interrupt  8                      <unused>
+.word end_of_test  ; Interrupt  9                      <unused>
+.word end_of_test  ; Interrupt 10                      Watchdog timer
+.word end_of_test  ; Interrupt 11                      <unused>
+.word end_of_test  ; Interrupt 12                      <unused>
+.word end_of_test  ; Interrupt 13                      <unused>
+.word end_of_test  ; Interrupt 14                      NMI
+.word main         ; Interrupt 15 (highest priority)   RESET

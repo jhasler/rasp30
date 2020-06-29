@@ -1,0 +1,1991 @@
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 1
+
+
+   1               	.include "pmem_defs.asm"
+   1               	/*===========================================================================*/
+   2               	/* Copyright (C) 2001 Authors                                                */
+   3               	/*                                                                           */
+   4               	/* This source file may be used and distributed without restriction provided */
+   5               	/* that this copyright statement is not removed from the file and that any   */
+   6               	/* derivative work contains the original copyright notice and the associated */
+   7               	/* disclaimer.                                                               */
+   8               	/*                                                                           */
+   9               	/* This source file is free software; you can redistribute it and/or modify  */
+  10               	/* it under the terms of the GNU Lesser General Public License as published  */
+  11               	/* by the Free Software Foundation; either version 2.1 of the License, or    */
+  12               	/* (at your option) any later version.                                       */
+  13               	/*                                                                           */
+  14               	/* This source is distributed in the hope that it will be useful, but WITHOUT*/
+  15               	/* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     */
+  16               	/* FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public       */
+  17               	/* License for more details.                                                 */
+  18               	/*                                                                           */
+  19               	/* You should have received a copy of the GNU Lesser General Public License  */
+  20               	/* along with this source; if not, write to the Free Software Foundation,    */
+  21               	/* Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA        */
+  22               	/*                                                                           */
+  23               	/*===========================================================================*/
+  24               	/*                          MEMORY DEFINITION FILE                           */
+  25               	/*---------------------------------------------------------------------------*/
+  26               	/*                                                                           */
+  27               	/* Author(s):                                                                */
+  28               	/*             - Olivier Girard,    olgirard@gmail.com                       */
+  29               	/*                                                                           */
+  30               	/*---------------------------------------------------------------------------*/
+  31               	/* $Rev: 19 $                                                                */
+  32               	/* $LastChangedBy: olivier.girard $                                          */
+  33               	/* $LastChangedDate: 2009-08-04 23:47:15 +0200 (Tue, 04 Aug 2009) $          */
+  34               	/*===========================================================================*/
+  35               	
+  36               	/*---------------------------------------------------------------------------*/
+  37               	/*                                   SFR                                     */
+  38               	/*---------------------------------------------------------------------------*/
+  39               	.set    IE1,       0x0000
+  40               	.set    IE1_HI,    0x0001
+  41               	.set    IFG1,      0x0002
+  42               	.set    IFG1_HI,   0x0003
+  43               	.set    CPU_ID_LO, 0x0004
+  44               	.set    CPU_ID_HI, 0x0006
+  45               	.set    CPU_NR,    0x0008
+  46               	
+  47               	/*---------------------------------------------------------------------------*/
+  48               	/*                                    GPIOs                                  */
+  49               	/*---------------------------------------------------------------------------*/
+  50               	.set    P1IN,      0x0020
+  51               	.set    P1OUT,     0x0021
+  52               	.set    P1DIR,     0x0022
+  53               	.set    P1IFG,     0x0023
+  54               	.set    P1IES,     0x0024
+  55               	.set    P1IE,      0x0025
+  56               	.set    P1SEL,     0x0026
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 2
+
+
+  57               	
+  58               	.set    P2IN,      0x0028
+  59               	.set    P2OUT,     0x0029
+  60               	.set    P2DIR,     0x002A
+  61               	.set    P2IFG,     0x002B
+  62               	.set    P2IES,     0x002C
+  63               	.set    P2IE,      0x002D
+  64               	.set    P2SEL,     0x002E
+  65               	
+  66               	.set    P3IN,      0x0018
+  67               	.set    P3OUT,     0x0019
+  68               	.set    P3DIR,     0x001A
+  69               	.set    P3SEL,     0x001B
+  70               	
+  71               	.set    P4IN,      0x001C
+  72               	.set    P4OUT,     0x001D
+  73               	.set    P4DIR,     0x001E
+  74               	.set    P4SEL,     0x001F
+  75               		
+  76               	.set    P5IN,      0x0030
+  77               	.set    P5OUT,     0x0031
+  78               	.set    P5DIR,     0x0032
+  79               	.set    P5SEL,     0x0033
+  80               	
+  81               	.set    P6IN,      0x0034
+  82               	.set    P6OUT,     0x0035
+  83               	.set    P6DIR,     0x0036
+  84               	.set    P6SEL,     0x0037
+  85               	
+  86               	/*---------------------------------------------------------------------------*/
+  87               	/*                           BASIC CLOCK MODULE                              */
+  88               	/*---------------------------------------------------------------------------*/
+  89               	.set    BCSCTL1,   0x0057
+  90               	.set    BCSCTL2,   0x0058
+  91               	
+  92               	/*---------------------------------------------------------------------------*/
+  93               	/*                             WATCHDOG TIMER                                */
+  94               	/*---------------------------------------------------------------------------*/
+  95               	.set    WDTCTL,    0x0120
+  96               	
+  97               	/*---------------------------------------------------------------------------*/
+  98               	/*                           HARDWARE MULTIPLIER                             */
+  99               	/*---------------------------------------------------------------------------*/
+ 100               	.set    MPY,       0x0130
+ 101               	.set    MPYS,      0x0132
+ 102               	.set    MAC,       0x0134
+ 103               	.set    MACS,      0x0136
+ 104               	.set    OP2,       0x0138
+ 105               	.set    RESLO,     0x013A
+ 106               	.set    RESHI,     0x013C
+ 107               	.set    SUMEXT,    0x013E
+ 108               	
+ 109               	/*---------------------------------------------------------------------------*/
+ 110               	/*                                 TIMER A                                   */
+ 111               	/*---------------------------------------------------------------------------*/
+ 112               	.set    TACTL,     0x0160
+ 113               	.set    TAR,       0x0170
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 3
+
+
+ 114               	.set    TACCTL0,   0x0162
+ 115               	.set    TACCR0,    0x0172
+ 116               	.set    TACCTL1,   0x0164
+ 117               	.set    TACCR1,    0x0174
+ 118               	.set    TACCTL2,   0x0166
+ 119               	.set    TACCR2,    0x0176
+ 120               	.set    TAIV,      0x012E
+ 121               	
+ 122               	/*---------------------------------------------------------------------------*/
+ 123               	/*                          DATA MEMORY MAPPING                              */
+ 124               	/*---------------------------------------------------------------------------*/
+ 125               	.set    DMEM_BASE, 16384
+ 126               	
+ 127               	.set    DMEM_200,  (DMEM_BASE+0x00)
+ 128               	.set    DMEM_201,  (DMEM_BASE+0x01)
+ 129               	.set    DMEM_202,  (DMEM_BASE+0x02)
+ 130               	.set    DMEM_203,  (DMEM_BASE+0x03)
+ 131               	.set    DMEM_204,  (DMEM_BASE+0x04)
+ 132               	.set    DMEM_205,  (DMEM_BASE+0x05)
+ 133               	.set    DMEM_206,  (DMEM_BASE+0x06)
+ 134               	.set    DMEM_207,  (DMEM_BASE+0x07)
+ 135               	.set    DMEM_208,  (DMEM_BASE+0x08)
+ 136               	.set    DMEM_209,  (DMEM_BASE+0x09)
+ 137               	.set    DMEM_20A,  (DMEM_BASE+0x0A)
+ 138               	.set    DMEM_20B,  (DMEM_BASE+0x0B)
+ 139               	.set    DMEM_20C,  (DMEM_BASE+0x0C)
+ 140               	.set    DMEM_20D,  (DMEM_BASE+0x0D)
+ 141               	.set    DMEM_20E,  (DMEM_BASE+0x0E)
+ 142               	.set    DMEM_20F,  (DMEM_BASE+0x0F)
+ 143               	
+ 144               	.set    DMEM_210,  (DMEM_BASE+0x10)
+ 145               	.set    DMEM_211,  (DMEM_BASE+0x11)
+ 146               	.set    DMEM_212,  (DMEM_BASE+0x12)
+ 147               	.set    DMEM_213,  (DMEM_BASE+0x13)
+ 148               	.set    DMEM_214,  (DMEM_BASE+0x14)
+ 149               	.set    DMEM_215,  (DMEM_BASE+0x15)
+ 150               	.set    DMEM_216,  (DMEM_BASE+0x16)
+ 151               	.set    DMEM_217,  (DMEM_BASE+0x17)
+ 152               	.set    DMEM_218,  (DMEM_BASE+0x18)
+ 153               	.set    DMEM_219,  (DMEM_BASE+0x19)
+ 154               	.set    DMEM_21A,  (DMEM_BASE+0x1A)
+ 155               	.set    DMEM_21B,  (DMEM_BASE+0x1B)
+ 156               	.set    DMEM_21C,  (DMEM_BASE+0x1C)
+ 157               	.set    DMEM_21D,  (DMEM_BASE+0x1D)
+ 158               	.set    DMEM_21E,  (DMEM_BASE+0x1E)
+ 159               	.set    DMEM_21F,  (DMEM_BASE+0x1F)
+ 160               	
+ 161               	.set    DMEM_220,  (DMEM_BASE+0x20)
+ 162               	.set    DMEM_221,  (DMEM_BASE+0x21)
+ 163               	.set    DMEM_222,  (DMEM_BASE+0x22)
+ 164               	.set    DMEM_223,  (DMEM_BASE+0x23)
+ 165               	.set    DMEM_224,  (DMEM_BASE+0x24)
+ 166               	.set    DMEM_225,  (DMEM_BASE+0x25)
+ 167               	.set    DMEM_226,  (DMEM_BASE+0x26)
+ 168               	.set    DMEM_227,  (DMEM_BASE+0x27)
+ 169               	.set    DMEM_228,  (DMEM_BASE+0x28)
+ 170               	.set    DMEM_229,  (DMEM_BASE+0x29)
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 4
+
+
+ 171               	.set    DMEM_22A,  (DMEM_BASE+0x2A)
+ 172               	.set    DMEM_22B,  (DMEM_BASE+0x2B)
+ 173               	.set    DMEM_22C,  (DMEM_BASE+0x2C)
+ 174               	.set    DMEM_22D,  (DMEM_BASE+0x2D)
+ 175               	.set    DMEM_22E,  (DMEM_BASE+0x2E)
+ 176               	.set    DMEM_22F,  (DMEM_BASE+0x2F)
+ 177               	
+ 178               	.set    DMEM_230,  (DMEM_BASE+0x30)
+ 179               	.set    DMEM_231,  (DMEM_BASE+0x31)
+ 180               	.set    DMEM_232,  (DMEM_BASE+0x32)
+ 181               	.set    DMEM_233,  (DMEM_BASE+0x33)
+ 182               	.set    DMEM_234,  (DMEM_BASE+0x34)
+ 183               	.set    DMEM_235,  (DMEM_BASE+0x35)
+ 184               	.set    DMEM_236,  (DMEM_BASE+0x36)
+ 185               	.set    DMEM_237,  (DMEM_BASE+0x37)
+ 186               	.set    DMEM_238,  (DMEM_BASE+0x38)
+ 187               	.set    DMEM_239,  (DMEM_BASE+0x39)
+ 188               	.set    DMEM_23A,  (DMEM_BASE+0x3A)
+ 189               	.set    DMEM_23B,  (DMEM_BASE+0x3B)
+ 190               	.set    DMEM_23C,  (DMEM_BASE+0x3C)
+ 191               	.set    DMEM_23D,  (DMEM_BASE+0x3D)
+ 192               	.set    DMEM_23E,  (DMEM_BASE+0x3E)
+ 193               	.set    DMEM_23F,  (DMEM_BASE+0x3F)
+ 194               	
+ 195               	.set    DMEM_240,  (DMEM_BASE+0x40)
+ 196               	.set    DMEM_241,  (DMEM_BASE+0x41)
+ 197               	.set    DMEM_242,  (DMEM_BASE+0x42)
+ 198               	.set    DMEM_243,  (DMEM_BASE+0x43)
+ 199               	.set    DMEM_244,  (DMEM_BASE+0x44)
+ 200               	.set    DMEM_245,  (DMEM_BASE+0x45)
+ 201               	.set    DMEM_246,  (DMEM_BASE+0x46)
+ 202               	.set    DMEM_247,  (DMEM_BASE+0x47)
+ 203               	.set    DMEM_248,  (DMEM_BASE+0x48)
+ 204               	.set    DMEM_249,  (DMEM_BASE+0x49)
+ 205               	.set    DMEM_24A,  (DMEM_BASE+0x4A)
+ 206               	.set    DMEM_24B,  (DMEM_BASE+0x4B)
+ 207               	.set    DMEM_24C,  (DMEM_BASE+0x4C)
+ 208               	.set    DMEM_24D,  (DMEM_BASE+0x4D)
+ 209               	.set    DMEM_24E,  (DMEM_BASE+0x4E)
+ 210               	.set    DMEM_24F,  (DMEM_BASE+0x4F)
+ 211               	
+ 212               	.set    DMEM_250,  (DMEM_BASE+0x50)
+ 213               	.set    DMEM_251,  (DMEM_BASE+0x51)
+ 214               	.set    DMEM_252,  (DMEM_BASE+0x52)
+ 215               	.set    DMEM_253,  (DMEM_BASE+0x53)
+ 216               	.set    DMEM_254,  (DMEM_BASE+0x54)
+ 217               	.set    DMEM_255,  (DMEM_BASE+0x55)
+ 218               	.set    DMEM_256,  (DMEM_BASE+0x56)
+ 219               	.set    DMEM_257,  (DMEM_BASE+0x57)
+ 220               	.set    DMEM_258,  (DMEM_BASE+0x58)
+ 221               	.set    DMEM_259,  (DMEM_BASE+0x59)
+ 222               	.set    DMEM_25A,  (DMEM_BASE+0x5A)
+ 223               	.set    DMEM_25B,  (DMEM_BASE+0x5B)
+ 224               	.set    DMEM_25C,  (DMEM_BASE+0x5C)
+ 225               	.set    DMEM_25D,  (DMEM_BASE+0x5D)
+ 226               	.set    DMEM_25E,  (DMEM_BASE+0x5E)
+ 227               	.set    DMEM_25F,  (DMEM_BASE+0x5F)
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 5
+
+
+ 228               	
+ 229               	.set    DMEM_260,  (DMEM_BASE+0x60)
+ 230               	.set    DMEM_261,  (DMEM_BASE+0x61)
+ 231               	.set    DMEM_262,  (DMEM_BASE+0x62)
+ 232               	.set    DMEM_263,  (DMEM_BASE+0x63)
+ 233               	.set    DMEM_264,  (DMEM_BASE+0x64)
+ 234               	.set    DMEM_265,  (DMEM_BASE+0x65)
+ 235               	.set    DMEM_266,  (DMEM_BASE+0x66)
+ 236               	.set    DMEM_267,  (DMEM_BASE+0x67)
+ 237               	.set    DMEM_268,  (DMEM_BASE+0x68)
+ 238               	.set    DMEM_269,  (DMEM_BASE+0x69)
+ 239               	.set    DMEM_26A,  (DMEM_BASE+0x6A)
+ 240               	.set    DMEM_26B,  (DMEM_BASE+0x6B)
+ 241               	.set    DMEM_26C,  (DMEM_BASE+0x6C)
+ 242               	.set    DMEM_26D,  (DMEM_BASE+0x6D)
+ 243               	.set    DMEM_26E,  (DMEM_BASE+0x6E)
+ 244               	.set    DMEM_26F,  (DMEM_BASE+0x6F)
+ 245               	
+ 246               	.set    DMEM_300,  (DMEM_BASE+0x100)
+ 247               	
+ 248               	/*---------------------------------------------------------------------------*/
+ 249               	/*                        PROGRAM MEMORY MAPPING                             */
+ 250               	/*---------------------------------------------------------------------------*/
+ 251               	.set    PMEM_LENGTH, 16384
+ 252               	
+ 253               	/*---------------------------------------------------------------------------*/
+ 254               	/*                        Programming register addresses                     */
+ 255               	/*---------------------------------------------------------------------------*/
+ 256               	.set    DRAIN_CTRL,     0x0B00
+ 257               	.set    GATE_S,         0x0B02
+ 258               	.set    ADC,            0x0B04
+ 259               	.set    PULSE_CTRL,     0x0B06
+ 260               	.set    ROW_SEL,        0x0B08
+ 261               	.set    COL_SEL,        0x0B0A
+ 262               	.set    PROG_BITS,      0x0B0C
+ 263               	.set    TUN_MUX,        0x0B0E
+ 264               	.set    GATE_US_P,      0x0B10
+ 265               	.set    GATE_US_N,      0x0B12
+ 266               	.set    BIAS_DACS,      0x0B14
+ 267               	.set    GP_PER_1,       0x0160
+ 268               	.set    GP_PER_2,       0x0162
+ 269               	.set    GP_PER_3,       0x0164
+ 270               	.set    GP_PER_4,       0x0166
+ 271               	
+   2               	.include "chip_para.asm"
+   1               	/*---------------------------------------------------------------------------*/
+   2               	/*                       chip parameters for chip 10                         */ 
+   3               	/*---------------------------------------------------------------------------*/
+   4               	/*----------------*/
+   5               	/* Switch program */
+   6               	/*----------------*/
+   7               	.set    TUN_TIME_SP,     3          /* tunneling time for switch programming (ms) */
+   8               	.set    R_TUN_TIME_SP,     2          /* reverse tunneling time for switch programming (ms) */
+   9               	.set    INJ_TIME_SP_1,     50000          /* injection time for switch programming (10us) (1st puls
+  10               	.set    INJ_TIME_SP_2,     5000          /* injection time for switch programming (10us) (2nd pulse
+  11               	.set    INJ_TIME_SP_3,     100          /* injection time for switch programming (10us) (3rd pulse)
+  12               	.set    INJ_TIME_SP_4,     100          /* injection time for switch programming (10us) (4th pulse)
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 6
+
+
+  13               	.set    INJ_TIME_SP_5,     100          /* injection time for switch programming (10us) (5th pulse)
+  14               	.set    INJ_TIME_SP_SUM,     553          /* injection time for switch programming (ms) (calculatio
+  15               	.set    INJ_TIME_SP_RUN,     500          /* injection time for switch programming in run-mode(10us
+  16               	
+  17               	/*----------------*/
+  18               	/* Target program */
+  19               	/*----------------*/
+  20               	.set    ADC_1nA,    4385          /* 1nA ADC value */
+  21               	
+  22               	/* Tunnel and Reverse Tunnel */
+  23               	.set    TUN_TIME_TP_CAB,     40          /* tunneling time for target programming (ms) - CAB */
+  24               	.set    R_TUN_TIME_TP_CAB,   40          /* Reverse tunneling time for target programming (ms) - CA
+  25               	
+  26               	/* Recover Inject (RI) */
+  27               	.set    RI_GATE_S_SWC,     0x0040          /* Gate_S voltage for SWC recover injection = gnd */
+  28               	.set    RI_VC1_SWC,     5716          /* Verify Current 1 for SWC recover injection = nA @ Vgm=0V -
+  29               	.set    RI_VC2_SWC,     5583          /* Verify Current 1 for SWC recover injection = nA @ Vgm=0V *
+  30               	.set    RI_VC3_SWC,     5184           /* Verify Current 1 for SWC recover injection = nA @ Vgm=0V 
+  31               	.set    RI_VC4_SWC,     4385           /* Verify Current 1 for SWC recover injection = 1nA @ Vgm=0V
+  32               	.set    RI_VD1_SWC,     0xea0e          /* Drain Voltage for recover injection final stage */
+  33               	.set    RI_VD2_SWC,     0xfe0e          /* Drain Voltage for recover injection pre-final stage */
+  34               	.set    RI_GATE_S_OTA,    0x0000          /* Gate_S voltage for OTA recover injection = 2.5V @ IVDD
+  35               	.set    RI_VC1_OTA,     6576           /* Verify Current 1 for OTA recover injection = nA @ Vgm=0V 
+  36               	.set    RI_VC2_OTA,     6357          /* Verify Current 1 for OTA recover injection =  nA @ Vgm=0V 
+  37               	.set    RI_VC3_OTA,     5699           /* Verify Current 1 for OTA recover injection = nA @ Vgm=0V 
+  38               	.set    RI_VC4_OTA,     4385           /* Verify Current 1 for OTA recover injection = 5nA @ Vgm=0V
+  39               	.set    RI_VD1_OTA,     0xea0e          /* Drain Voltage for recover injection final stage */
+  40               	.set    RI_VD2_OTA,     0xfe0e          /* Drain Voltage for recover injection pre-final stage */
+  41               	.set    RI_GATE_S_OTAREF,    0x0040          /* Gate_S voltage for OTAREF recover injection = gnd *
+  42               	.set    RI_VC1_OTAREF,  5972              /* Verify Current 1 for OTAREF recover injection = nA @ V
+  43               	.set    RI_VC2_OTAREF,  5813             /* Verify Current 1 for OTAREF recover injection = nA @ Vg
+  44               	.set    RI_VC3_OTAREF,  5337              /* Verify Current 1 for OTAREF recover injection = nA @ V
+  45               	.set    RI_VC4_OTAREF,  4385              /* Verify Current 1 for OTAREF recover injection = 1nA @ 
+  46               	.set    RI_VD1_OTAREF,  0xea0e          /* Drain Voltage for recover injection final stage */
+  47               	.set    RI_VD2_OTAREF,  0xfe0e          /* Drain Voltage for recover injection pre-final stage */
+  48               	.set    RI_GATE_S_MITE,    0x0000          /* Gate_S voltage for MITE recover injection = 2.5V @ IV
+  49               	.set    RI_VC1_MITE,    6847           /* Verify Current 1 for MITE recover injection = nA @ Vgm=0V
+  50               	.set    RI_VC2_MITE,    6601           /* Verify Current 1 for MITE recover injection =  nA @ Vgm=0
+  51               	.set    RI_VC3_MITE,    5862            /* Verify Current 1 for MITE recover injection = nA @ Vgm=0
+  52               	.set    RI_VC4_MITE,    4385            /* Verify Current 1 for MITE recover injection = 1nA @ Vgm=
+  53               	.set    RI_VD1_MITE,    0xea0e          /* Drain Voltage for recover injection final stage */
+  54               	.set    RI_VD2_MITE,    0xfe0e          /* Drain Voltage for recover injection pre-final stage */
+  55               	.set    RI_GATE_S_DIRSWC,     0x0040          /* Gate_S voltage for SWC recover injection = gnd */
+  56               	.set    RI_VC1_DIRSWC,     5716          /* Verify Current 1 for SWC recover injection = nA @ Vgm=0
+  57               	.set    RI_VC2_DIRSWC,     5583          /* Verify Current 1 for SWC recover injection = nA @ Vgm=0
+  58               	.set    RI_VC3_DIRSWC,     5184           /* Verify Current 1 for SWC recover injection = nA @ Vgm=
+  59               	.set    RI_VC4_DIRSWC,     4385           /* Verify Current 1 for SWC recover injection = 1nA @ Vgm
+  60               	.set    RI_VD1_DIRSWC,     0xea0e          /* Drain Voltage for recover injection final stage */
+  61               	.set    RI_VD2_DIRSWC,     0xfe0e          /* Drain Voltage for recover injection pre-final stage *
+  62               	
+  63               	.set    RIL_GATE_S_SWC,     0x0040          /* Gate_S voltage for SWC low sub Vth recover injection
+  64               	.set    RIL_VC1_SWC,     4385          /* Verify Current 1 for SWC low sub Vth recover injection = 
+  65               	.set    RIL_VC2_SWC,     4089          /* Verify Current 1 for SWC low sub Vth recover injection = 
+  66               	.set    RIL_VD1_SWC,     0xea0e          /* Drain Voltage for recover injection final stage */
+  67               	.set    RIL_GATE_S_OTA,    0x0000          /* Gate_S voltage for OTA low sub Vth recover injection 
+  68               	.set    RIL_VC1_OTA,     4385           /* Verify Current 1 for OTA low sub Vth recover injection =
+  69               	.set    RIL_VC2_OTA,     4084          /* Verify Current 1 for OTA low sub Vth recover injection = 
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 7
+
+
+  70               	.set    RIL_VD1_OTA,     0xea0e          /* Drain Voltage for recover injection final stage */
+  71               	.set    RIL_GATE_S_OTAREF,    0x0040          /* Gate_S voltage for OTAREF low sub Vth recover inje
+  72               	.set    RIL_VC1_OTAREF,  4385              /* Verify Current 1 for OTAREF low sub Vth recover injec
+  73               	.set    RIL_VC2_OTAREF,  4077             /* Verify Current 1 for OTAREF low sub Vth recover inject
+  74               	.set    RIL_VD1_OTAREF,  0xea0e          /* Drain Voltage for recover injection final stage */
+  75               	.set    RIL_GATE_S_MITE,    0x0000          /* Gate_S voltage for MITE low sub Vth recover injectio
+  76               	.set    RIL_VC1_MITE,    4385           /* Verify Current 1 for MITE low sub Vth recover injection 
+  77               	.set    RIL_VC2_MITE,    4094           /* Verify Current 1 for MITE rlow sub Vth ecover injection 
+  78               	.set    RIL_VD1_MITE,    0xea0e          /* Drain Voltage for recover injection final stage */
+  79               	.set    RIL_GATE_S_DIRSWC,     0x0040          /* Gate_S voltage for SWC low sub Vth recover inject
+  80               	.set    RIL_VC1_DIRSWC,     4385          /* Verify Current 1 for SWC low sub Vth recover injection
+  81               	.set    RIL_VC2_DIRSWC,     4089          /* Verify Current 1 for SWC low sub Vth recover injection
+  82               	.set    RIL_VD1_DIRSWC,     0xea0e          /* Drain Voltage for recover injection final stage */
+  83               	
+  84               	/* First_Coarse_Program (FCP) */
+  85               	.set    FCP_GATE_S_SWC,    0x5600          /* Gate_S voltage for SWC first coarese program = V @ IV
+  86               	.set    FCP_INJ_T_SWC,    1          /* Injection time for SWC first coarese program = *10us */
+  87               	.set    FCP_GATE_S_OTA,    0x4600          /* Gate_S voltage for OTA first coarese program = V @ IV
+  88               	.set    FCP_INJ_T_OTA,    3          /* Injection time for OTA first coarese program = *10us */
+  89               	.set    FCP_GATE_S_OTAREF,   0x4800          /* Gate_S voltage for OTAREF first coarese program = V
+  90               	.set    FCP_INJ_T_OTAREF,    6          /* Injection time for OTAREF first coarese program = *10us 
+  91               	.set    FCP_GATE_S_MITE,    0x4800          /* Gate_S voltage for MITE first coarese program = V @ 
+  92               	.set    FCP_INJ_T_MITE,    3          /* Injection time for MITE first coarese program = *10us */
+  93               	.set    FCP_GATE_S_DIRSWC,    0x5600          /* Gate_S voltage for SWC first coarese program = V @
+  94               	.set    FCP_INJ_T_DIRSWC,    1          /* Injection time for SWC first coarese program = *10us */
+  95               	
+  96               	.set    FCPL_GATE_S_SWC,    0x3e00          /* Gate_S voltage for SWC low sub Vth first coarese pro
+  97               	.set    FCPL_INJ_T_SWC,    1          /* Injection time for SWC low sub Vth first coarese program =
+  98               	.set    FCPL_GATE_S_OTA,    0x2e00          /* Gate_S voltage for OTA low sub Vth first coarese pro
+  99               	.set    FCPL_INJ_T_OTA,    3          /* Injection time for OTA low sub Vth first coarese program =
+ 100               	.set    FCPL_GATE_S_OTAREF,    0x3000          /* Gate_S voltage for OTAREF low sub Vth measured co
+ 101               	.set    FCPL_INJ_T_OTAREF,    6          /* Injection time for OTAREF low sub Vth measured coarse p
+ 102               	.set    FCPL_GATE_S_MITE,    0x3000          /* Gate_S voltage for MITE low sub Vth first coarese p
+ 103               	.set    FCPL_INJ_T_MITE,    3          /* Injection time for MITE low sub Vth first coarese program
+ 104               	.set    FCPL_GATE_S_DIRSWC,    0x3e00          /* Gate_S voltage for SWC low sub Vth first coarese 
+ 105               	.set    FCPL_INJ_T_DIRSWC,    1          /* Injection time for SWC low sub Vth first coarese progra
+ 106               	
+ 107               	/* Measured_Coarse_Program (MCP) */
+ 108               	.set    MCP_GATE_S_SWC,    0x5600          /* Gate_S voltage for SWC sub Vth measured coarse progra
+ 109               	.set    MCP_INJ_T_SWC,    1          /* Injection time for SWC sub Vth measured coarse program = *1
+ 110               	.set    MCP_GATE_S_OTA,    0x4600          /* Gate_S voltage for OTA sub Vth measured coarse progra
+ 111               	.set    MCP_INJ_T_OTA,    3          /* Injection time for OTA sub Vth measured coarse program = *1
+ 112               	.set    MCP_GATE_S_OTAREF,    0x4800          /* Gate_S voltage for OTAREF sub Vth measured coarse 
+ 113               	.set    MCP_INJ_T_OTAREF,    6          /* Injection time for OTAREF sub Vth measured coarse progra
+ 114               	.set    MCP_GATE_S_MITE,    0x4800          /* Gate_S voltage for MITE sub Vth measured coarse prog
+ 115               	.set    MCP_INJ_T_MITE,    3          /* Injection time for MITE sub Vth measured coarse program = 
+ 116               	.set    MCP_GATE_S_DIRSWC,    0x5600          /* Gate_S voltage for SWC sub Vth measured coarse pro
+ 117               	.set    MCP_INJ_T_DIRSWC,    1          /* Injection time for SWC sub Vth measured coarse program =
+ 118               	
+ 119               	.set    MCPL_GATE_S_SWC,    0x3e00          /* Gate_S voltage for SWC low sub Vth measured coarse p
+ 120               	.set    MCPL_INJ_T_SWC,    1          /* Injection time for SWC low sub Vth measured coarse program
+ 121               	.set    MCPL_GATE_S_OTA,    0x2e00          /* Gate_S voltage for OTA low sub Vth measured coarse p
+ 122               	.set    MCPL_INJ_T_OTA,    3          /* Injection time for OTA low sub Vth measured coarse program
+ 123               	.set    MCPL_GATE_S_OTAREF,    0x3000          /* Gate_S voltage for OTAREF low sub Vth measured co
+ 124               	.set    MCPL_INJ_T_OTAREF,    6          /* Injection time for OTAREF low sub Vth measured coarse p
+ 125               	.set    MCPL_GATE_S_MITE,    0x2c00          /* Gate_S voltage for MITE low sub Vth measured coarse
+ 126               	.set    MCPL_INJ_T_MITE,    3          /* Injection time for MITE low sub Vth measured coarse progr
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 8
+
+
+ 127               	.set    MCPL_GATE_S_DIRSWC,    0x3e00          /* Gate_S voltage for SWC low sub Vth measured coars
+ 128               	.set    MCPL_INJ_T_DIRSWC,    1          /* Injection time for SWC low sub Vth measured coarse prog
+ 129               	
+ 130               	/* Fine_Program (FP) */
+ 131               	.set    FPS_GATE_S_SWC,    0x4a00          /* Gate_S voltage for SWC sub Vth fine program = V @ IVD
+ 132               	.set    FPS_INJ_T_SWC,    1          /* Injection time for SWC sub Vth fine program = *10us */
+ 133               	.set    FPS_VD_OS_SWC,    46         /* Vd table offset */
+ 134               	.set    FPS_GATE_S_OTA,    0x3400          /* Gate_S voltage for OTA sub Vth fine program = V @ IVD
+ 135               	.set    FPS_INJ_T_OTA,    3          /* Injection time for OTA sub Vth fine program = *10us */
+ 136               	.set    FPS_VD_OS_OTA,    46         /* Vd table offset */
+ 137               	.set    FPS_GATE_S_OTAREF,    0x4200          /* Gate_S voltage for OTAREF sub Vth fine program = V
+ 138               	.set    FPS_INJ_T_OTAREF,    6          /* Injection time for OTAREF sub Vth fine program = *10us *
+ 139               	.set    FPS_VD_OS_OTAREF,    46         /* Vd table offset */
+ 140               	.set    FPS_GATE_S_MITE,     0x3200          /* Gate_S voltage for MITE sub Vth fine program = V @ 
+ 141               	.set    FPS_INJ_T_MITE,    3          /* Injection time for MITE sub Vth fine program = *10us */
+ 142               	.set    FPS_VD_OS_MITE,    46         /* Vd table offset */
+ 143               	.set    FPS_GATE_S_DIRSWC,    0x4a00          /* Gate_S voltage for SWC sub Vth fine program = V @ 
+ 144               	.set    FPS_INJ_T_DIRSWC,    1          /* Injection time for SWC sub Vth fine program = *10us */
+ 145               	.set    FPS_VD_OS_DIRSWC,    46         /* Vd table offset */
+ 146               	
+ 147               	.set    FPA_GATE_S_SWC,  0x4e00          /* Gate_S voltage for SWC above Vth fine program = V @ IVD
+ 148               	.set    FPA_INJ_T_SWC,    1          /* Injection time for SWC above Vth fine program = *10us */
+ 149               	.set    FPA_VD_OS_SWC,    21         /* Vd table offset */
+ 150               	.set    FPA_GATE_S_OTA,    0x4000          /* Gate_S voltage for OTA above Vth fine program = V @ I
+ 151               	.set    FPA_INJ_T_OTA,    3          /* Injection time for OTA above Vth fine program = *10us */
+ 152               	.set    FPA_VD_OS_OTA,    21         /* Vd table offset */
+ 153               	.set    FPA_GATE_S_OTAREF,    0x4000          /* Gate_S voltage for OTAREF above Vth fine program =
+ 154               	.set    FPA_INJ_T_OTAREF,    6          /* Injection time for OTAREF above Vth fine program = *10us
+ 155               	.set    FPA_VD_OS_OTAREF,    21         /* Vd table offset */
+ 156               	.set    FPA_GATE_S_MITE,    0x4c00          /* Gate_S voltage for MITE above Vth fine program = V @
+ 157               	.set    FPA_INJ_T_MITE,    3          /* Injection time for MITE above Vth fine program = *10us */
+ 158               	.set    FPA_VD_OS_MITE,    21         /* Vd table offset */
+ 159               	.set    FPA_GATE_S_DIRSWC,  0x4e00          /* Gate_S voltage for SWC above Vth fine program = V @ 
+ 160               	.set    FPA_INJ_T_DIRSWC,    1          /* Injection time for SWC above Vth fine program = *10us */
+ 161               	.set    FPA_VD_OS_DIRSWC,    21         /* Vd table offset */
+ 162               	
+ 163               	.set    FPL_GATE_S_SWC,   0x4000         /* Gate_S voltage for SWC low sub Vth fine program = V @ I
+ 164               	.set    FPL_INJ_T_SWC,    1          /* Injection time for SWC low sub Vth fine program = *10us */
+ 165               	.set    FPL_VD_OS_SWC,    46         /* Vd table offset */
+ 166               	.set    FPL_GATE_S_OTA,    0x2e00          /* Gate_S voltage for OTA low sub Vth fine program = V @
+ 167               	.set    FPL_INJ_T_OTA,    3          /* Injection time for OTA low sub Vth fine program = *10us */
+ 168               	.set    FPL_VD_OS_OTA,    46         /* Vd table offset */
+ 169               	.set    FPL_GATE_S_OTAREF,    0x3000          /* Gate_S voltage for OTAREF low sub Vth fine program
+ 170               	.set    FPL_INJ_T_OTAREF,    7          /* Injection time for OTAREF low sub Vth fine program = *10
+ 171               	.set    FPL_VD_OS_OTAREF,    46         /* Vd table offset */
+ 172               	.set    FPL_GATE_S_MITE,    0x3000          /* Gate_S voltage for MITE low sub Vth fine program = V
+ 173               	.set    FPL_INJ_T_MITE,    3          /* Injection time for MITE low sub Vth fine program = *10us *
+ 174               	.set    FPL_VD_OS_MITE,    46         /* Vd table offset */
+ 175               	.set    FPL_GATE_S_DIRSWC,   0x4000         /* Gate_S voltage for SWC low sub Vth fine program = V 
+ 176               	.set    FPL_INJ_T_DIRSWC,    1          /* Injection time for SWC low sub Vth fine program = *10us 
+ 177               	.set    FPL_VD_OS_DIRSWC,    46         /* Vd table offset */
+ 178               	
+   3               	
+   4               	.global main
+   5               	
+   6               	main:
+   7 0000 3140 5040 	        mov     #DMEM_250, r1           ; Initialize stack pointer
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 9
+
+
+   8 0004 3740 0050 		mov	#0x5000, r7
+   9 0008 0A43      		mov	#0, r10			; Initialize time
+  10 000a 3540 401F 		mov     #8000, r5             	; Number of ms
+  11               	init_wait:
+  12 000e 1583      	        dec.w   r5 
+  13 0010 FE23      	        jnz     init_wait
+  14 0012 B240 1000 		mov	#0x0010, &BCSCTL2	; Divide clock 20MHz
+  14      5800 
+  15 0018 B240 805A 		mov	#0x5A80, &WDTCTL	; Watchdog controller 
+  15      2001 
+  16 001e 32C2      		dint
+  17 0020 A243 0E0B 		mov	#0x0002, &TUN_MUX
+  18 0024 B240 04BE 	        mov     #0xBE04, &GP_PER_3      ; Vtun_ext = 5V, enable 6V, esd=6v
+  18      6401 
+  19 002a B240 6600 		mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+  19      000B 
+  20 0030 B240 2400 	        mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+  20      6001 
+  21 0036 B240 0080 		mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+  21      0C0B 
+  22 003c 8243 080B 		mov     #0,    &ROW_SEL
+  23 0040 8243 0A0B 	        mov     #0,    &COL_SEL
+  24 0044 874A 0000 		mov	r10, @r7
+  25 0048 2753      		incd	r7
+  26 004a 874A 0000 		mov	r10, @r7
+  27 004e 2753      		incd	r7
+  28 0050 0D43      		mov	#0x0000, r13		;gate_s = 0.6V @ IVDD 2.5V
+  29 0052 B012 0000 		call	#block_measure
+  30               	
+  31 0056 1F43      		mov	#1, r15
+  32               	coarse_loop_s:
+  33 0058 0D43      		mov	#0x0000, r13		;gate_s = 0.6V @ IVDD 2.5V
+  34 005a B012 0000 		call	#measure_verify
+  35 005e B012 0000 		call	#Pulse_w_calculate
+  36 0062 B012 0000 		call	#coarse_inject
+  37 0066 0D43      		mov	#0x0000, r13		;gate_s = 0.6V @ IVDD 2.5V
+  38 0068 B012 0000 		call	#block_measure
+  39 006c 1F83      	        dec.w   r15
+  40 006e 0124      	        jz      coarse_loop_e
+  41 0070 F33F      		jmp	coarse_loop_s
+  42               	coarse_loop_e:
+  43               	
+  44 0072 B743 0000 		mov	#0xFFFF, @r7		; Data End
+  45 0076 8243 5800 		mov	#0x0000, &BCSCTL2	; Divide clock 20MHz
+  46 007a 2F3D      		jmp     end_of_test
+  47               	
+  48               	coarse_inject:
+  49 007c 3B40 0070 		mov	#0x7000, r11
+  50 0080 2C4B      		mov	@r11, r12		; No. of FGs 
+  51 0082 B240 0080 	        mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+  51      0C0B 
+  52 0088 B240 04BE 		mov     #0xBE04, &GP_PER_3    	; ########### VTUN_EXT TO 5V
+  52      6401 
+  53 008e B240 2400 		mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+  53      6001 
+  54 0094 B243 0E0B 	    	mov     #0xFFFF, &TUN_MUX       ; Set tunnel mux, <3>:switch <4>:cab <5>:ble
+  55               	coarse_inject_set_s:
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 10
+
+
+  56 0098 2B53      		incd	r11
+  57 009a A24B 080B 		mov     @r11,    &ROW_SEL
+  58 009e 2B53      		incd	r11
+  59 00a0 A24B 0A0B 	        mov     @r11,    &COL_SEL
+  60 00a4 2B53      		incd	r11
+  61 00a6 2B53      		incd	r11
+  62 00a8 2B53      		incd	r11
+  63 00aa 284B      	        mov     @r11,    r8		; Read # of pulses
+  64 00ac 0893      		cmp	#0x0000, r8
+  65 00ae 2624      		jeq	coarse_inject_skip
+  66 00b0 B240 0048 		mov	#FCP_GATE_S_OTAREF, &GATE_S	; gate_s 
+  66      020B 
+  67 00b6 B240 6000 	        mov	#0x0060, &GATE_US_P	; gate_us_p = ivdd
+  67      100B 
+  68 00bc B240 6000 		mov	#0x0060, &GATE_US_N	; gate_us_n = ivdd
+  68      120B 
+  69 00c2 B240 6600 		mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+  69      000B 
+  70 00c8 B240 1400 	        mov     #0x0014, &GP_PER_1      ; IVDD to 6.0V, Set vtun_ext = On
+  70      6001 
+  71 00ce 2543      		mov     #2, r5             	; Number of ms
+  72 00d0 B012 0000 		call    #wait_ms                ; Call the waiting function
+  73 00d4 B240 2600 		mov 	#0x0026, &DRAIN_CTRL	; gnd, 0xfe0e: 0.415V, 0xde0e: 0.98V, 0xc40e: 1.5V, 0x900e: 2V, 0x000e: 
+  73      000B 
+  74               	multi_inject_pulse_s:
+  75 00da 3540 0600 	        mov     #FCP_INJ_T_OTAREF, r5   ; Number of 10us to inject
+  76 00de B012 0000 		call    #wait_10us             	; Call the waiting function
+  77 00e2 3A50 0600 		add     #FCP_INJ_T_OTAREF, r10	; Calculate time
+  78 00e6 1883      	       	dec.w   r8
+  79 00e8 0124      	        jz      multi_inject_pulse_e_1
+  80 00ea F73F      	        jmp	multi_inject_pulse_s
+  81               	multi_inject_pulse_e_1:
+  82 00ec 8B48 0000 		mov	r8, @r11
+  83               	multi_inject_pulse_e_2:
+  84 00f0 B240 6600 		mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+  84      000B 
+  85 00f6 1543      		mov     #1, r5             	; Number of ms
+  86 00f8 B012 0000 		call    #wait_ms                ; Call the waiting function
+  87               	coarse_inject_skip:
+  88 00fc 1C83      	       	dec.w   r12
+  89 00fe 0124      	        jz      coarse_inject_e
+  90 0100 CB3F      	 	jmp	coarse_inject_set_s
+  91               	coarse_inject_e:
+  92 0102 A242 6001 		mov     #0x0004, &GP_PER_1      ; IVDD to 0V, Set vtun_ext = On
+  93 0106 2543      		mov     #2, r5             	; Number of ms
+  94 0108 B012 0000 		call    #wait_ms                ; Call the waiting function
+  95 010c B240 2400 		mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+  95      6001 
+  96 0112 1543      		mov     #1, r5             	; Number of ms
+  97 0114 B012 0000 		call    #wait_ms                ; Call the waiting function
+  98 0118 A243 0E0B 		mov     #0x0002, &TUN_MUX       ; Set tunnel mux, <3>:switch <4>:cab <5>:ble
+  99 011c B240 4000 		mov	#0x0040, &GATE_US_P	; gate_us_p = gnd
+  99      100B 
+ 100 0122 B240 4000 		mov	#0x0040, &GATE_US_N	; gate_us_n = gnd
+ 100      120B 
+ 101 0128 1543      		mov     #1, r5             	; Number of ms
+ 102 012a B012 0000 		call    #wait_ms                ; Call the waiting function
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 11
+
+
+ 103 012e B740 3333 		mov     #0x3333, @r7	        ; Record Injection 0x3333 
+ 103      0000 
+ 104 0134 2753      		incd	r7
+ 105 0136 874A 0000 		mov     r10, @r7	        ; Record time 
+ 106 013a 2753      		incd	r7
+ 107 013c 3041      		ret
+ 108               	
+ 109               	measure_verify:
+ 110 013e 3B40 0070 		mov	#0x7000, r11
+ 111 0142 2C4B      		mov	@r11, r12		; No. of FGs 
+ 112 0144 B240 0080 		mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+ 112      0C0B 
+ 113 014a B240 04BE 		mov     #0xBE04, &GP_PER_3    	; ########### VTUN_EXT TO 5V
+ 113      6401 
+ 114 0150 B240 2400 		mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+ 114      6001 
+ 115 0156 A243 0E0B 	    	mov     #0x0002, &TUN_MUX       ; Reset tunnel mux (gnd), <3>:switch <4>:cab <5>:ble
+ 116               	measure_verify_s:
+ 117 015a 2B53      		incd	r11
+ 118 015c A24B 080B 		mov     @r11,    &ROW_SEL
+ 119 0160 2B53      		incd	r11
+ 120 0162 A24B 0A0B 	        mov     @r11,    &COL_SEL
+ 121 0166 2B53      		incd	r11
+ 122 0168 284B      		mov	@r11, r8
+ 123 016a 2B53      		incd	r11
+ 124 016c 2B53      		incd	r11
+ 125 016e 294B      		mov	@r11, r9		; Read # of pulses
+ 126 0170 0993      		cmp	#0x0000, r9
+ 127 0172 3224      		jeq	measure_verify_skip
+ 128 0174 824D 020B 		mov 	r13, &GATE_S
+ 129 0178 B240 4000 		mov	#0x0040, &GATE_US_P	; gate_us_p = gnd
+ 129      100B 
+ 130 017e B240 4000 		mov	#0x0040, &GATE_US_N	; gate_us_n = gnd
+ 130      120B 
+ 131 0184 B240 6600 		mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+ 131      000B 
+ 132 018a 2543      	        mov     #2, r5             	; Number of ms
+ 133 018c B012 0000 		call    #wait_ms                ; Call the waiting function
+ 134 0190 B240 A400 		mov	#0x00A4, &DRAIN_CTRL	; 101 cascode off, no use DAC, i2v mux control=fg_inn;
+ 134      000B 
+ 135 0196 3540 0A00 	        mov     #10, r5             	; Number of ms
+ 136 019a B012 0000 	        call    #wait_ms                ; Call the waiting function
+ 137 019e B240 00B0 		mov     #0xB000, &PROG_BITS     ; Set measure_adc high, Toggle the adc counter's clear_n
+ 137      0C0B 
+ 138 01a4 3540 0500 	        mov     #5, r5             	; Number of ms
+ 139 01a8 B012 0000 		call    #wait_ms                ; Call the waiting function
+ 140 01ac 8243 040B 	        mov     #0, &ADC                ; Write counter value into ADC via dummy write
+ 141 01b0 1942 040B 		mov     &ADC, r9	        ; Get value in counter
+ 142 01b4 B240 0080 		mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+ 142      0C0B 
+ 143 01ba 0998      		cmp	r8, r9
+ 144 01bc 0330      		jn	status_1
+ 145 01be 8B43 0000 		mov	#0x0000, @r11		; Injection over
+ 146 01c2 0A3C      		jmp	measure_verify_skip	
+ 147               	status_1:
+ 148 01c4 3990 2111 		cmp	#ADC_1nA, r9	; If r9 - #0x1190 < 0,
+ 149 01c8 0234      		jge	Istart_1
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 12
+
+
+ 150 01ca 3940 2111 		mov	#ADC_1nA, r9	; r9 = 0x1190
+ 151               	Istart_1:
+ 152 01ce 2B83      		decd	r11
+ 153 01d0 0889      		sub	r9, r8
+ 154 01d2 8B48 0000 		mov	r8, @r11
+ 155 01d6 2B53      		incd	r11
+ 156               	measure_verify_skip:
+ 157 01d8 1C83      	        dec.w   r12
+ 158 01da 0124      	        jz      measure_verify_e
+ 159 01dc BE3F      		jmp	measure_verify_s
+ 160               	measure_verify_e:
+ 161 01de B240 6600 		mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+ 161      000B 
+ 162 01e4 B240 2400 	        mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+ 162      6001 
+ 163 01ea 3041      		ret
+ 164               	
+ 165               	Pulse_w_calculate:
+ 166 01ec 3B40 0070 		mov	#0x7000, r11
+ 167 01f0 2C4B      		mov	@r11, r12		; No. of FGs 
+ 168               	Pulse_w_cal_s:
+ 169 01f2 2B53      		incd	r11			; @ Row_Sel
+ 170 01f4 2B53      		incd	r11			; @ Col_Sel
+ 171 01f6 2B53      		incd	r11	
+ 172 01f8 2B53      		incd	r11	
+ 173 01fa 294B      		mov	@r11, r9		; @ Diff
+ 174 01fc 2B53      		incd	r11		
+ 175 01fe 2E4B      		mov	@r11, r14		; @ Pulse No. 
+ 176 0200 0E93      		cmp	#0x0000, r14
+ 177 0202 0F24      		jeq	No_calculation
+ 178 0204 0910      		rrc	r9						
+ 179 0206 0910      		rrc	r9						
+ 180 0208 0910      		rrc	r9						
+ 181 020a 0910      		rrc	r9						
+ 182 020c 0910      		rrc	r9						
+ 183 020e 0910      		rrc	r9
+ 184 0210 39C0 00FF 		bic	#0xff00, r9
+ 185 0214 0969      		rlc	r9
+ 186 0216 19C3      		bic	#0x0001, r9
+ 187 0218 3950 0068 		add	#0x6800, r9
+ 188               	;	decd	r11		
+ 189               	;	mov	@r9, r14
+ 190               	;	mov	r14, @r11
+ 191               	;	incd	r11
+ 192 021c 2E49      	 	mov	@r9, r14
+ 193 021e 8B4E 0000 		mov	r14, @r11
+ 194               	No_calculation:
+ 195 0222 1C83      	        dec.w   r12
+ 196 0224 0124      	        jz      Pulse_w_cal_e
+ 197 0226 E53F      		jmp	Pulse_w_cal_s
+ 198               	Pulse_w_cal_e:
+ 199 0228 3041      		ret
+ 200               	
+ 201               	block_measure:
+ 202 022a 3B40 0070 		mov	#0x7000, r11
+ 203 022e 2C4B      		mov	@r11, r12		; No. of FGs 
+ 204 0230 B240 0080 		mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 13
+
+
+ 204      0C0B 
+ 205 0236 B240 04BE 		mov     #0xBE04, &GP_PER_3    	; ########### VTUN_EXT TO 5V
+ 205      6401 
+ 206 023c B240 2400 		mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+ 206      6001 
+ 207 0242 A243 0E0B 	    	mov     #0x0002, &TUN_MUX       ; Reset tunnel mux (gnd), <3>:switch <4>:cab <5>:ble
+ 208               	block_measure_s:
+ 209 0246 2B53      		incd	r11
+ 210 0248 A24B 080B 		mov     @r11,    &ROW_SEL
+ 211 024c 2B53      		incd	r11
+ 212 024e A24B 0A0B 	        mov     @r11,    &COL_SEL
+ 213 0252 2B53      		incd	r11
+ 214 0254 2B53      		incd	r11
+ 215 0256 2B53      		incd	r11
+ 216 0258 824D 020B 		mov 	r13, &GATE_S
+ 217 025c B240 4000 		mov	#0x0040, &GATE_US_P	; gate_us_p = gnd
+ 217      100B 
+ 218 0262 B240 4000 		mov	#0x0040, &GATE_US_N	; gate_us_n = gnd
+ 218      120B 
+ 219 0268 B240 6600 		mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+ 219      000B 
+ 220 026e 2543      	        mov     #2, r5             	; Number of ms
+ 221 0270 B012 0000 		call    #wait_ms                ; Call the waiting function
+ 222 0274 B240 A400 		mov	#0x00A4, &DRAIN_CTRL	; 101 cascode off, no use DAC, i2v mux control=fg_inn;
+ 222      000B 
+ 223 027a 3540 0A00 	        mov     #10, r5             	; Number of ms
+ 224 027e B012 0000 	        call    #wait_ms                ; Call the waiting function
+ 225 0282 B240 00B0 		mov     #0xB000, &PROG_BITS     ; Set measure_adc high, Toggle the adc counter's clear_n
+ 225      0C0B 
+ 226 0288 3540 0500 	        mov     #5, r5             	; Number of ms
+ 227 028c B012 0000 		call    #wait_ms                ; Call the waiting function
+ 228 0290 8243 040B 	        mov     #0, &ADC                ; Write counter value into ADC via dummy write
+ 229 0294 9742 040B 		mov     &ADC, @r7		; Get value in counter
+ 229      0000 
+ 230 029a 2753      		incd	r7
+ 231 029c B240 0080 		mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+ 231      0C0B 
+ 232 02a2 1C83      	        dec.w   r12
+ 233 02a4 0124      	        jz      block_measure_e
+ 234 02a6 CF3F      		jmp	block_measure_s
+ 235               	block_measure_e:
+ 236 02a8 B240 6600 		mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+ 236      000B 
+ 237 02ae B240 2400 	        mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+ 237      6001 
+ 238 02b4 3041      		ret
+ 239               	
+ 240               	wait_ms:
+ 241 02b6 3440 FC0C 	        mov     #3324, r4               ; Number of clock cycles in a ms (chariterized by pulse mea
+ 242 02ba 0644      	        mov     r4, r6                  ; Get number of inner loop iterations
+ 243               	wait_ms_loop:
+ 244 02bc 1683      	        dec.w   r6                      ; Subtract from number of clk cycles.Execution takes 2 cloc
+ 245 02be FE23      	        jnz     wait_ms_loop            ; Test for loop termination. Execution takes 2 clock cycles
+ 246 02c0 0644      	        mov     r4, r6                  ; Reset number of clock cycles
+ 247 02c2 1583      	        dec.w   r5                      ; Decrement number of ms total
+ 248 02c4 FB23      	        jnz     wait_ms_loop            ; Keep looping if necessary
+ 249 02c6 3041      	        ret    
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 14
+
+
+ 250               	 
+ 251               	wait_10us:
+ 252 02c8 3440 2200 	        mov     #34, r4                 ; Number of clock cycles in 100 us (3324 was divided by 100
+ 253 02cc 0644      	        mov     r4, r6                  ; Get number of inner loop iterations
+ 254               	wait_10us_loop:
+ 255 02ce 1683      	        dec.w   r6                      ; Subtract from number of clk cycles.Execution takes 2 cloc
+ 256 02d0 FE23      	        jnz     wait_10us_loop          ; Test for loop termination. Execution takes 2 clock cycles
+ 257 02d2 0644      	        mov     r4, r6                  ; Reset number of clock cycles
+ 258 02d4 1583      	        dec.w   r5                      ; Decrement number of ms total
+ 259 02d6 FB23      	        jnz     wait_10us_loop          ; Keep looping if necessary
+ 260 02d8 3041      	        ret   
+ 261               	
+ 262               	end_of_test:
+ 263 02da 8243 5800 		mov	#0x0000, &BCSCTL2
+ 264 02de 0343      		nop
+ 265 02e0 3043      		br #0xffff
+ 266               	
+ 267               	/* ----------------------         INTERRUPT VECTORS  --------------- */
+ 268               	.section .vectors, "a"
+ 269 0000 0000      	.word end_of_test  ; Interrupt  0 (lowest priority)    <unused>
+ 270 0002 0000      	.word end_of_test  ; Interrupt  1                      <unused>
+ 271 0004 0000      	.word end_of_test  ; Interrupt  2                      <unused>
+ 272 0006 0000      	.word end_of_test  ; Interrupt  3                      <unused>
+ 273 0008 0000      	.word end_of_test  ; Interrupt  4                      <unused>
+ 274 000a 0000      	.word end_of_test  ; Interrupt  5                      <unused>
+ 275 000c 0000      	.word end_of_test  ; Interrupt  6                      <unused>
+ 276 000e 0000      	.word end_of_test  ; Interrupt  7                      <unused>
+ 277 0010 0000      	.word end_of_test  ; Interrupt  8                      <unused>
+ 278 0012 0000      	.word end_of_test  ; Interrupt  9                      <unused>
+ 279 0014 0000      	.word end_of_test  ; Interrupt 10                      Watchdog timer
+ 280 0016 0000      	.word end_of_test  ; Interrupt 11                      <unused>
+ 281 0018 0000      	.word end_of_test  ; Interrupt 12                      <unused>
+ 282 001a 0000      	.word end_of_test  ; Interrupt 13                      <unused>
+ 283 001c 0000      	.word end_of_test  ; Interrupt 14                      NMI
+ 284 001e 0000      	.word main         ; Interrupt 15 (highest priority)   RESET
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 15
+
+
+DEFINED SYMBOLS
+       pmem_defs.asm:39     *ABS*:00000000 IE1
+       pmem_defs.asm:40     *ABS*:00000001 IE1_HI
+       pmem_defs.asm:41     *ABS*:00000002 IFG1
+       pmem_defs.asm:42     *ABS*:00000003 IFG1_HI
+       pmem_defs.asm:43     *ABS*:00000004 CPU_ID_LO
+       pmem_defs.asm:44     *ABS*:00000006 CPU_ID_HI
+       pmem_defs.asm:45     *ABS*:00000008 CPU_NR
+       pmem_defs.asm:50     *ABS*:00000020 P1IN
+       pmem_defs.asm:51     *ABS*:00000021 P1OUT
+       pmem_defs.asm:52     *ABS*:00000022 P1DIR
+       pmem_defs.asm:53     *ABS*:00000023 P1IFG
+       pmem_defs.asm:54     *ABS*:00000024 P1IES
+       pmem_defs.asm:55     *ABS*:00000025 P1IE
+       pmem_defs.asm:56     *ABS*:00000026 P1SEL
+       pmem_defs.asm:58     *ABS*:00000028 P2IN
+       pmem_defs.asm:59     *ABS*:00000029 P2OUT
+       pmem_defs.asm:60     *ABS*:0000002a P2DIR
+       pmem_defs.asm:61     *ABS*:0000002b P2IFG
+       pmem_defs.asm:62     *ABS*:0000002c P2IES
+       pmem_defs.asm:63     *ABS*:0000002d P2IE
+       pmem_defs.asm:64     *ABS*:0000002e P2SEL
+       pmem_defs.asm:66     *ABS*:00000018 P3IN
+       pmem_defs.asm:67     *ABS*:00000019 P3OUT
+       pmem_defs.asm:68     *ABS*:0000001a P3DIR
+       pmem_defs.asm:69     *ABS*:0000001b P3SEL
+       pmem_defs.asm:71     *ABS*:0000001c P4IN
+       pmem_defs.asm:72     *ABS*:0000001d P4OUT
+       pmem_defs.asm:73     *ABS*:0000001e P4DIR
+       pmem_defs.asm:74     *ABS*:0000001f P4SEL
+       pmem_defs.asm:76     *ABS*:00000030 P5IN
+       pmem_defs.asm:77     *ABS*:00000031 P5OUT
+       pmem_defs.asm:78     *ABS*:00000032 P5DIR
+       pmem_defs.asm:79     *ABS*:00000033 P5SEL
+       pmem_defs.asm:81     *ABS*:00000034 P6IN
+       pmem_defs.asm:82     *ABS*:00000035 P6OUT
+       pmem_defs.asm:83     *ABS*:00000036 P6DIR
+       pmem_defs.asm:84     *ABS*:00000037 P6SEL
+       pmem_defs.asm:89     *ABS*:00000057 BCSCTL1
+       pmem_defs.asm:90     *ABS*:00000058 BCSCTL2
+       pmem_defs.asm:95     *ABS*:00000120 WDTCTL
+       pmem_defs.asm:100    *ABS*:00000130 MPY
+       pmem_defs.asm:101    *ABS*:00000132 MPYS
+       pmem_defs.asm:102    *ABS*:00000134 MAC
+       pmem_defs.asm:103    *ABS*:00000136 MACS
+       pmem_defs.asm:104    *ABS*:00000138 OP2
+       pmem_defs.asm:105    *ABS*:0000013a RESLO
+       pmem_defs.asm:106    *ABS*:0000013c RESHI
+       pmem_defs.asm:107    *ABS*:0000013e SUMEXT
+       pmem_defs.asm:112    *ABS*:00000160 TACTL
+       pmem_defs.asm:113    *ABS*:00000170 TAR
+       pmem_defs.asm:114    *ABS*:00000162 TACCTL0
+       pmem_defs.asm:115    *ABS*:00000172 TACCR0
+       pmem_defs.asm:116    *ABS*:00000164 TACCTL1
+       pmem_defs.asm:117    *ABS*:00000174 TACCR1
+       pmem_defs.asm:118    *ABS*:00000166 TACCTL2
+       pmem_defs.asm:119    *ABS*:00000176 TACCR2
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 16
+
+
+       pmem_defs.asm:120    *ABS*:0000012e TAIV
+       pmem_defs.asm:125    *ABS*:00004000 DMEM_BASE
+       pmem_defs.asm:127    *ABS*:00004000 DMEM_200
+       pmem_defs.asm:128    *ABS*:00004001 DMEM_201
+       pmem_defs.asm:129    *ABS*:00004002 DMEM_202
+       pmem_defs.asm:130    *ABS*:00004003 DMEM_203
+       pmem_defs.asm:131    *ABS*:00004004 DMEM_204
+       pmem_defs.asm:132    *ABS*:00004005 DMEM_205
+       pmem_defs.asm:133    *ABS*:00004006 DMEM_206
+       pmem_defs.asm:134    *ABS*:00004007 DMEM_207
+       pmem_defs.asm:135    *ABS*:00004008 DMEM_208
+       pmem_defs.asm:136    *ABS*:00004009 DMEM_209
+       pmem_defs.asm:137    *ABS*:0000400a DMEM_20A
+       pmem_defs.asm:138    *ABS*:0000400b DMEM_20B
+       pmem_defs.asm:139    *ABS*:0000400c DMEM_20C
+       pmem_defs.asm:140    *ABS*:0000400d DMEM_20D
+       pmem_defs.asm:141    *ABS*:0000400e DMEM_20E
+       pmem_defs.asm:142    *ABS*:0000400f DMEM_20F
+       pmem_defs.asm:144    *ABS*:00004010 DMEM_210
+       pmem_defs.asm:145    *ABS*:00004011 DMEM_211
+       pmem_defs.asm:146    *ABS*:00004012 DMEM_212
+       pmem_defs.asm:147    *ABS*:00004013 DMEM_213
+       pmem_defs.asm:148    *ABS*:00004014 DMEM_214
+       pmem_defs.asm:149    *ABS*:00004015 DMEM_215
+       pmem_defs.asm:150    *ABS*:00004016 DMEM_216
+       pmem_defs.asm:151    *ABS*:00004017 DMEM_217
+       pmem_defs.asm:152    *ABS*:00004018 DMEM_218
+       pmem_defs.asm:153    *ABS*:00004019 DMEM_219
+       pmem_defs.asm:154    *ABS*:0000401a DMEM_21A
+       pmem_defs.asm:155    *ABS*:0000401b DMEM_21B
+       pmem_defs.asm:156    *ABS*:0000401c DMEM_21C
+       pmem_defs.asm:157    *ABS*:0000401d DMEM_21D
+       pmem_defs.asm:158    *ABS*:0000401e DMEM_21E
+       pmem_defs.asm:159    *ABS*:0000401f DMEM_21F
+       pmem_defs.asm:161    *ABS*:00004020 DMEM_220
+       pmem_defs.asm:162    *ABS*:00004021 DMEM_221
+       pmem_defs.asm:163    *ABS*:00004022 DMEM_222
+       pmem_defs.asm:164    *ABS*:00004023 DMEM_223
+       pmem_defs.asm:165    *ABS*:00004024 DMEM_224
+       pmem_defs.asm:166    *ABS*:00004025 DMEM_225
+       pmem_defs.asm:167    *ABS*:00004026 DMEM_226
+       pmem_defs.asm:168    *ABS*:00004027 DMEM_227
+       pmem_defs.asm:169    *ABS*:00004028 DMEM_228
+       pmem_defs.asm:170    *ABS*:00004029 DMEM_229
+       pmem_defs.asm:171    *ABS*:0000402a DMEM_22A
+       pmem_defs.asm:172    *ABS*:0000402b DMEM_22B
+       pmem_defs.asm:173    *ABS*:0000402c DMEM_22C
+       pmem_defs.asm:174    *ABS*:0000402d DMEM_22D
+       pmem_defs.asm:175    *ABS*:0000402e DMEM_22E
+       pmem_defs.asm:176    *ABS*:0000402f DMEM_22F
+       pmem_defs.asm:178    *ABS*:00004030 DMEM_230
+       pmem_defs.asm:179    *ABS*:00004031 DMEM_231
+       pmem_defs.asm:180    *ABS*:00004032 DMEM_232
+       pmem_defs.asm:181    *ABS*:00004033 DMEM_233
+       pmem_defs.asm:182    *ABS*:00004034 DMEM_234
+       pmem_defs.asm:183    *ABS*:00004035 DMEM_235
+       pmem_defs.asm:184    *ABS*:00004036 DMEM_236
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 17
+
+
+       pmem_defs.asm:185    *ABS*:00004037 DMEM_237
+       pmem_defs.asm:186    *ABS*:00004038 DMEM_238
+       pmem_defs.asm:187    *ABS*:00004039 DMEM_239
+       pmem_defs.asm:188    *ABS*:0000403a DMEM_23A
+       pmem_defs.asm:189    *ABS*:0000403b DMEM_23B
+       pmem_defs.asm:190    *ABS*:0000403c DMEM_23C
+       pmem_defs.asm:191    *ABS*:0000403d DMEM_23D
+       pmem_defs.asm:192    *ABS*:0000403e DMEM_23E
+       pmem_defs.asm:193    *ABS*:0000403f DMEM_23F
+       pmem_defs.asm:195    *ABS*:00004040 DMEM_240
+       pmem_defs.asm:196    *ABS*:00004041 DMEM_241
+       pmem_defs.asm:197    *ABS*:00004042 DMEM_242
+       pmem_defs.asm:198    *ABS*:00004043 DMEM_243
+       pmem_defs.asm:199    *ABS*:00004044 DMEM_244
+       pmem_defs.asm:200    *ABS*:00004045 DMEM_245
+       pmem_defs.asm:201    *ABS*:00004046 DMEM_246
+       pmem_defs.asm:202    *ABS*:00004047 DMEM_247
+       pmem_defs.asm:203    *ABS*:00004048 DMEM_248
+       pmem_defs.asm:204    *ABS*:00004049 DMEM_249
+       pmem_defs.asm:205    *ABS*:0000404a DMEM_24A
+       pmem_defs.asm:206    *ABS*:0000404b DMEM_24B
+       pmem_defs.asm:207    *ABS*:0000404c DMEM_24C
+       pmem_defs.asm:208    *ABS*:0000404d DMEM_24D
+       pmem_defs.asm:209    *ABS*:0000404e DMEM_24E
+       pmem_defs.asm:210    *ABS*:0000404f DMEM_24F
+       pmem_defs.asm:212    *ABS*:00004050 DMEM_250
+       pmem_defs.asm:213    *ABS*:00004051 DMEM_251
+       pmem_defs.asm:214    *ABS*:00004052 DMEM_252
+       pmem_defs.asm:215    *ABS*:00004053 DMEM_253
+       pmem_defs.asm:216    *ABS*:00004054 DMEM_254
+       pmem_defs.asm:217    *ABS*:00004055 DMEM_255
+       pmem_defs.asm:218    *ABS*:00004056 DMEM_256
+       pmem_defs.asm:219    *ABS*:00004057 DMEM_257
+       pmem_defs.asm:220    *ABS*:00004058 DMEM_258
+       pmem_defs.asm:221    *ABS*:00004059 DMEM_259
+       pmem_defs.asm:222    *ABS*:0000405a DMEM_25A
+       pmem_defs.asm:223    *ABS*:0000405b DMEM_25B
+       pmem_defs.asm:224    *ABS*:0000405c DMEM_25C
+       pmem_defs.asm:225    *ABS*:0000405d DMEM_25D
+       pmem_defs.asm:226    *ABS*:0000405e DMEM_25E
+       pmem_defs.asm:227    *ABS*:0000405f DMEM_25F
+       pmem_defs.asm:229    *ABS*:00004060 DMEM_260
+       pmem_defs.asm:230    *ABS*:00004061 DMEM_261
+       pmem_defs.asm:231    *ABS*:00004062 DMEM_262
+       pmem_defs.asm:232    *ABS*:00004063 DMEM_263
+       pmem_defs.asm:233    *ABS*:00004064 DMEM_264
+       pmem_defs.asm:234    *ABS*:00004065 DMEM_265
+       pmem_defs.asm:235    *ABS*:00004066 DMEM_266
+       pmem_defs.asm:236    *ABS*:00004067 DMEM_267
+       pmem_defs.asm:237    *ABS*:00004068 DMEM_268
+       pmem_defs.asm:238    *ABS*:00004069 DMEM_269
+       pmem_defs.asm:239    *ABS*:0000406a DMEM_26A
+       pmem_defs.asm:240    *ABS*:0000406b DMEM_26B
+       pmem_defs.asm:241    *ABS*:0000406c DMEM_26C
+       pmem_defs.asm:242    *ABS*:0000406d DMEM_26D
+       pmem_defs.asm:243    *ABS*:0000406e DMEM_26E
+       pmem_defs.asm:244    *ABS*:0000406f DMEM_26F
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 18
+
+
+       pmem_defs.asm:246    *ABS*:00004100 DMEM_300
+       pmem_defs.asm:251    *ABS*:00004000 PMEM_LENGTH
+       pmem_defs.asm:256    *ABS*:00000b00 DRAIN_CTRL
+       pmem_defs.asm:257    *ABS*:00000b02 GATE_S
+       pmem_defs.asm:258    *ABS*:00000b04 ADC
+       pmem_defs.asm:259    *ABS*:00000b06 PULSE_CTRL
+       pmem_defs.asm:260    *ABS*:00000b08 ROW_SEL
+       pmem_defs.asm:261    *ABS*:00000b0a COL_SEL
+       pmem_defs.asm:262    *ABS*:00000b0c PROG_BITS
+       pmem_defs.asm:263    *ABS*:00000b0e TUN_MUX
+       pmem_defs.asm:264    *ABS*:00000b10 GATE_US_P
+       pmem_defs.asm:265    *ABS*:00000b12 GATE_US_N
+       pmem_defs.asm:266    *ABS*:00000b14 BIAS_DACS
+       pmem_defs.asm:267    *ABS*:00000160 GP_PER_1
+       pmem_defs.asm:268    *ABS*:00000162 GP_PER_2
+       pmem_defs.asm:269    *ABS*:00000164 GP_PER_3
+       pmem_defs.asm:270    *ABS*:00000166 GP_PER_4
+       chip_para.asm:7      *ABS*:00000003 TUN_TIME_SP
+       chip_para.asm:8      *ABS*:00000002 R_TUN_TIME_SP
+       chip_para.asm:9      *ABS*:0000c350 INJ_TIME_SP_1
+       chip_para.asm:10     *ABS*:00001388 INJ_TIME_SP_2
+       chip_para.asm:11     *ABS*:00000064 INJ_TIME_SP_3
+       chip_para.asm:12     *ABS*:00000064 INJ_TIME_SP_4
+       chip_para.asm:13     *ABS*:00000064 INJ_TIME_SP_5
+       chip_para.asm:14     *ABS*:00000229 INJ_TIME_SP_SUM
+       chip_para.asm:15     *ABS*:000001f4 INJ_TIME_SP_RUN
+       chip_para.asm:20     *ABS*:00001121 ADC_1nA
+       chip_para.asm:23     *ABS*:00000028 TUN_TIME_TP_CAB
+       chip_para.asm:24     *ABS*:00000028 R_TUN_TIME_TP_CAB
+       chip_para.asm:27     *ABS*:00000040 RI_GATE_S_SWC
+       chip_para.asm:28     *ABS*:00001654 RI_VC1_SWC
+       chip_para.asm:29     *ABS*:000015cf RI_VC2_SWC
+       chip_para.asm:30     *ABS*:00001440 RI_VC3_SWC
+       chip_para.asm:31     *ABS*:00001121 RI_VC4_SWC
+       chip_para.asm:32     *ABS*:0000ea0e RI_VD1_SWC
+       chip_para.asm:33     *ABS*:0000fe0e RI_VD2_SWC
+       chip_para.asm:34     *ABS*:00000000 RI_GATE_S_OTA
+       chip_para.asm:35     *ABS*:000019b0 RI_VC1_OTA
+       chip_para.asm:36     *ABS*:000018d5 RI_VC2_OTA
+       chip_para.asm:37     *ABS*:00001643 RI_VC3_OTA
+       chip_para.asm:38     *ABS*:00001121 RI_VC4_OTA
+       chip_para.asm:39     *ABS*:0000ea0e RI_VD1_OTA
+       chip_para.asm:40     *ABS*:0000fe0e RI_VD2_OTA
+       chip_para.asm:41     *ABS*:00000040 RI_GATE_S_OTAREF
+       chip_para.asm:42     *ABS*:00001754 RI_VC1_OTAREF
+       chip_para.asm:43     *ABS*:000016b5 RI_VC2_OTAREF
+       chip_para.asm:44     *ABS*:000014d9 RI_VC3_OTAREF
+       chip_para.asm:45     *ABS*:00001121 RI_VC4_OTAREF
+       chip_para.asm:46     *ABS*:0000ea0e RI_VD1_OTAREF
+       chip_para.asm:47     *ABS*:0000fe0e RI_VD2_OTAREF
+       chip_para.asm:48     *ABS*:00000000 RI_GATE_S_MITE
+       chip_para.asm:49     *ABS*:00001abf RI_VC1_MITE
+       chip_para.asm:50     *ABS*:000019c9 RI_VC2_MITE
+       chip_para.asm:51     *ABS*:000016e6 RI_VC3_MITE
+       chip_para.asm:52     *ABS*:00001121 RI_VC4_MITE
+       chip_para.asm:53     *ABS*:0000ea0e RI_VD1_MITE
+       chip_para.asm:54     *ABS*:0000fe0e RI_VD2_MITE
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 19
+
+
+       chip_para.asm:55     *ABS*:00000040 RI_GATE_S_DIRSWC
+       chip_para.asm:56     *ABS*:00001654 RI_VC1_DIRSWC
+       chip_para.asm:57     *ABS*:000015cf RI_VC2_DIRSWC
+       chip_para.asm:58     *ABS*:00001440 RI_VC3_DIRSWC
+       chip_para.asm:59     *ABS*:00001121 RI_VC4_DIRSWC
+       chip_para.asm:60     *ABS*:0000ea0e RI_VD1_DIRSWC
+       chip_para.asm:61     *ABS*:0000fe0e RI_VD2_DIRSWC
+       chip_para.asm:63     *ABS*:00000040 RIL_GATE_S_SWC
+       chip_para.asm:64     *ABS*:00001121 RIL_VC1_SWC
+       chip_para.asm:65     *ABS*:00000ff9 RIL_VC2_SWC
+       chip_para.asm:66     *ABS*:0000ea0e RIL_VD1_SWC
+       chip_para.asm:67     *ABS*:00000000 RIL_GATE_S_OTA
+       chip_para.asm:68     *ABS*:00001121 RIL_VC1_OTA
+       chip_para.asm:69     *ABS*:00000ff4 RIL_VC2_OTA
+       chip_para.asm:70     *ABS*:0000ea0e RIL_VD1_OTA
+       chip_para.asm:71     *ABS*:00000040 RIL_GATE_S_OTAREF
+       chip_para.asm:72     *ABS*:00001121 RIL_VC1_OTAREF
+       chip_para.asm:73     *ABS*:00000fed RIL_VC2_OTAREF
+       chip_para.asm:74     *ABS*:0000ea0e RIL_VD1_OTAREF
+       chip_para.asm:75     *ABS*:00000000 RIL_GATE_S_MITE
+       chip_para.asm:76     *ABS*:00001121 RIL_VC1_MITE
+       chip_para.asm:77     *ABS*:00000ffe RIL_VC2_MITE
+       chip_para.asm:78     *ABS*:0000ea0e RIL_VD1_MITE
+       chip_para.asm:79     *ABS*:00000040 RIL_GATE_S_DIRSWC
+       chip_para.asm:80     *ABS*:00001121 RIL_VC1_DIRSWC
+       chip_para.asm:81     *ABS*:00000ff9 RIL_VC2_DIRSWC
+       chip_para.asm:82     *ABS*:0000ea0e RIL_VD1_DIRSWC
+       chip_para.asm:85     *ABS*:00005600 FCP_GATE_S_SWC
+       chip_para.asm:86     *ABS*:00000001 FCP_INJ_T_SWC
+       chip_para.asm:87     *ABS*:00004600 FCP_GATE_S_OTA
+       chip_para.asm:88     *ABS*:00000003 FCP_INJ_T_OTA
+       chip_para.asm:89     *ABS*:00004800 FCP_GATE_S_OTAREF
+       chip_para.asm:90     *ABS*:00000006 FCP_INJ_T_OTAREF
+       chip_para.asm:91     *ABS*:00004800 FCP_GATE_S_MITE
+       chip_para.asm:92     *ABS*:00000003 FCP_INJ_T_MITE
+       chip_para.asm:93     *ABS*:00005600 FCP_GATE_S_DIRSWC
+       chip_para.asm:94     *ABS*:00000001 FCP_INJ_T_DIRSWC
+       chip_para.asm:96     *ABS*:00003e00 FCPL_GATE_S_SWC
+       chip_para.asm:97     *ABS*:00000001 FCPL_INJ_T_SWC
+       chip_para.asm:98     *ABS*:00002e00 FCPL_GATE_S_OTA
+       chip_para.asm:99     *ABS*:00000003 FCPL_INJ_T_OTA
+       chip_para.asm:100    *ABS*:00003000 FCPL_GATE_S_OTAREF
+       chip_para.asm:101    *ABS*:00000006 FCPL_INJ_T_OTAREF
+       chip_para.asm:102    *ABS*:00003000 FCPL_GATE_S_MITE
+       chip_para.asm:103    *ABS*:00000003 FCPL_INJ_T_MITE
+       chip_para.asm:104    *ABS*:00003e00 FCPL_GATE_S_DIRSWC
+       chip_para.asm:105    *ABS*:00000001 FCPL_INJ_T_DIRSWC
+       chip_para.asm:108    *ABS*:00005600 MCP_GATE_S_SWC
+       chip_para.asm:109    *ABS*:00000001 MCP_INJ_T_SWC
+       chip_para.asm:110    *ABS*:00004600 MCP_GATE_S_OTA
+       chip_para.asm:111    *ABS*:00000003 MCP_INJ_T_OTA
+       chip_para.asm:112    *ABS*:00004800 MCP_GATE_S_OTAREF
+       chip_para.asm:113    *ABS*:00000006 MCP_INJ_T_OTAREF
+       chip_para.asm:114    *ABS*:00004800 MCP_GATE_S_MITE
+       chip_para.asm:115    *ABS*:00000003 MCP_INJ_T_MITE
+       chip_para.asm:116    *ABS*:00005600 MCP_GATE_S_DIRSWC
+       chip_para.asm:117    *ABS*:00000001 MCP_INJ_T_DIRSWC
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 20
+
+
+       chip_para.asm:119    *ABS*:00003e00 MCPL_GATE_S_SWC
+       chip_para.asm:120    *ABS*:00000001 MCPL_INJ_T_SWC
+       chip_para.asm:121    *ABS*:00002e00 MCPL_GATE_S_OTA
+       chip_para.asm:122    *ABS*:00000003 MCPL_INJ_T_OTA
+       chip_para.asm:123    *ABS*:00003000 MCPL_GATE_S_OTAREF
+       chip_para.asm:124    *ABS*:00000006 MCPL_INJ_T_OTAREF
+       chip_para.asm:125    *ABS*:00002c00 MCPL_GATE_S_MITE
+       chip_para.asm:126    *ABS*:00000003 MCPL_INJ_T_MITE
+       chip_para.asm:127    *ABS*:00003e00 MCPL_GATE_S_DIRSWC
+       chip_para.asm:128    *ABS*:00000001 MCPL_INJ_T_DIRSWC
+       chip_para.asm:131    *ABS*:00004a00 FPS_GATE_S_SWC
+       chip_para.asm:132    *ABS*:00000001 FPS_INJ_T_SWC
+       chip_para.asm:133    *ABS*:0000002e FPS_VD_OS_SWC
+       chip_para.asm:134    *ABS*:00003400 FPS_GATE_S_OTA
+       chip_para.asm:135    *ABS*:00000003 FPS_INJ_T_OTA
+       chip_para.asm:136    *ABS*:0000002e FPS_VD_OS_OTA
+       chip_para.asm:137    *ABS*:00004200 FPS_GATE_S_OTAREF
+       chip_para.asm:138    *ABS*:00000006 FPS_INJ_T_OTAREF
+       chip_para.asm:139    *ABS*:0000002e FPS_VD_OS_OTAREF
+       chip_para.asm:140    *ABS*:00003200 FPS_GATE_S_MITE
+       chip_para.asm:141    *ABS*:00000003 FPS_INJ_T_MITE
+       chip_para.asm:142    *ABS*:0000002e FPS_VD_OS_MITE
+       chip_para.asm:143    *ABS*:00004a00 FPS_GATE_S_DIRSWC
+       chip_para.asm:144    *ABS*:00000001 FPS_INJ_T_DIRSWC
+       chip_para.asm:145    *ABS*:0000002e FPS_VD_OS_DIRSWC
+       chip_para.asm:147    *ABS*:00004e00 FPA_GATE_S_SWC
+       chip_para.asm:148    *ABS*:00000001 FPA_INJ_T_SWC
+       chip_para.asm:149    *ABS*:00000015 FPA_VD_OS_SWC
+       chip_para.asm:150    *ABS*:00004000 FPA_GATE_S_OTA
+       chip_para.asm:151    *ABS*:00000003 FPA_INJ_T_OTA
+       chip_para.asm:152    *ABS*:00000015 FPA_VD_OS_OTA
+       chip_para.asm:153    *ABS*:00004000 FPA_GATE_S_OTAREF
+       chip_para.asm:154    *ABS*:00000006 FPA_INJ_T_OTAREF
+       chip_para.asm:155    *ABS*:00000015 FPA_VD_OS_OTAREF
+       chip_para.asm:156    *ABS*:00004c00 FPA_GATE_S_MITE
+       chip_para.asm:157    *ABS*:00000003 FPA_INJ_T_MITE
+       chip_para.asm:158    *ABS*:00000015 FPA_VD_OS_MITE
+       chip_para.asm:159    *ABS*:00004e00 FPA_GATE_S_DIRSWC
+       chip_para.asm:160    *ABS*:00000001 FPA_INJ_T_DIRSWC
+       chip_para.asm:161    *ABS*:00000015 FPA_VD_OS_DIRSWC
+       chip_para.asm:163    *ABS*:00004000 FPL_GATE_S_SWC
+       chip_para.asm:164    *ABS*:00000001 FPL_INJ_T_SWC
+       chip_para.asm:165    *ABS*:0000002e FPL_VD_OS_SWC
+       chip_para.asm:166    *ABS*:00002e00 FPL_GATE_S_OTA
+       chip_para.asm:167    *ABS*:00000003 FPL_INJ_T_OTA
+       chip_para.asm:168    *ABS*:0000002e FPL_VD_OS_OTA
+       chip_para.asm:169    *ABS*:00003000 FPL_GATE_S_OTAREF
+       chip_para.asm:170    *ABS*:00000007 FPL_INJ_T_OTAREF
+       chip_para.asm:171    *ABS*:0000002e FPL_VD_OS_OTAREF
+       chip_para.asm:172    *ABS*:00003000 FPL_GATE_S_MITE
+       chip_para.asm:173    *ABS*:00000003 FPL_INJ_T_MITE
+       chip_para.asm:174    *ABS*:0000002e FPL_VD_OS_MITE
+       chip_para.asm:175    *ABS*:00004000 FPL_GATE_S_DIRSWC
+       chip_para.asm:176    *ABS*:00000001 FPL_INJ_T_DIRSWC
+       chip_para.asm:177    *ABS*:0000002e FPL_VD_OS_DIRSWC
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:6      .text:00000000 main
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:11     .text:0000000e init_wait
+GAS LISTING /home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43 			page 21
+
+
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:201    .text:0000022a block_measure
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:32     .text:00000058 coarse_loop_s
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:109    .text:0000013e measure_verify
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:165    .text:000001ec Pulse_w_calculate
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:48     .text:0000007c coarse_inject
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:42     .text:00000072 coarse_loop_e
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:262    .text:000002da end_of_test
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:55     .text:00000098 coarse_inject_set_s
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:87     .text:000000fc coarse_inject_skip
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:240    .text:000002b6 wait_ms
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:74     .text:000000da multi_inject_pulse_s
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:251    .text:000002c8 wait_10us
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:81     .text:000000ec multi_inject_pulse_e_1
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:83     .text:000000f0 multi_inject_pulse_e_2
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:91     .text:00000102 coarse_inject_e
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:116    .text:0000015a measure_verify_s
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:156    .text:000001d8 measure_verify_skip
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:147    .text:000001c4 status_1
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:151    .text:000001ce Istart_1
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:160    .text:000001de measure_verify_e
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:168    .text:000001f2 Pulse_w_cal_s
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:194    .text:00000222 No_calculation
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:198    .text:00000228 Pulse_w_cal_e
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:208    .text:00000246 block_measure_s
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:235    .text:000002a8 block_measure_e
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:243    .text:000002bc wait_ms_loop
+/home/ubuntu/rasp30/prog_assembly/libs/asm_code/first_coarse_program_CAB_ota_ref.s43:254    .text:000002ce wait_10us_loop
+
+NO UNDEFINED SYMBOLS
+
+first_coarse_program_aboveVt_CAB_ota_ref.o:     file format elf32-msp430
+first_coarse_program_aboveVt_CAB_ota_ref.o
+architecture: msp430:430, flags 0x00000011:
+HAS_RELOC, HAS_SYMS
+start address 0x00000000
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000002e2  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000316  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000316  2**0
+                  ALLOC
+  3 .vectors      00000020  00000000  00000000  00000316  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA
+SYMBOL TABLE:
+00000000 l    d  .text	00000000 .text
+00000000 l    d  .data	00000000 .data
+00000000 l    d  .bss	00000000 .bss
+00000000 l       *ABS*	00000000 IE1
+00000001 l       *ABS*	00000000 IE1_HI
+00000002 l       *ABS*	00000000 IFG1
+00000003 l       *ABS*	00000000 IFG1_HI
+00000004 l       *ABS*	00000000 CPU_ID_LO
+00000006 l       *ABS*	00000000 CPU_ID_HI
+00000008 l       *ABS*	00000000 CPU_NR
+00000020 l       *ABS*	00000000 P1IN
+00000021 l       *ABS*	00000000 P1OUT
+00000022 l       *ABS*	00000000 P1DIR
+00000023 l       *ABS*	00000000 P1IFG
+00000024 l       *ABS*	00000000 P1IES
+00000025 l       *ABS*	00000000 P1IE
+00000026 l       *ABS*	00000000 P1SEL
+00000028 l       *ABS*	00000000 P2IN
+00000029 l       *ABS*	00000000 P2OUT
+0000002a l       *ABS*	00000000 P2DIR
+0000002b l       *ABS*	00000000 P2IFG
+0000002c l       *ABS*	00000000 P2IES
+0000002d l       *ABS*	00000000 P2IE
+0000002e l       *ABS*	00000000 P2SEL
+00000018 l       *ABS*	00000000 P3IN
+00000019 l       *ABS*	00000000 P3OUT
+0000001a l       *ABS*	00000000 P3DIR
+0000001b l       *ABS*	00000000 P3SEL
+0000001c l       *ABS*	00000000 P4IN
+0000001d l       *ABS*	00000000 P4OUT
+0000001e l       *ABS*	00000000 P4DIR
+0000001f l       *ABS*	00000000 P4SEL
+00000030 l       *ABS*	00000000 P5IN
+00000031 l       *ABS*	00000000 P5OUT
+00000032 l       *ABS*	00000000 P5DIR
+00000033 l       *ABS*	00000000 P5SEL
+00000034 l       *ABS*	00000000 P6IN
+00000035 l       *ABS*	00000000 P6OUT
+00000036 l       *ABS*	00000000 P6DIR
+00000037 l       *ABS*	00000000 P6SEL
+00000057 l       *ABS*	00000000 BCSCTL1
+00000058 l       *ABS*	00000000 BCSCTL2
+00000120 l       *ABS*	00000000 WDTCTL
+00000130 l       *ABS*	00000000 MPY
+00000132 l       *ABS*	00000000 MPYS
+00000134 l       *ABS*	00000000 MAC
+00000136 l       *ABS*	00000000 MACS
+00000138 l       *ABS*	00000000 OP2
+0000013a l       *ABS*	00000000 RESLO
+0000013c l       *ABS*	00000000 RESHI
+0000013e l       *ABS*	00000000 SUMEXT
+00000160 l       *ABS*	00000000 TACTL
+00000170 l       *ABS*	00000000 TAR
+00000162 l       *ABS*	00000000 TACCTL0
+00000172 l       *ABS*	00000000 TACCR0
+00000164 l       *ABS*	00000000 TACCTL1
+00000174 l       *ABS*	00000000 TACCR1
+00000166 l       *ABS*	00000000 TACCTL2
+00000176 l       *ABS*	00000000 TACCR2
+0000012e l       *ABS*	00000000 TAIV
+00004000 l       *ABS*	00000000 DMEM_BASE
+00004000 l       *ABS*	00000000 DMEM_200
+00004001 l       *ABS*	00000000 DMEM_201
+00004002 l       *ABS*	00000000 DMEM_202
+00004003 l       *ABS*	00000000 DMEM_203
+00004004 l       *ABS*	00000000 DMEM_204
+00004005 l       *ABS*	00000000 DMEM_205
+00004006 l       *ABS*	00000000 DMEM_206
+00004007 l       *ABS*	00000000 DMEM_207
+00004008 l       *ABS*	00000000 DMEM_208
+00004009 l       *ABS*	00000000 DMEM_209
+0000400a l       *ABS*	00000000 DMEM_20A
+0000400b l       *ABS*	00000000 DMEM_20B
+0000400c l       *ABS*	00000000 DMEM_20C
+0000400d l       *ABS*	00000000 DMEM_20D
+0000400e l       *ABS*	00000000 DMEM_20E
+0000400f l       *ABS*	00000000 DMEM_20F
+00004010 l       *ABS*	00000000 DMEM_210
+00004011 l       *ABS*	00000000 DMEM_211
+00004012 l       *ABS*	00000000 DMEM_212
+00004013 l       *ABS*	00000000 DMEM_213
+00004014 l       *ABS*	00000000 DMEM_214
+00004015 l       *ABS*	00000000 DMEM_215
+00004016 l       *ABS*	00000000 DMEM_216
+00004017 l       *ABS*	00000000 DMEM_217
+00004018 l       *ABS*	00000000 DMEM_218
+00004019 l       *ABS*	00000000 DMEM_219
+0000401a l       *ABS*	00000000 DMEM_21A
+0000401b l       *ABS*	00000000 DMEM_21B
+0000401c l       *ABS*	00000000 DMEM_21C
+0000401d l       *ABS*	00000000 DMEM_21D
+0000401e l       *ABS*	00000000 DMEM_21E
+0000401f l       *ABS*	00000000 DMEM_21F
+00004020 l       *ABS*	00000000 DMEM_220
+00004021 l       *ABS*	00000000 DMEM_221
+00004022 l       *ABS*	00000000 DMEM_222
+00004023 l       *ABS*	00000000 DMEM_223
+00004024 l       *ABS*	00000000 DMEM_224
+00004025 l       *ABS*	00000000 DMEM_225
+00004026 l       *ABS*	00000000 DMEM_226
+00004027 l       *ABS*	00000000 DMEM_227
+00004028 l       *ABS*	00000000 DMEM_228
+00004029 l       *ABS*	00000000 DMEM_229
+0000402a l       *ABS*	00000000 DMEM_22A
+0000402b l       *ABS*	00000000 DMEM_22B
+0000402c l       *ABS*	00000000 DMEM_22C
+0000402d l       *ABS*	00000000 DMEM_22D
+0000402e l       *ABS*	00000000 DMEM_22E
+0000402f l       *ABS*	00000000 DMEM_22F
+00004030 l       *ABS*	00000000 DMEM_230
+00004031 l       *ABS*	00000000 DMEM_231
+00004032 l       *ABS*	00000000 DMEM_232
+00004033 l       *ABS*	00000000 DMEM_233
+00004034 l       *ABS*	00000000 DMEM_234
+00004035 l       *ABS*	00000000 DMEM_235
+00004036 l       *ABS*	00000000 DMEM_236
+00004037 l       *ABS*	00000000 DMEM_237
+00004038 l       *ABS*	00000000 DMEM_238
+00004039 l       *ABS*	00000000 DMEM_239
+0000403a l       *ABS*	00000000 DMEM_23A
+0000403b l       *ABS*	00000000 DMEM_23B
+0000403c l       *ABS*	00000000 DMEM_23C
+0000403d l       *ABS*	00000000 DMEM_23D
+0000403e l       *ABS*	00000000 DMEM_23E
+0000403f l       *ABS*	00000000 DMEM_23F
+00004040 l       *ABS*	00000000 DMEM_240
+00004041 l       *ABS*	00000000 DMEM_241
+00004042 l       *ABS*	00000000 DMEM_242
+00004043 l       *ABS*	00000000 DMEM_243
+00004044 l       *ABS*	00000000 DMEM_244
+00004045 l       *ABS*	00000000 DMEM_245
+00004046 l       *ABS*	00000000 DMEM_246
+00004047 l       *ABS*	00000000 DMEM_247
+00004048 l       *ABS*	00000000 DMEM_248
+00004049 l       *ABS*	00000000 DMEM_249
+0000404a l       *ABS*	00000000 DMEM_24A
+0000404b l       *ABS*	00000000 DMEM_24B
+0000404c l       *ABS*	00000000 DMEM_24C
+0000404d l       *ABS*	00000000 DMEM_24D
+0000404e l       *ABS*	00000000 DMEM_24E
+0000404f l       *ABS*	00000000 DMEM_24F
+00004050 l       *ABS*	00000000 DMEM_250
+00004051 l       *ABS*	00000000 DMEM_251
+00004052 l       *ABS*	00000000 DMEM_252
+00004053 l       *ABS*	00000000 DMEM_253
+00004054 l       *ABS*	00000000 DMEM_254
+00004055 l       *ABS*	00000000 DMEM_255
+00004056 l       *ABS*	00000000 DMEM_256
+00004057 l       *ABS*	00000000 DMEM_257
+00004058 l       *ABS*	00000000 DMEM_258
+00004059 l       *ABS*	00000000 DMEM_259
+0000405a l       *ABS*	00000000 DMEM_25A
+0000405b l       *ABS*	00000000 DMEM_25B
+0000405c l       *ABS*	00000000 DMEM_25C
+0000405d l       *ABS*	00000000 DMEM_25D
+0000405e l       *ABS*	00000000 DMEM_25E
+0000405f l       *ABS*	00000000 DMEM_25F
+00004060 l       *ABS*	00000000 DMEM_260
+00004061 l       *ABS*	00000000 DMEM_261
+00004062 l       *ABS*	00000000 DMEM_262
+00004063 l       *ABS*	00000000 DMEM_263
+00004064 l       *ABS*	00000000 DMEM_264
+00004065 l       *ABS*	00000000 DMEM_265
+00004066 l       *ABS*	00000000 DMEM_266
+00004067 l       *ABS*	00000000 DMEM_267
+00004068 l       *ABS*	00000000 DMEM_268
+00004069 l       *ABS*	00000000 DMEM_269
+0000406a l       *ABS*	00000000 DMEM_26A
+0000406b l       *ABS*	00000000 DMEM_26B
+0000406c l       *ABS*	00000000 DMEM_26C
+0000406d l       *ABS*	00000000 DMEM_26D
+0000406e l       *ABS*	00000000 DMEM_26E
+0000406f l       *ABS*	00000000 DMEM_26F
+00004100 l       *ABS*	00000000 DMEM_300
+00004000 l       *ABS*	00000000 PMEM_LENGTH
+00000b00 l       *ABS*	00000000 DRAIN_CTRL
+00000b02 l       *ABS*	00000000 GATE_S
+00000b04 l       *ABS*	00000000 ADC
+00000b06 l       *ABS*	00000000 PULSE_CTRL
+00000b08 l       *ABS*	00000000 ROW_SEL
+00000b0a l       *ABS*	00000000 COL_SEL
+00000b0c l       *ABS*	00000000 PROG_BITS
+00000b0e l       *ABS*	00000000 TUN_MUX
+00000b10 l       *ABS*	00000000 GATE_US_P
+00000b12 l       *ABS*	00000000 GATE_US_N
+00000b14 l       *ABS*	00000000 BIAS_DACS
+00000160 l       *ABS*	00000000 GP_PER_1
+00000162 l       *ABS*	00000000 GP_PER_2
+00000164 l       *ABS*	00000000 GP_PER_3
+00000166 l       *ABS*	00000000 GP_PER_4
+00000003 l       *ABS*	00000000 TUN_TIME_SP
+00000002 l       *ABS*	00000000 R_TUN_TIME_SP
+0000c350 l       *ABS*	00000000 INJ_TIME_SP_1
+00001388 l       *ABS*	00000000 INJ_TIME_SP_2
+00000064 l       *ABS*	00000000 INJ_TIME_SP_3
+00000064 l       *ABS*	00000000 INJ_TIME_SP_4
+00000064 l       *ABS*	00000000 INJ_TIME_SP_5
+00000229 l       *ABS*	00000000 INJ_TIME_SP_SUM
+000001f4 l       *ABS*	00000000 INJ_TIME_SP_RUN
+00001121 l       *ABS*	00000000 ADC_1nA
+00000028 l       *ABS*	00000000 TUN_TIME_TP_CAB
+00000028 l       *ABS*	00000000 R_TUN_TIME_TP_CAB
+00000040 l       *ABS*	00000000 RI_GATE_S_SWC
+00001654 l       *ABS*	00000000 RI_VC1_SWC
+000015cf l       *ABS*	00000000 RI_VC2_SWC
+00001440 l       *ABS*	00000000 RI_VC3_SWC
+00001121 l       *ABS*	00000000 RI_VC4_SWC
+0000ea0e l       *ABS*	00000000 RI_VD1_SWC
+0000fe0e l       *ABS*	00000000 RI_VD2_SWC
+00000000 l       *ABS*	00000000 RI_GATE_S_OTA
+000019b0 l       *ABS*	00000000 RI_VC1_OTA
+000018d5 l       *ABS*	00000000 RI_VC2_OTA
+00001643 l       *ABS*	00000000 RI_VC3_OTA
+00001121 l       *ABS*	00000000 RI_VC4_OTA
+0000ea0e l       *ABS*	00000000 RI_VD1_OTA
+0000fe0e l       *ABS*	00000000 RI_VD2_OTA
+00000040 l       *ABS*	00000000 RI_GATE_S_OTAREF
+00001754 l       *ABS*	00000000 RI_VC1_OTAREF
+000016b5 l       *ABS*	00000000 RI_VC2_OTAREF
+000014d9 l       *ABS*	00000000 RI_VC3_OTAREF
+00001121 l       *ABS*	00000000 RI_VC4_OTAREF
+0000ea0e l       *ABS*	00000000 RI_VD1_OTAREF
+0000fe0e l       *ABS*	00000000 RI_VD2_OTAREF
+00000000 l       *ABS*	00000000 RI_GATE_S_MITE
+00001abf l       *ABS*	00000000 RI_VC1_MITE
+000019c9 l       *ABS*	00000000 RI_VC2_MITE
+000016e6 l       *ABS*	00000000 RI_VC3_MITE
+00001121 l       *ABS*	00000000 RI_VC4_MITE
+0000ea0e l       *ABS*	00000000 RI_VD1_MITE
+0000fe0e l       *ABS*	00000000 RI_VD2_MITE
+00000040 l       *ABS*	00000000 RI_GATE_S_DIRSWC
+00001654 l       *ABS*	00000000 RI_VC1_DIRSWC
+000015cf l       *ABS*	00000000 RI_VC2_DIRSWC
+00001440 l       *ABS*	00000000 RI_VC3_DIRSWC
+00001121 l       *ABS*	00000000 RI_VC4_DIRSWC
+0000ea0e l       *ABS*	00000000 RI_VD1_DIRSWC
+0000fe0e l       *ABS*	00000000 RI_VD2_DIRSWC
+00000040 l       *ABS*	00000000 RIL_GATE_S_SWC
+00001121 l       *ABS*	00000000 RIL_VC1_SWC
+00000ff9 l       *ABS*	00000000 RIL_VC2_SWC
+0000ea0e l       *ABS*	00000000 RIL_VD1_SWC
+00000000 l       *ABS*	00000000 RIL_GATE_S_OTA
+00001121 l       *ABS*	00000000 RIL_VC1_OTA
+00000ff4 l       *ABS*	00000000 RIL_VC2_OTA
+0000ea0e l       *ABS*	00000000 RIL_VD1_OTA
+00000040 l       *ABS*	00000000 RIL_GATE_S_OTAREF
+00001121 l       *ABS*	00000000 RIL_VC1_OTAREF
+00000fed l       *ABS*	00000000 RIL_VC2_OTAREF
+0000ea0e l       *ABS*	00000000 RIL_VD1_OTAREF
+00000000 l       *ABS*	00000000 RIL_GATE_S_MITE
+00001121 l       *ABS*	00000000 RIL_VC1_MITE
+00000ffe l       *ABS*	00000000 RIL_VC2_MITE
+0000ea0e l       *ABS*	00000000 RIL_VD1_MITE
+00000040 l       *ABS*	00000000 RIL_GATE_S_DIRSWC
+00001121 l       *ABS*	00000000 RIL_VC1_DIRSWC
+00000ff9 l       *ABS*	00000000 RIL_VC2_DIRSWC
+0000ea0e l       *ABS*	00000000 RIL_VD1_DIRSWC
+00005600 l       *ABS*	00000000 FCP_GATE_S_SWC
+00000001 l       *ABS*	00000000 FCP_INJ_T_SWC
+00004600 l       *ABS*	00000000 FCP_GATE_S_OTA
+00000003 l       *ABS*	00000000 FCP_INJ_T_OTA
+00004800 l       *ABS*	00000000 FCP_GATE_S_OTAREF
+00000006 l       *ABS*	00000000 FCP_INJ_T_OTAREF
+00004800 l       *ABS*	00000000 FCP_GATE_S_MITE
+00000003 l       *ABS*	00000000 FCP_INJ_T_MITE
+00005600 l       *ABS*	00000000 FCP_GATE_S_DIRSWC
+00000001 l       *ABS*	00000000 FCP_INJ_T_DIRSWC
+00003e00 l       *ABS*	00000000 FCPL_GATE_S_SWC
+00000001 l       *ABS*	00000000 FCPL_INJ_T_SWC
+00002e00 l       *ABS*	00000000 FCPL_GATE_S_OTA
+00000003 l       *ABS*	00000000 FCPL_INJ_T_OTA
+00003000 l       *ABS*	00000000 FCPL_GATE_S_OTAREF
+00000006 l       *ABS*	00000000 FCPL_INJ_T_OTAREF
+00003000 l       *ABS*	00000000 FCPL_GATE_S_MITE
+00000003 l       *ABS*	00000000 FCPL_INJ_T_MITE
+00003e00 l       *ABS*	00000000 FCPL_GATE_S_DIRSWC
+00000001 l       *ABS*	00000000 FCPL_INJ_T_DIRSWC
+00005600 l       *ABS*	00000000 MCP_GATE_S_SWC
+00000001 l       *ABS*	00000000 MCP_INJ_T_SWC
+00004600 l       *ABS*	00000000 MCP_GATE_S_OTA
+00000003 l       *ABS*	00000000 MCP_INJ_T_OTA
+00004800 l       *ABS*	00000000 MCP_GATE_S_OTAREF
+00000006 l       *ABS*	00000000 MCP_INJ_T_OTAREF
+00004800 l       *ABS*	00000000 MCP_GATE_S_MITE
+00000003 l       *ABS*	00000000 MCP_INJ_T_MITE
+00005600 l       *ABS*	00000000 MCP_GATE_S_DIRSWC
+00000001 l       *ABS*	00000000 MCP_INJ_T_DIRSWC
+00003e00 l       *ABS*	00000000 MCPL_GATE_S_SWC
+00000001 l       *ABS*	00000000 MCPL_INJ_T_SWC
+00002e00 l       *ABS*	00000000 MCPL_GATE_S_OTA
+00000003 l       *ABS*	00000000 MCPL_INJ_T_OTA
+00003000 l       *ABS*	00000000 MCPL_GATE_S_OTAREF
+00000006 l       *ABS*	00000000 MCPL_INJ_T_OTAREF
+00002c00 l       *ABS*	00000000 MCPL_GATE_S_MITE
+00000003 l       *ABS*	00000000 MCPL_INJ_T_MITE
+00003e00 l       *ABS*	00000000 MCPL_GATE_S_DIRSWC
+00000001 l       *ABS*	00000000 MCPL_INJ_T_DIRSWC
+00004a00 l       *ABS*	00000000 FPS_GATE_S_SWC
+00000001 l       *ABS*	00000000 FPS_INJ_T_SWC
+0000002e l       *ABS*	00000000 FPS_VD_OS_SWC
+00003400 l       *ABS*	00000000 FPS_GATE_S_OTA
+00000003 l       *ABS*	00000000 FPS_INJ_T_OTA
+0000002e l       *ABS*	00000000 FPS_VD_OS_OTA
+00004200 l       *ABS*	00000000 FPS_GATE_S_OTAREF
+00000006 l       *ABS*	00000000 FPS_INJ_T_OTAREF
+0000002e l       *ABS*	00000000 FPS_VD_OS_OTAREF
+00003200 l       *ABS*	00000000 FPS_GATE_S_MITE
+00000003 l       *ABS*	00000000 FPS_INJ_T_MITE
+0000002e l       *ABS*	00000000 FPS_VD_OS_MITE
+00004a00 l       *ABS*	00000000 FPS_GATE_S_DIRSWC
+00000001 l       *ABS*	00000000 FPS_INJ_T_DIRSWC
+0000002e l       *ABS*	00000000 FPS_VD_OS_DIRSWC
+00004e00 l       *ABS*	00000000 FPA_GATE_S_SWC
+00000001 l       *ABS*	00000000 FPA_INJ_T_SWC
+00000015 l       *ABS*	00000000 FPA_VD_OS_SWC
+00004000 l       *ABS*	00000000 FPA_GATE_S_OTA
+00000003 l       *ABS*	00000000 FPA_INJ_T_OTA
+00000015 l       *ABS*	00000000 FPA_VD_OS_OTA
+00004000 l       *ABS*	00000000 FPA_GATE_S_OTAREF
+00000006 l       *ABS*	00000000 FPA_INJ_T_OTAREF
+00000015 l       *ABS*	00000000 FPA_VD_OS_OTAREF
+00004c00 l       *ABS*	00000000 FPA_GATE_S_MITE
+00000003 l       *ABS*	00000000 FPA_INJ_T_MITE
+00000015 l       *ABS*	00000000 FPA_VD_OS_MITE
+00004e00 l       *ABS*	00000000 FPA_GATE_S_DIRSWC
+00000001 l       *ABS*	00000000 FPA_INJ_T_DIRSWC
+00000015 l       *ABS*	00000000 FPA_VD_OS_DIRSWC
+00004000 l       *ABS*	00000000 FPL_GATE_S_SWC
+00000001 l       *ABS*	00000000 FPL_INJ_T_SWC
+0000002e l       *ABS*	00000000 FPL_VD_OS_SWC
+00002e00 l       *ABS*	00000000 FPL_GATE_S_OTA
+00000003 l       *ABS*	00000000 FPL_INJ_T_OTA
+0000002e l       *ABS*	00000000 FPL_VD_OS_OTA
+00003000 l       *ABS*	00000000 FPL_GATE_S_OTAREF
+00000007 l       *ABS*	00000000 FPL_INJ_T_OTAREF
+0000002e l       *ABS*	00000000 FPL_VD_OS_OTAREF
+00003000 l       *ABS*	00000000 FPL_GATE_S_MITE
+00000003 l       *ABS*	00000000 FPL_INJ_T_MITE
+0000002e l       *ABS*	00000000 FPL_VD_OS_MITE
+00004000 l       *ABS*	00000000 FPL_GATE_S_DIRSWC
+00000001 l       *ABS*	00000000 FPL_INJ_T_DIRSWC
+0000002e l       *ABS*	00000000 FPL_VD_OS_DIRSWC
+0000000e l       .text	00000000 init_wait
+0000022a l       .text	00000000 block_measure
+00000058 l       .text	00000000 coarse_loop_s
+0000013e l       .text	00000000 measure_verify
+000001ec l       .text	00000000 Pulse_w_calculate
+0000007c l       .text	00000000 coarse_inject
+00000072 l       .text	00000000 coarse_loop_e
+000002da l       .text	00000000 end_of_test
+00000098 l       .text	00000000 coarse_inject_set_s
+000000fc l       .text	00000000 coarse_inject_skip
+000002b6 l       .text	00000000 wait_ms
+000000da l       .text	00000000 multi_inject_pulse_s
+000002c8 l       .text	00000000 wait_10us
+000000ec l       .text	00000000 multi_inject_pulse_e_1
+000000f0 l       .text	00000000 multi_inject_pulse_e_2
+00000102 l       .text	00000000 coarse_inject_e
+0000015a l       .text	00000000 measure_verify_s
+000001d8 l       .text	00000000 measure_verify_skip
+000001c4 l       .text	00000000 status_1
+000001ce l       .text	00000000 Istart_1
+000001de l       .text	00000000 measure_verify_e
+000001f2 l       .text	00000000 Pulse_w_cal_s
+00000222 l       .text	00000000 No_calculation
+00000228 l       .text	00000000 Pulse_w_cal_e
+00000246 l       .text	00000000 block_measure_s
+000002a8 l       .text	00000000 block_measure_e
+000002bc l       .text	00000000 wait_ms_loop
+000002ce l       .text	00000000 wait_10us_loop
+00000000 l    d  .vectors	00000000 .vectors
+00000000 g       .text	00000000 main
+
+
+Contents of section .text:
+ 0000 31405040 37400050 0a433540 401f1583  1@P@7@.P.C5@@...
+ 0010 fe23b240 10005800 b240805a 200132c2  .#.@..X..@.Z .2.
+ 0020 a2430e0b b24004be 6401b240 6600000b  .C...@..d..@f...
+ 0030 b2402400 6001b240 00800c0b 8243080b  .@$.`..@.....C..
+ 0040 82430a0b 874a0000 2753874a 00002753  .C...J..'S.J..'S
+ 0050 0d43b012 00001f43 0d43b012 0000b012  .C.....C.C......
+ 0060 0000b012 00000d43 b0120000 1f830124  .......C.......$
+ 0070 f33fb743 00008243 58002f3d 3b400070  .?.C...CX./=;@.p
+ 0080 2c4bb240 00800c0b b24004be 6401b240  ,K.@.....@..d..@
+ 0090 24006001 b2430e0b 2b53a24b 080b2b53  $.`..C..+S.K..+S
+ 00a0 a24b0a0b 2b532b53 2b53284b 08932624  .K..+S+S+S(K..&$
+ 00b0 b2400048 020bb240 6000100b b2406000  .@.H...@`....@`.
+ 00c0 120bb240 6600000b b2401400 60012543  ...@f....@..`.%C
+ 00d0 b0120000 b2402600 000b3540 0600b012  .....@&...5@....
+ 00e0 00003a50 06001883 0124f73f 8b480000  ..:P.....$.?.H..
+ 00f0 b2406600 000b1543 b0120000 1c830124  .@f....C.......$
+ 0100 cb3fa242 60012543 b0120000 b2402400  .?.B`.%C.....@$.
+ 0110 60011543 b0120000 a2430e0b b2404000  `..C.....C...@@.
+ 0120 100bb240 4000120b 1543b012 0000b740  ...@@....C.....@
+ 0130 33330000 2753874a 00002753 30413b40  33..'S.J..'S0A;@
+ 0140 00702c4b b2400080 0c0bb240 04be6401  .p,K.@.....@..d.
+ 0150 b2402400 6001a243 0e0b2b53 a24b080b  .@$.`..C..+S.K..
+ 0160 2b53a24b 0a0b2b53 284b2b53 2b53294b  +S.K..+S(K+S+S)K
+ 0170 09933224 824d020b b2404000 100bb240  ..2$.M...@@....@
+ 0180 4000120b b2406600 000b2543 b0120000  @....@f...%C....
+ 0190 b240a400 000b3540 0a00b012 0000b240  .@....5@.......@
+ 01a0 00b00c0b 35400500 b0120000 8243040b  ....5@.......C..
+ 01b0 1942040b b2400080 0c0b0998 03308b43  .B...@.......0.C
+ 01c0 00000a3c 39902111 02343940 21112b83  ...<9.!..49@!.+.
+ 01d0 08898b48 00002b53 1c830124 be3fb240  ...H..+S...$.?.@
+ 01e0 6600000b b2402400 60013041 3b400070  f....@$.`.0A;@.p
+ 01f0 2c4b2b53 2b532b53 2b53294b 2b532e4b  ,K+S+S+S+S)K+S.K
+ 0200 0e930f24 09100910 09100910 09100910  ...$............
+ 0210 39c000ff 096919c3 39500068 2e498b4e  9....i..9P.h.I.N
+ 0220 00001c83 0124e53f 30413b40 00702c4b  .....$.?0A;@.p,K
+ 0230 b2400080 0c0bb240 04be6401 b2402400  .@.....@..d..@$.
+ 0240 6001a243 0e0b2b53 a24b080b 2b53a24b  `..C..+S.K..+S.K
+ 0250 0a0b2b53 2b532b53 824d020b b2404000  ..+S+S+S.M...@@.
+ 0260 100bb240 4000120b b2406600 000b2543  ...@@....@f...%C
+ 0270 b0120000 b240a400 000b3540 0a00b012  .....@....5@....
+ 0280 0000b240 00b00c0b 35400500 b0120000  ...@....5@......
+ 0290 8243040b 9742040b 00002753 b2400080  .C...B....'S.@..
+ 02a0 0c0b1c83 0124cf3f b2406600 000bb240  .....$.?.@f....@
+ 02b0 24006001 30413440 fc0c0644 1683fe23  $.`.0A4@...D...#
+ 02c0 06441583 fb233041 34402200 06441683  .D...#0A4@"..D..
+ 02d0 fe230644 1583fb23 30418243 58000343  .#.D...#0A.CX..C
+ 02e0 3043                                 0C              
+Contents of section .vectors:
+ 0000 00000000 00000000 00000000 00000000  ................
+ 0010 00000000 00000000 00000000 00000000  ................
+
+Disassembly of section .text:
+
+00000000 <main>:
+   0:	31 40 50 40 	mov	#16464,	r1	;#0x4050
+   4:	37 40 00 50 	mov	#20480,	r7	;#0x5000
+   8:	0a 43       	clr	r10		
+   a:	35 40 40 1f 	mov	#8000,	r5	;#0x1f40
+
+0000000e <init_wait>:
+   e:	15 83       	dec	r5		
+  10:	fe 23       	jnz	$-2      	;abs 0xe
+  12:	b2 40 10 00 	mov	#16,	&0x0058	;#0x0010
+  16:	58 00 
+  18:	b2 40 80 5a 	mov	#23168,	&0x0120	;#0x5a80
+  1c:	20 01 
+  1e:	32 c2       	dint			
+  20:	a2 43 0e 0b 	mov	#2,	&0x0b0e	;r3 As==10
+  24:	b2 40 04 be 	mov	#-16892,&0x0164	;#0xbe04
+  28:	64 01 
+  2a:	b2 40 66 00 	mov	#102,	&0x0b00	;#0x0066
+  2e:	00 0b 
+  30:	b2 40 24 00 	mov	#36,	&0x0160	;#0x0024
+  34:	60 01 
+  36:	b2 40 00 80 	mov	#-32768,&0x0b0c	;#0x8000
+  3a:	0c 0b 
+  3c:	82 43 08 0b 	mov	#0,	&0x0b08	;r3 As==00
+  40:	82 43 0a 0b 	mov	#0,	&0x0b0a	;r3 As==00
+  44:	87 4a 00 00 	mov	r10,	0(r7)	;0x0000(r7)
+  48:	27 53       	incd	r7		
+  4a:	87 4a 00 00 	mov	r10,	0(r7)	;0x0000(r7)
+  4e:	27 53       	incd	r7		
+  50:	0d 43       	clr	r13		
+  52:	b0 12 00 00 	call	#0x0000	
+			54: R_MSP430_16_BYTE	.text+0x22a
+  56:	1f 43       	mov	#1,	r15	;r3 As==01
+
+00000058 <coarse_loop_s>:
+  58:	0d 43       	clr	r13		
+  5a:	b0 12 00 00 	call	#0x0000	
+			5c: R_MSP430_16_BYTE	.text+0x13e
+  5e:	b0 12 00 00 	call	#0x0000	
+			60: R_MSP430_16_BYTE	.text+0x1ec
+  62:	b0 12 00 00 	call	#0x0000	
+			64: R_MSP430_16_BYTE	.text+0x7c
+  66:	0d 43       	clr	r13		
+  68:	b0 12 00 00 	call	#0x0000	
+			6a: R_MSP430_16_BYTE	.text+0x22a
+  6c:	1f 83       	dec	r15		
+  6e:	01 24       	jz	$+4      	;abs 0x72
+  70:	f3 3f       	jmp	$-24     	;abs 0x58
+
+00000072 <coarse_loop_e>:
+  72:	b7 43 00 00 	mov	#-1,	0(r7)	;r3 As==11, 0x0000(r7)
+  76:	82 43 58 00 	mov	#0,	&0x0058	;r3 As==00
+  7a:	2f 3d       	jmp	$+608    	;abs 0x2da
+
+0000007c <coarse_inject>:
+  7c:	3b 40 00 70 	mov	#28672,	r11	;#0x7000
+  80:	2c 4b       	mov	@r11,	r12	
+  82:	b2 40 00 80 	mov	#-32768,&0x0b0c	;#0x8000
+  86:	0c 0b 
+  88:	b2 40 04 be 	mov	#-16892,&0x0164	;#0xbe04
+  8c:	64 01 
+  8e:	b2 40 24 00 	mov	#36,	&0x0160	;#0x0024
+  92:	60 01 
+  94:	b2 43 0e 0b 	mov	#-1,	&0x0b0e	;r3 As==11
+
+00000098 <coarse_inject_set_s>:
+  98:	2b 53       	incd	r11		
+  9a:	a2 4b 08 0b 	mov	@r11,	&0x0b08	
+  9e:	2b 53       	incd	r11		
+  a0:	a2 4b 0a 0b 	mov	@r11,	&0x0b0a	
+  a4:	2b 53       	incd	r11		
+  a6:	2b 53       	incd	r11		
+  a8:	2b 53       	incd	r11		
+  aa:	28 4b       	mov	@r11,	r8	
+  ac:	08 93       	tst	r8		
+  ae:	26 24       	jz	$+78     	;abs 0xfc
+  b0:	b2 40 00 48 	mov	#18432,	&0x0b02	;#0x4800
+  b4:	02 0b 
+  b6:	b2 40 60 00 	mov	#96,	&0x0b10	;#0x0060
+  ba:	10 0b 
+  bc:	b2 40 60 00 	mov	#96,	&0x0b12	;#0x0060
+  c0:	12 0b 
+  c2:	b2 40 66 00 	mov	#102,	&0x0b00	;#0x0066
+  c6:	00 0b 
+  c8:	b2 40 14 00 	mov	#20,	&0x0160	;#0x0014
+  cc:	60 01 
+  ce:	25 43       	mov	#2,	r5	;r3 As==10
+  d0:	b0 12 00 00 	call	#0x0000	
+			d2: R_MSP430_16_BYTE	.text+0x2b6
+  d4:	b2 40 26 00 	mov	#38,	&0x0b00	;#0x0026
+  d8:	00 0b 
+
+000000da <multi_inject_pulse_s>:
+  da:	35 40 06 00 	mov	#6,	r5	;#0x0006
+  de:	b0 12 00 00 	call	#0x0000	
+			e0: R_MSP430_16_BYTE	.text+0x2c8
+  e2:	3a 50 06 00 	add	#6,	r10	;#0x0006
+  e6:	18 83       	dec	r8		
+  e8:	01 24       	jz	$+4      	;abs 0xec
+  ea:	f7 3f       	jmp	$-16     	;abs 0xda
+
+000000ec <multi_inject_pulse_e_1>:
+  ec:	8b 48 00 00 	mov	r8,	0(r11)	;0x0000(r11)
+
+000000f0 <multi_inject_pulse_e_2>:
+  f0:	b2 40 66 00 	mov	#102,	&0x0b00	;#0x0066
+  f4:	00 0b 
+  f6:	15 43       	mov	#1,	r5	;r3 As==01
+  f8:	b0 12 00 00 	call	#0x0000	
+			fa: R_MSP430_16_BYTE	.text+0x2b6
+
+000000fc <coarse_inject_skip>:
+  fc:	1c 83       	dec	r12		
+  fe:	01 24       	jz	$+4      	;abs 0x102
+ 100:	cb 3f       	jmp	$-104    	;abs 0x98
+
+00000102 <coarse_inject_e>:
+ 102:	a2 42 60 01 	mov	#4,	&0x0160	;r2 As==10
+ 106:	25 43       	mov	#2,	r5	;r3 As==10
+ 108:	b0 12 00 00 	call	#0x0000	
+			10a: R_MSP430_16_BYTE	.text+0x2b6
+ 10c:	b2 40 24 00 	mov	#36,	&0x0160	;#0x0024
+ 110:	60 01 
+ 112:	15 43       	mov	#1,	r5	;r3 As==01
+ 114:	b0 12 00 00 	call	#0x0000	
+			116: R_MSP430_16_BYTE	.text+0x2b6
+ 118:	a2 43 0e 0b 	mov	#2,	&0x0b0e	;r3 As==10
+ 11c:	b2 40 40 00 	mov	#64,	&0x0b10	;#0x0040
+ 120:	10 0b 
+ 122:	b2 40 40 00 	mov	#64,	&0x0b12	;#0x0040
+ 126:	12 0b 
+ 128:	15 43       	mov	#1,	r5	;r3 As==01
+ 12a:	b0 12 00 00 	call	#0x0000	
+			12c: R_MSP430_16_BYTE	.text+0x2b6
+ 12e:	b7 40 33 33 	mov	#13107,	0(r7)	;#0x3333, 0x0000(r7)
+ 132:	00 00 
+ 134:	27 53       	incd	r7		
+ 136:	87 4a 00 00 	mov	r10,	0(r7)	;0x0000(r7)
+ 13a:	27 53       	incd	r7		
+ 13c:	30 41       	ret			
+
+0000013e <measure_verify>:
+ 13e:	3b 40 00 70 	mov	#28672,	r11	;#0x7000
+ 142:	2c 4b       	mov	@r11,	r12	
+ 144:	b2 40 00 80 	mov	#-32768,&0x0b0c	;#0x8000
+ 148:	0c 0b 
+ 14a:	b2 40 04 be 	mov	#-16892,&0x0164	;#0xbe04
+ 14e:	64 01 
+ 150:	b2 40 24 00 	mov	#36,	&0x0160	;#0x0024
+ 154:	60 01 
+ 156:	a2 43 0e 0b 	mov	#2,	&0x0b0e	;r3 As==10
+
+0000015a <measure_verify_s>:
+ 15a:	2b 53       	incd	r11		
+ 15c:	a2 4b 08 0b 	mov	@r11,	&0x0b08	
+ 160:	2b 53       	incd	r11		
+ 162:	a2 4b 0a 0b 	mov	@r11,	&0x0b0a	
+ 166:	2b 53       	incd	r11		
+ 168:	28 4b       	mov	@r11,	r8	
+ 16a:	2b 53       	incd	r11		
+ 16c:	2b 53       	incd	r11		
+ 16e:	29 4b       	mov	@r11,	r9	
+ 170:	09 93       	tst	r9		
+ 172:	32 24       	jz	$+102    	;abs 0x1d8
+ 174:	82 4d 02 0b 	mov	r13,	&0x0b02	
+ 178:	b2 40 40 00 	mov	#64,	&0x0b10	;#0x0040
+ 17c:	10 0b 
+ 17e:	b2 40 40 00 	mov	#64,	&0x0b12	;#0x0040
+ 182:	12 0b 
+ 184:	b2 40 66 00 	mov	#102,	&0x0b00	;#0x0066
+ 188:	00 0b 
+ 18a:	25 43       	mov	#2,	r5	;r3 As==10
+ 18c:	b0 12 00 00 	call	#0x0000	
+			18e: R_MSP430_16_BYTE	.text+0x2b6
+ 190:	b2 40 a4 00 	mov	#164,	&0x0b00	;#0x00a4
+ 194:	00 0b 
+ 196:	35 40 0a 00 	mov	#10,	r5	;#0x000a
+ 19a:	b0 12 00 00 	call	#0x0000	
+			19c: R_MSP430_16_BYTE	.text+0x2b6
+ 19e:	b2 40 00 b0 	mov	#-20480,&0x0b0c	;#0xb000
+ 1a2:	0c 0b 
+ 1a4:	35 40 05 00 	mov	#5,	r5	;#0x0005
+ 1a8:	b0 12 00 00 	call	#0x0000	
+			1aa: R_MSP430_16_BYTE	.text+0x2b6
+ 1ac:	82 43 04 0b 	mov	#0,	&0x0b04	;r3 As==00
+ 1b0:	19 42 04 0b 	mov	&0x0b04,r9	
+ 1b4:	b2 40 00 80 	mov	#-32768,&0x0b0c	;#0x8000
+ 1b8:	0c 0b 
+ 1ba:	09 98       	cmp	r8,	r9	
+ 1bc:	03 30       	jn	$+8      	;abs 0x1c4
+ 1be:	8b 43 00 00 	mov	#0,	0(r11)	;r3 As==00, 0x0000(r11)
+ 1c2:	0a 3c       	jmp	$+22     	;abs 0x1d8
+
+000001c4 <status_1>:
+ 1c4:	39 90 21 11 	cmp	#4385,	r9	;#0x1121
+ 1c8:	02 34       	jge	$+6      	;abs 0x1ce
+ 1ca:	39 40 21 11 	mov	#4385,	r9	;#0x1121
+
+000001ce <Istart_1>:
+ 1ce:	2b 83       	decd	r11		
+ 1d0:	08 89       	sub	r9,	r8	
+ 1d2:	8b 48 00 00 	mov	r8,	0(r11)	;0x0000(r11)
+ 1d6:	2b 53       	incd	r11		
+
+000001d8 <measure_verify_skip>:
+ 1d8:	1c 83       	dec	r12		
+ 1da:	01 24       	jz	$+4      	;abs 0x1de
+ 1dc:	be 3f       	jmp	$-130    	;abs 0x15a
+
+000001de <measure_verify_e>:
+ 1de:	b2 40 66 00 	mov	#102,	&0x0b00	;#0x0066
+ 1e2:	00 0b 
+ 1e4:	b2 40 24 00 	mov	#36,	&0x0160	;#0x0024
+ 1e8:	60 01 
+ 1ea:	30 41       	ret			
+
+000001ec <Pulse_w_calculate>:
+ 1ec:	3b 40 00 70 	mov	#28672,	r11	;#0x7000
+ 1f0:	2c 4b       	mov	@r11,	r12	
+
+000001f2 <Pulse_w_cal_s>:
+ 1f2:	2b 53       	incd	r11		
+ 1f4:	2b 53       	incd	r11		
+ 1f6:	2b 53       	incd	r11		
+ 1f8:	2b 53       	incd	r11		
+ 1fa:	29 4b       	mov	@r11,	r9	
+ 1fc:	2b 53       	incd	r11		
+ 1fe:	2e 4b       	mov	@r11,	r14	
+ 200:	0e 93       	tst	r14		
+ 202:	0f 24       	jz	$+32     	;abs 0x222
+ 204:	09 10       	rrc	r9		
+ 206:	09 10       	rrc	r9		
+ 208:	09 10       	rrc	r9		
+ 20a:	09 10       	rrc	r9		
+ 20c:	09 10       	rrc	r9		
+ 20e:	09 10       	rrc	r9		
+ 210:	39 c0 00 ff 	bic	#-256,	r9	;#0xff00
+ 214:	09 69       	rlc	r9		
+ 216:	19 c3       	bic	#1,	r9	;r3 As==01
+ 218:	39 50 00 68 	add	#26624,	r9	;#0x6800
+ 21c:	2e 49       	mov	@r9,	r14	
+ 21e:	8b 4e 00 00 	mov	r14,	0(r11)	;0x0000(r11)
+
+00000222 <No_calculation>:
+ 222:	1c 83       	dec	r12		
+ 224:	01 24       	jz	$+4      	;abs 0x228
+ 226:	e5 3f       	jmp	$-52     	;abs 0x1f2
+
+00000228 <Pulse_w_cal_e>:
+ 228:	30 41       	ret			
+
+0000022a <block_measure>:
+ 22a:	3b 40 00 70 	mov	#28672,	r11	;#0x7000
+ 22e:	2c 4b       	mov	@r11,	r12	
+ 230:	b2 40 00 80 	mov	#-32768,&0x0b0c	;#0x8000
+ 234:	0c 0b 
+ 236:	b2 40 04 be 	mov	#-16892,&0x0164	;#0xbe04
+ 23a:	64 01 
+ 23c:	b2 40 24 00 	mov	#36,	&0x0160	;#0x0024
+ 240:	60 01 
+ 242:	a2 43 0e 0b 	mov	#2,	&0x0b0e	;r3 As==10
+
+00000246 <block_measure_s>:
+ 246:	2b 53       	incd	r11		
+ 248:	a2 4b 08 0b 	mov	@r11,	&0x0b08	
+ 24c:	2b 53       	incd	r11		
+ 24e:	a2 4b 0a 0b 	mov	@r11,	&0x0b0a	
+ 252:	2b 53       	incd	r11		
+ 254:	2b 53       	incd	r11		
+ 256:	2b 53       	incd	r11		
+ 258:	82 4d 02 0b 	mov	r13,	&0x0b02	
+ 25c:	b2 40 40 00 	mov	#64,	&0x0b10	;#0x0040
+ 260:	10 0b 
+ 262:	b2 40 40 00 	mov	#64,	&0x0b12	;#0x0040
+ 266:	12 0b 
+ 268:	b2 40 66 00 	mov	#102,	&0x0b00	;#0x0066
+ 26c:	00 0b 
+ 26e:	25 43       	mov	#2,	r5	;r3 As==10
+ 270:	b0 12 00 00 	call	#0x0000	
+			272: R_MSP430_16_BYTE	.text+0x2b6
+ 274:	b2 40 a4 00 	mov	#164,	&0x0b00	;#0x00a4
+ 278:	00 0b 
+ 27a:	35 40 0a 00 	mov	#10,	r5	;#0x000a
+ 27e:	b0 12 00 00 	call	#0x0000	
+			280: R_MSP430_16_BYTE	.text+0x2b6
+ 282:	b2 40 00 b0 	mov	#-20480,&0x0b0c	;#0xb000
+ 286:	0c 0b 
+ 288:	35 40 05 00 	mov	#5,	r5	;#0x0005
+ 28c:	b0 12 00 00 	call	#0x0000	
+			28e: R_MSP430_16_BYTE	.text+0x2b6
+ 290:	82 43 04 0b 	mov	#0,	&0x0b04	;r3 As==00
+ 294:	97 42 04 0b 	mov	&0x0b04,0(r7)	;0x0000(r7)
+ 298:	00 00 
+ 29a:	27 53       	incd	r7		
+ 29c:	b2 40 00 80 	mov	#-32768,&0x0b0c	;#0x8000
+ 2a0:	0c 0b 
+ 2a2:	1c 83       	dec	r12		
+ 2a4:	01 24       	jz	$+4      	;abs 0x2a8
+ 2a6:	cf 3f       	jmp	$-96     	;abs 0x246
+
+000002a8 <block_measure_e>:
+ 2a8:	b2 40 66 00 	mov	#102,	&0x0b00	;#0x0066
+ 2ac:	00 0b 
+ 2ae:	b2 40 24 00 	mov	#36,	&0x0160	;#0x0024
+ 2b2:	60 01 
+ 2b4:	30 41       	ret			
+
+000002b6 <wait_ms>:
+ 2b6:	34 40 fc 0c 	mov	#3324,	r4	;#0x0cfc
+ 2ba:	06 44       	mov	r4,	r6	
+
+000002bc <wait_ms_loop>:
+ 2bc:	16 83       	dec	r6		
+ 2be:	fe 23       	jnz	$-2      	;abs 0x2bc
+ 2c0:	06 44       	mov	r4,	r6	
+ 2c2:	15 83       	dec	r5		
+ 2c4:	fb 23       	jnz	$-8      	;abs 0x2bc
+ 2c6:	30 41       	ret			
+
+000002c8 <wait_10us>:
+ 2c8:	34 40 22 00 	mov	#34,	r4	;#0x0022
+ 2cc:	06 44       	mov	r4,	r6	
+
+000002ce <wait_10us_loop>:
+ 2ce:	16 83       	dec	r6		
+ 2d0:	fe 23       	jnz	$-2      	;abs 0x2ce
+ 2d2:	06 44       	mov	r4,	r6	
+ 2d4:	15 83       	dec	r5		
+ 2d6:	fb 23       	jnz	$-8      	;abs 0x2ce
+ 2d8:	30 41       	ret			
+
+000002da <end_of_test>:
+ 2da:	82 43 58 00 	mov	#0,	&0x0058	;r3 As==00
+ 2de:	03 43       	nop			
+ 2e0:	30 43       	br	#-1		;r3 As==11

@@ -1,0 +1,5 @@
+.model mite_FG
+.inputs net1_1
+.outputs gnd
+.subckt meas_volt_mite in[0]=net1_1 out[0]=gnd #meas_fg =0.00001 
+.end

@@ -1,0 +1,4 @@
+#to add all files for documentation. Its hard to keep doing this.
+svn add --force figures/*
+svn add --force text/*
+svn commit -m ""

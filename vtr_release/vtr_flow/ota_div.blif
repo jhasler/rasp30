@@ -1,0 +1,7 @@
+.model ota_div
+.inputs net1 net2 net3 net4
+.outputs net5 net6
+# ota
+.subckt ota in[0]= net1 in[1]= net2 out=net5
+.end
+  

@@ -1,0 +1,144 @@
+			<interconnect>		
+				<direct name="volswc1" input="cab.I[5:0]" output="volswc[0].in[5:0]"/>
+				<complete name="crossbar" input="fgota.out ota_buf.out ota.out cap.out nfet.out pfet.out tgate.out nmirror.out volswc[1:0].out" output="volswc[0].in[7:6]"/>
+				<direct name="volswc3" input="cab.I[11:6]" output="volswc[1].in[5:0]"/>
+				<complete name="crossbar" input="fgota.out ota_buf.out ota.out cap.out nfet.out pfet.out tgate.out nmirror.out volswc[1:0].out" output="volswc[1].in[7:6]"/>
+				<direct name="volswc5" input="cab.I[15:13]" output="volswc[0].ci"/>
+				<direct name="volswc6" input="volswc[0].co" output="volswc[1].ci"/>
+				<direct name="volswc7" input="volswc[1].co" output="cab.O[7:5]"/>	
+				<direct name="crossbar" input="cab.I[15:13]" output="mmap_local_swc[0].in[2:0]"/>
+				<complete name="crossbar" input="cab.I[12:8] fgota.out cap.out nfet.out pfet.out tgate.out nmirror.out volswc[1:0].out" output="fgota.in[1:0] ichar_nfet[0].in[1:0] TIA_blk.in[0] cap.in nfet.in[1:0] pfet.in[1:0] tgate.in[1:0] nmirror.in"></complete>
+				<complete name="crossbar" input="fgota.out ota.out cap.out nfet.out pfet.out nmirror.out volswc[1:0].out ota_buf.out lpf.out nfet_i2v.out pfet_i2v.out i2v_pfet_gatefgota.out[0] mismatch_meas.out[0] gnd_out.out vdd_out.out in2in_x1.out in2in_x6.out tgate.out" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[8]" output="ota_buf.in lpf.in"/>				
+				<complete name="crossbar" input="cab.I[12:0]" output="gnd_out.in[1:0] vdd_out.in[1:0] in2in_x1.in[2:0] in2in_x6.in[12:0] nfet_i2v.in[0] pfet_i2v.in[0] i2v_pfet_gatefgota.in[0] mismatch_meas.in[2:0]"/>
+				<complete name="crossbar" input="cab.I[11]" output="tgate.in[0]"/>	
+				<complete name="crossbar" input="pfet.out ichar_nfet[0].out" output="cab.O[4:3] "/>	
+				<complete name="crossbar" input="TIA_blk.out[0]" output="cab.O[4]"/>
+				<complete name="direct" input="hhneuron[0].out[2:0]" output="cab.O[3:1] "/>
+				<complete name="crossbar" input="cab.I[11:8]" output="hhneuron.in[3:0] c4_sp.in[1:0] fgota.in[1:0]"/>
+				<complete name="crossbar" input="cab.I[11:9] cab.I[8]" output="ota.in ramp_fe.in ota_buf.in"/>	
+				<complete name="crossbar" input="cab.I[6] cab.I[12]" output="c4_sp.in[1:0] fgota.in[1:0]"/>
+				<complete name="crossbar" input="cab.I[8]" output="c4_sp[0].in[1] cap.in[0]"/>
+				<complete name="crossbar" input="cab.I[6] cab.I[12]" output="c4_sp.in[1:0] fgota.in[1:0]"/>
+				<complete name="crossbar" input="cab.I[7:6]" output="fgota.in[0] "/>		
+				<complete name="crossbar" input="c4_sp.out[0] cap.out[0]" output="cab.O[4]"/>
+				<direct name="crossbar" input="ramp_fe.out[3:1]" output="cab.O[3:1] "/>
+				<direct name="crossbar" input="ramp_fe.out[0]" output="cab.O[4] "/>
+				<direct name="crossbar" input="mmap_local_swc[0].out[3:0]" output="cab.O[7:4]" />	
+				<complete name="crossbar" input="cab.I[12:0]" output="Hyst_diff.in[0]"/>
+				<complete name="crossbar" input="Hyst_diff[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="Max_detect.in[0]"/>
+				<complete name="crossbar" input="Max_detect[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="Min_detect.in[0]"/>
+				<complete name="crossbar" input="Min_detect[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="hhn.in[3:0]"/>
+				<complete name="crossbar" input="hhn[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="fgswitch.in[0]"/>
+				<complete name="crossbar" input="fgswitch[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="common_drain.in[0]"/>
+				<complete name="crossbar" input="common_drain[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="common_drain_nfet.in[0]"/>
+				<complete name="crossbar" input="common_drain_nfet[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="hhn_debug.in[3:0]"/>
+				<complete name="crossbar" input="hhn_debug[0].out[2:0]" output="cab.O[4:2]"/>
+				<direct name="a2a" input="cab.I" output="vmm_16x16.in"> </direct>
+				<direct name="b2b" input="vmm_16x16.out" output="cab.O"></direct>
+				<complete name="sub" input="cab.I[1:0]" output="vmm_2x2.in[1:0]"> </complete>
+				<complete name="sub2" input="vmm_2x2.out[1:0]" output="cab.O[1:0]"></complete>
+				<complete name="crossbar" input="tgate_so.out" output="cab.O[3]"></complete>
+				<complete name="crossbar" input="cab.I[12:0]" output="tgate_so.in[7:0]"></complete>
+				<complete name="crossbar" input="ota_vmm.out" output="cab.O[4]"></complete>
+				<complete name="crossbar" input="vmm12x1.out vmm12x1_wowta.out" output="cab.O[4]"></complete>
+				<complete name="crossbar" input="vmm8x4_in.out" output="cab.O[4]"></complete>
+				<direct name="crossbar" input="cab.I[12:11]" output="ota_vmm.in"> </direct>
+				<direct name="crossbar" input="cab.I[1]" output="vmm8x4_SR.in[4]"> </direct>
+				<direct name="crossbar" input="cab.I[2]" output="vmm8x4_SR.in[5]"> </direct>
+				<direct name="crossbar" input="cab.I[3]" output="vmm8x4_SR.in[6]"> </direct>
+				<direct name="crossbar" input="cab.I[5]" output="vmm8x4_SR.in[7]"> </direct>
+				<direct name="crossbar" input="cab.I[1]" output="vmm8x4.in[4]"> </direct>
+				<direct name="crossbar" input="cab.I[2]" output="vmm8x4.in[5]"> </direct>
+				<direct name="crossbar" input="cab.I[3]" output="vmm8x4.in[6]"> </direct>
+				<direct name="crossbar" input="cab.I[5]" output="vmm8x4.in[7]"> </direct>
+				<direct name="crossbar" input="cab.I[0]" output="vmm8x4.in[8]"> </direct>
+				<direct name="crossbar" input="cab.I[4]" output="vmm8x4.in[9]"> </direct>
+				<direct name="crossbar" input="cab.I[6]" output="vmm8x4.in[10]"> </direct>
+				<direct name="crossbar" input="cab.I[10]" output="vmm8x4.in[11]"> </direct>
+				<direct name="crossbar" input="cab.I[12:0]" output="vmm12x1.in[12:0]"> </direct>
+				<direct name="crossbar" input="cab.I[11:0]" output="vmm12x1_wowta.in[11:0]"> </direct>
+				<direct name="crossbar" input="cab.I[12:0]" output="vmm8x4_in.in[12:0]"> </direct>
+				<complete name="direct04" input="cab.I[12]" output="vmm4x4_SR.in[3] vmm4x4_SR2.in[3] vmm8x4_SR.in[3] vmm4x4.in[3] vmm8x4.in[3]"> </complete>
+				<complete name="direct04" input="cab.I[11]" output="vmm4x4_SR.in[2] vmm4x4_SR2.in[2] vmm8x4_SR.in[2] vmm4x4.in[2] vmm8x4.in[2]"> </complete>
+				<complete name="direct05" input="cab.I[9]" output="vmm4x4_SR.in[1] vmm4x4_SR2.in[1] vmm8x4_SR.in[1] vmm4x4.in[1] vmm8x4.in[1]"> </complete>
+				<complete name="direct05" input="cab.I[8]" output="vmm4x4_SR.in[0] vmm4x4_SR2.in[0] vmm8x4_SR.in[0] vmm4x4.in[0] vmm8x4.in[0]"> </complete>
+				<complete name="direct05" input="cab.I[7]" output="vmm8x4.in[12]"> </complete>
+				<complete name="direct4" input="cab.I[13]" output="vmm4x4_SR.in[4] vmm4x4_SR2.in[4] vmm8x4_SR.in[8] SR4.in[1]"> </complete>
+				<complete name="direct5" input="cab.I[14]" output="vmm4x4_SR.in[5] vmm4x4_SR2.in[5] vmm8x4_SR.in[9] SR4.in[2]"> </complete>
+				<complete name="direct6" input="cab.I[15]" output="vmm4x4_SR.in[6] vmm4x4_SR2.in[6] vmm8x4_SR.in[10] SR4.in[3]"> </complete>
+				<direct name="direct7" input="vmm4x4_SR.out[3:0] " output="cab.O[7:4]"> </direct> <!--do not chng-->
+				<direct name="crossbar" input="vmm4x4_SR2.out[3:0] " output="cab.O[7:4]"> </direct> <!--do not chng-->
+				<direct name="direct8" input="vmm8x4_SR.out[3:0] " output="cab.O[7:4]"> </direct> <!--do not chng-->
+				<direct name="direct9" input="SR4.out[4:0] " output="cab.O[4:0]"> </direct> <!--do not chng-->
+				<direct name="crossbar" input="vmm4x4.out[3:0] " output="cab.O[3:0]"> </direct> <!--do not chng-->
+				<direct name="direct10" input="SR4.out[7:5] " output="cab.O[7:5]"> </direct> <!--do not chng-->
+				<direct name="crossbar" input="vmm8x4.out[0] " output="cab.O[4]"> </direct> <!--do not chng-->
+				<complete name="crossbar" input="cab.I[12]" output="SR4.in[0]"> </complete>
+				<complete name="crossbar" input="cab.I[7]" output="vmm4x4_SR2.in[7]"> </complete>
+				<direct name="crossbar" input="cab.I[5:0]" output="sftreg[0].in[13:8]"/>
+				<direct name="crossbar" input="cab.I[11:6]" output="sftreg[0].in[5:0]"/>
+				<direct name="crossbar" input="cab.si[3:2]" output="sftreg[0].in[7:6]"/>
+				<direct name="crossbar" input="cab.si[1:0]" output="sftreg[0].in[15:14]"/>
+				<direct name="crossbar" input="cab.I[15:13]" output="sftreg[0].in[18:16]"/>
+				<direct name="crossbar" input="sftreg[0].out[3:0]" output="cab.O[7:4]" />
+				<direct name="crossbar" input="cab.I[15:13]" output="DAC_sftreg[0].in[2:0]"/>
+				<direct name="crossbar" input="DAC_sftreg[0].out[3:0]" output="cab.O[7:4]" />
+				<direct name="crossbar" input="cab.I[15:13]" output="sftreg2[0].in[2:0]"/>
+				<direct name="crossbar" input="cab.I[15:13]" output="sftreg3[0].in[2:0]"/>
+				<direct name="crossbar" input="cab.I[15:13]" output="sftreg4[0].in[2:0]"/>
+				<direct name="crossbar" input="cab.I[12]" output="sftreg3[0].in[3]"/>
+				<direct name="crossbar" input="cab.I[12]" output="sftreg4[0].in[3]"/>
+				<direct name="crossbar" input="sftreg2[0].out[9:4]" output="cab.so[11:6] "/>
+				<direct name="crossbar" input="sftreg2[0].out[17:12]" output="cab.so[5:0] "/>
+				<direct name="crossbar" input="sftreg2[0].out[11:10]" output="cab.O[3:2]" />
+				<direct name="crossbar" input="sftreg2[0].out[19:18]" output="cab.O[1:0]" />
+				<direct name="crossbar" input="sftreg2[0].out[3:0]" output="cab.O[7:4]" />
+				<direct name="crossbar" input="sftreg3[0].out[9:4]" output="cab.so[11:6] "/>
+				<direct name="crossbar" input="sftreg3[0].out[17:12]" output="cab.so[5:0] "/>
+				<direct name="crossbar" input="sftreg3[0].out[11:10]" output="cab.O[3:2]" />
+				<direct name="crossbar" input="sftreg3[0].out[19:18]" output="cab.O[1:0]" />
+				<direct name="crossbar" input="sftreg3[0].out[3:0]" output="cab.O[7:4]" />	
+				<direct name="crossbar" input="sftreg4[0].out[9:4]" output="cab.so[11:6] "/>
+				<direct name="crossbar" input="sftreg4[0].out[17:12]" output="cab.so[5:0] "/>
+				<direct name="crossbar" input="sftreg4[0].out[11:10]" output="cab.O[3:2]" />
+				<direct name="crossbar" input="sftreg4[0].out[19:18]" output="cab.O[1:0]" />
+				<direct name="crossbar" input="sftreg4[0].out[3:0]" output="cab.O[7:4]" />	
+				<!-- fg devices -->
+				<direct name="crossbar" input="cab.I[12]" output="vmm8inx8in.in[0]"/>
+				<direct name="crossbar" input="cab.I[11:0]" output="vmm8inx8in.in[12:1]"/>
+				<direct name="crossbar" input="cab.si[3:0]" output="vmm8inx8in.in[16:13]"/>
+				<direct name="crossbar" input="vmm8inx8in.out[0]" output="cab.O[4] "/>
+				<complete name="crossbar" input="cab.I[12:0]" output="vmmoffset.in[0]"/>
+				<complete name="crossbar" input="vmmoffset[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="wta_new.in[2:0]"/>
+				<complete name="crossbar" input="wta_new[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="common_source.in[0]"/>
+				<complete name="crossbar" input="common_source[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="VolDivide1.in[0]"/>
+				<complete name="crossbar" input="VolDivide1[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="I_SenseAmp.in[1:0]"/>
+				<complete name="crossbar" input="I_SenseAmp[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="nmirror_w_bias.in[1:0]"/>
+				<complete name="crossbar" input="nmirror_w_bias[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="SubbandArray.in[1:0]"/>
+				<complete name="crossbar" input="SubbandArray[0].out[1:0]" output="cab.O[4:3]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="HH_RG.in[4:0]"/>
+				<complete name="crossbar" input="HH_RG[0].out[1:0]" output="cab.O[4:3]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="HH_RG_2s.in[5:0]"/>
+				<complete name="crossbar" input="HH_RG_2s[0].out[1:0]" output="cab.O[4:3]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="HH_RG_3s.in[6:0]"/>
+				<complete name="crossbar" input="HH_RG_3s[0].out[1:0]" output="cab.O[4:3]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="SOSLPF.in[0]"/>
+				<complete name="crossbar" input="SOSLPF[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="MSOS02.in[0]"/>
+				<complete name="crossbar" input="MSOS02[0].out[0]" output="cab.O[4]"/>
+				<complete name="crossbar" input="cab.I[12:0]" output="vmm_offc.in[12:0]"/>
+				<complete name="crossbar" input="vmm_offc[0].out[1:0]" output="cab.O[4:3]"/>

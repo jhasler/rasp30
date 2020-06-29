@@ -1,0 +1,28 @@
+# Benchmark "div2" written by ABC on Fri May  3 15:50:00 2013
+.model div2
+.inputs top^ip1 top^reset
+.outputs top^op1
+
+.latch         n7 top^FF_NODE~10  re top^ip1 0
+.latch        n12 top^FF_NODE~7  re top^ip1 0
+.latch        n17 top^FF_NODE~8  re top^ip1 0
+.latch        n22 top^FF_NODE~9  re top^ip1 0
+
+.names top^reset top^FF_NODE~10 top^FF_NODE~9 n17_1 n7
+0011 1
+010- 1
+01-0 1
+.names top^FF_NODE~7 top^FF_NODE~8 n17_1
+11 1
+.names top^reset top^FF_NODE~7 n12
+00 1
+.names top^reset top^FF_NODE~7 top^FF_NODE~8 n17
+001 1
+010 1
+.names top^reset top^FF_NODE~9 top^FF_NODE~7 top^FF_NODE~8 n22
+0011 1
+010- 1
+01-0 1
+.names top^FF_NODE~10 top^op1
+1 1
+.end

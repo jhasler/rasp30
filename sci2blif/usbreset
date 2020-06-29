@@ -1,0 +1,4 @@
+sudo sh -c "echo 0 > /sys/bus/usb/devices/usb2/authorized"
+sleep 1
+sudo sh -c "echo 1 > /sys/bus/usb/devices/usb2/authorized"
+sleep 1

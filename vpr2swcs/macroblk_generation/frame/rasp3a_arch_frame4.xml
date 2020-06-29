@@ -1,0 +1,111 @@
+			</interconnect>
+			<fc_in type="frac">1</fc_in>
+			<fc_out type="frac">1</fc_out>
+			<pinlocations pattern="custom">
+				<loc side="left">cab.I[3:0] cab.O[1:0] cab.so[3:0] cab.si[1:0]</loc>
+				<loc side="top">cab.I[15:13] cab.I[9:8] cab.O[4] cab.so[9:8]</loc>
+				<loc side="right">cab.I[7:4] cab.O[3:2] cab.so[7:4] cab.si[3:2]</loc>
+				<loc side="bottom">cab.I[12:10] cab.O[7:5] cab.so[11:10]</loc>
+			</pinlocations>
+			<gridlocations>
+				<loc type="col" start="1" priority="6"/>
+				<loc type="col" start="3" priority="6"/>
+				<loc type="col" start="5" priority="6"/>
+			</gridlocations>
+		</pb_type>
+<!-->
+CAB2
+-->
+		<pb_type name="cab2">
+			<input name="I" num_pins="16" equivalent="false"/>
+			<output name="O" num_pins="8" equivalent="false"/>
+			<clock name="gnd" num_pins="1"/>
+			<clock name="clk" num_pins="1"/>
+			<pb_type name="ota_buffer" num_pb="1" blif_model=".ota_buffer">
+				<input name="in" num_pins="1"/>
+				<output name="out" num_pins="1"/>
+				<clock name="clk" num_pins="1" port_class="clock"/>
+				<delay_matrix type="max" in_port="ota_buffer.in" out_port="ota_buffer.out">10.69e-10 </delay_matrix>
+			</pb_type>
+			<pb_type name="tgate" num_pb="3" blif_model=".tgate">
+				<input name="in" num_pins="2"/>
+				<output name="out" num_pins="1"/>
+				<delay_matrix type="max" in_port="tgate.in" out_port="tgate.out">2.69e-10 2.69e-10 </delay_matrix>
+			</pb_type>
+			<pb_type name="cap2" num_pb="3" blif_model=".cap2">
+				<input name="in" num_pins="1"/>
+				<output name="out" num_pins="1"/>
+				<delay_matrix type="max" in_port="cap2.in" out_port="cap2.out">2.69e-10 </delay_matrix>
+			</pb_type>
+			<pb_type name="ota2" num_pb="1" blif_model=".ota2">
+				<input name="in" num_pins="2"/>
+				<output name="out" num_pins="1"/>
+				<delay_constant max="1.667e-9" in_port="ota2.in" out_port="ota2.out"/>
+			</pb_type>
+			<pb_type name="meas_volt_mite" num_pb="2" blif_model=".meas_volt_mite">
+				<input name="in" num_pins="1"/>
+				<output name="out" num_pins="1"/>
+				<delay_matrix type="max" in_port="meas_volt_mite.in" out_port="meas_volt_mite.out">2.69e-10 </delay_matrix>
+			</pb_type>
+			<pb_type name="current_ref" num_pb="1" blif_model=".current_ref">
+				<input name="in" num_pins="2"/>
+				<output name="out" num_pins="1"/>
+				<delay_constant max="1.667e-9" in_port="current_ref.in" out_port="current_ref.out"/>
+			</pb_type>
+			<pb_type name="tgate2" num_pb="3" blif_model=".tgate2">
+				<input name="in" num_pins="2"/>
+				<output name="out" num_pins="1"/>
+				<delay_matrix type="max" in_port="tgate2.in" out_port="tgate2.out">2.69e-10 2.69e-10  </delay_matrix>
+			</pb_type>
+			<pb_type name="mite" num_pb="3" blif_model=".mite">
+				<input name="in" num_pins="3"/>
+				<output name="out" num_pins="1"/>
+				<delay_matrix type="max" in_port="mite.in" out_port="mite.out">2.69e-10 2.69e-10 2.69e-10 </delay_matrix>
+			</pb_type>
+			<pb_type name="mite2" num_pb="2" blif_model=".mite2">
+				<input name="in" num_pins="2"/>
+				<output name="out" num_pins="2"/>
+				<delay_matrix type="max" in_port="mite2.in" out_port="mite2.out">2.69e-10 2.69e-10 2.69e-10 2.69e-10</delay_matrix>
+			</pb_type>
+			<pb_type name="signalmult" num_pb="1" blif_model=".signalmult">
+				<input name="in" num_pins="4"/>
+				<output name="out" num_pins="2"/>
+				<delay_matrix type="max" in_port="signalmult.in" out_port="signalmult.out">2.69e-10 2.69e-10 2.69e-10 2.69e-10 2.69e-10 2.69e-10 2.69e-10 2.69e-10 </delay_matrix>
+			</pb_type>
+			<pb_type name="volswc" num_pb="2" blif_model=".volswc">
+				<input name="in" num_pins="8"/>
+				<input name="ci" num_pins="3"/>
+				<output name="out" num_pins="1"/>
+				<output name="co" num_pins="3"/>
+				<delay_constant max="1.667e-9" in_port="volswc.in" out_port="volswc.out"/>					
+			</pb_type>
+			<interconnect>		
+				<direct name="volswc1" input="cab2.I[5:0]" output="volswc[0].in[5:0]"/> 
+				<complete name="crossbar" input="ota_buffer.out tgate[2:0].out cap2[2:0].out ota2.out tgate2[2:0].out  meas_volt_mite[1:0].out mite[2:0].out mite2.out[1:0] signalmult.out[1:0] volswc[1:0].out " output="volswc[0].in[7:6]"/>
+				<direct name="volswc3" input="cab2.I[11:6]" output="volswc[1].in[5:0]"/> 
+				<complete name="crossbar" input="ota_buffer.out tgate[2:0].out cap2[2:0].out ota2.out tgate2[2:0].out mite[2:0].out meas_volt_mite[1:0].out mite2.out[1:0] signalmult.out[1:0] volswc[1:0].out" output="volswc[1].in[7:6]"/>
+				<direct name="volswc5" input="cab2.I[15:13]" output="volswc[0].ci"/>
+				<direct name="volswc6" input="volswc[0].co" output="volswc[1].ci"/>
+				<direct name="volswc7" input="volswc[1].co" output="cab2.O[7:5]"/>				
+				<complete name="crossbar" input="cab2.I[12:0] ota_buffer.out tgate[2:0].out cap2[2:0].out ota2.out tgate2[2:0].out mite[2:0].out mite2.out[1:0] signalmult.out[1:0] volswc[1:0].out" output="ota_buffer.in current_ref.in tgate[2:0].in cap2[2:0].in ota2.in[1:0] tgate2[2:0].in mite2.in[1:0] signalmult.in[3:0] "></complete>
+				<complete name="crossbar" input="ota_buffer.out tgate[2:0].out cap2[2:0].out tgate2[2:0].out mite2.out[1:0] signalmult.out[1:0] volswc[1:0].out" output="cab2.O[4:0]"/>
+				<complete name="crossbar" input="ota2.out" output="cab2.O[4]"/>
+				<complete name="crossbar" input="meas_volt_mite[1:0].out mite[2:0].out" output="cab2.O[0]"/>
+				<complete name="crossbar" input="cab2.I[3:1]" output="mite[2:0].in[2:0]"/>
+				<complete name="crossbar" input="current_ref.out" output="cab2.O[0]"/>
+				<direct name="crossbar" input="cab2.I[1:0]" output="meas_volt_mite[1:0].in[0]" />
+			</interconnect>
+			<fc_in type="frac">1</fc_in>
+			<fc_out type="frac">1</fc_out>
+			<pinlocations pattern="custom">
+				<loc side="left">cab2.I[3:0] cab2.O[1:0]</loc>
+				<loc side="top">cab2.I[15:13] cab2.I[9:8] cab2.O[4]</loc>
+				<loc side="right">cab2.I[7:4] cab2.O[3:2]</loc>
+				<loc side="bottom">cab2.I[12:10] cab2.O[7:5] </loc>
+			</pinlocations>
+			<gridlocations>
+				<loc type="col" start="7" priority="6"/>
+			</gridlocations>
+		</pb_type>
+	</complexblocklist>
+</architecture>

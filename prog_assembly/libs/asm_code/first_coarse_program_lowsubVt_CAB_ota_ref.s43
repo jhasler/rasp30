@@ -1,0 +1,287 @@
+.include "pmem_defs.asm"
+.include "chip_para_CP.asm"
+
+.global main
+
+main:
+        mov     #DMEM_250, r1           ; Initialize stack pointer
+	mov	#0x5000, r7
+	mov	#0, r10			; Initialize time
+	mov     #8000, r5             	; Number of ms
+init_wait:
+        dec.w   r5 
+        jnz     init_wait
+	mov	#0x0010, &BCSCTL2	; Divide clock 20MHz
+	mov	#0x5A80, &WDTCTL	; Watchdog controller 
+	dint
+	mov	#0x0002, &TUN_MUX
+        mov     #0xBE04, &GP_PER_3      ; Vtun_ext = 5V, enable 6V, esd=6v
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+        mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+	mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+	mov     #0,    &ROW_SEL
+        mov     #0,    &COL_SEL
+	mov	r10, @r7
+	incd	r7
+	mov	r10, @r7
+	incd	r7
+;	mov	#0x0000, r13		;gate_s = 0.6V @ IVDD 2.5V
+	mov	#0x0040, r13		;gate_s = gnd
+	call	#block_measure
+
+	mov	#1, r15
+coarse_loop_s:
+;	mov	#0x0000, r13		;gate_s = 0.6V @ IVDD 2.5V
+	mov	#0x0040, r13		;gate_s = gnd
+	call	#measure_verify
+	call	#Pulse_w_calculate
+	call	#coarse_inject
+;	mov	#0x0000, r13		;gate_s = 0.6V @ IVDD 2.5V
+	mov	#0x0040, r13		;gate_s = gnd
+	call	#block_measure
+        dec.w   r15
+        jz      coarse_loop_e
+	jmp	coarse_loop_s
+coarse_loop_e:
+
+	mov	#0xFFFF, @r7		; Data End
+	mov	#0x0000, &BCSCTL2	; Divide clock 20MHz
+	jmp     end_of_test
+
+coarse_inject:
+	mov	#0x7000, r11
+	mov	@r11, r12		; No. of FGs 
+        mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+	mov     #0xBE04, &GP_PER_3    	; ########### VTUN_EXT TO 5V
+	mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+    	mov     #0xFFFF, &TUN_MUX       ; Set tunnel mux, <3>:switch <4>:cab <5>:ble
+coarse_inject_set_s:
+	incd	r11
+	mov     @r11,    &ROW_SEL
+	incd	r11
+        mov     @r11,    &COL_SEL
+	incd	r11
+	incd	r11
+	incd	r11
+        mov     @r11,    r8		; Read # of pulses
+	cmp	#0x0000, r8
+	jeq	coarse_inject_skip
+	mov	#CPL_GATE_S_OTAREF, &GATE_S	; gate_s 
+        mov	#0x0060, &GATE_US_P	; gate_us_p = ivdd
+	mov	#0x0060, &GATE_US_N	; gate_us_n = ivdd
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+        mov     #0x0014, &GP_PER_1      ; IVDD to 6.0V, Set vtun_ext = On
+	mov     #2, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+	mov 	#0x0026, &DRAIN_CTRL	; gnd, 0xfe0e: 0.415V, 0xde0e: 0.98V, 0xc40e: 1.5V, 0x900e: 2V, 0x000e: 2.3V
+multi_inject_pulse_s:
+        mov     #CPL_INJ_T_OTAREF, r5   ; Number of 10us to inject
+	call    #wait_10us             	; Call the waiting function
+	add     #CPL_INJ_T_OTAREF, r10	 ; Calculate time
+       	dec.w   r8
+        jz      multi_inject_pulse_e_1
+        jmp	multi_inject_pulse_s
+multi_inject_pulse_e_1:
+	mov	r8, @r11
+multi_inject_pulse_e_2:
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+	mov     #1, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+coarse_inject_skip:
+       	dec.w   r12
+        jz      coarse_inject_e
+ 	jmp	coarse_inject_set_s
+coarse_inject_e:
+	mov     #0x0004, &GP_PER_1      ; IVDD to 0V, Set vtun_ext = On
+	mov     #2, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+	mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+	mov     #1, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+	mov     #0x0002, &TUN_MUX       ; Set tunnel mux, <3>:switch <4>:cab <5>:ble
+	mov	#0x0040, &GATE_US_P	; gate_us_p = gnd
+	mov	#0x0040, &GATE_US_N	; gate_us_n = gnd
+	mov     #1, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+	mov     #0x3333, @r7	        ; Record Injection 0x3333 
+	incd	r7
+	mov     r10, @r7	        ; Record time 
+	incd	r7
+	ret
+
+measure_verify:
+	mov	#0x7000, r11
+	mov	@r11, r12		; No. of FGs 
+	mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+	mov     #0xBE04, &GP_PER_3    	; ########### VTUN_EXT TO 5V
+	mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+    	mov     #0x0002, &TUN_MUX       ; Reset tunnel mux (gnd), <3>:switch <4>:cab <5>:ble
+measure_verify_s:
+	incd	r11
+	mov     @r11,    &ROW_SEL
+	incd	r11
+        mov     @r11,    &COL_SEL
+	incd	r11
+	mov	@r11, r8
+	incd	r11
+	incd	r11
+	mov	@r11, r9		; Read # of pulses
+	cmp	#0x0000, r9
+	jeq	measure_verify_skip
+	mov 	r13, &GATE_S
+	mov	#0x0040, &GATE_US_P	; gate_us_p = gnd
+	mov	#0x0040, &GATE_US_N	; gate_us_n = gnd
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+        mov     #2, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+	mov	#0x00A4, &DRAIN_CTRL	; 101 cascode off, no use DAC, i2v mux control=fg_inn;
+        mov     #10, r5             	; Number of ms
+        call    #wait_ms                ; Call the waiting function
+	mov     #0xB000, &PROG_BITS     ; Set measure_adc high, Toggle the adc counter's clear_n
+        mov     #5, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+        mov     #0, &ADC                ; Write counter value into ADC via dummy write
+	mov     &ADC, r9	        ; Get value in counter
+	mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+	cmp	r8, r9
+	jn	status_1
+	mov	#0x0000, @r11		; Injection over
+	jmp	measure_verify_skip	
+status_1:
+	cmp	#ADC_1nA, r9	; If r9 - #0x1190 < 0,
+	jge	Istart_1
+	mov	#ADC_1nA, r9	; r9 = 0x1190
+Istart_1:
+	decd	r11
+	sub	r9, r8
+	mov	r8, @r11
+	incd	r11
+measure_verify_skip:
+        dec.w   r12
+        jz      measure_verify_e
+	jmp	measure_verify_s
+measure_verify_e:
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+        mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+	ret
+
+Pulse_w_calculate:
+	mov	#0x7000, r11
+	mov	@r11, r12		; No. of FGs 
+Pulse_w_cal_s:
+	incd	r11			; @ Row_Sel
+	incd	r11			; @ Col_Sel
+	incd	r11	
+	incd	r11	
+	mov	@r11, r9		; @ Diff
+	incd	r11		
+	mov	@r11, r14		; @ Pulse No. 
+	cmp	#0x0000, r14
+	jeq	No_calculation
+	rrc	r9						
+	rrc	r9						
+	rrc	r9						
+	rrc	r9						
+	rrc	r9						
+	rrc	r9
+	bic	#0xff00, r9
+	rlc	r9
+	bic	#0x0001, r9
+	add	#0x6800, r9
+;	decd	r11		
+;	mov	@r9, r14
+;	mov	r14, @r11
+;	incd	r11
+ 	mov	@r9, r14
+	mov	r14, @r11
+No_calculation:
+        dec.w   r12
+        jz      Pulse_w_cal_e
+	jmp	Pulse_w_cal_s
+Pulse_w_cal_e:
+	ret
+
+block_measure:
+	mov	#0x7000, r11
+	mov	@r11, r12		; No. of FGs 
+	mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+	mov     #0xBE04, &GP_PER_3    	; ########### VTUN_EXT TO 5V
+	mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+    	mov     #0x0002, &TUN_MUX       ; Reset tunnel mux (gnd), <3>:switch <4>:cab <5>:ble
+block_measure_s:
+	incd	r11
+	mov     @r11,    &ROW_SEL
+	incd	r11
+        mov     @r11,    &COL_SEL
+	incd	r11
+	incd	r11
+	incd	r11
+	mov 	r13, &GATE_S
+	mov	#0x0040, &GATE_US_P	; gate_us_p = gnd
+	mov	#0x0040, &GATE_US_N	; gate_us_n = gnd
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+        mov     #2, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+	mov	#0x00A4, &DRAIN_CTRL	; 101 cascode off, no use DAC, i2v mux control=fg_inn;
+        mov     #10, r5             	; Number of ms
+        call    #wait_ms                ; Call the waiting function
+	mov     #0xB000, &PROG_BITS     ; Set measure_adc high, Toggle the adc counter's clear_n
+        mov     #5, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+        mov     #0, &ADC                ; Write counter value into ADC via dummy write
+	mov     &ADC, @r7		; Get value in counter
+	incd	r7
+	mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+        dec.w   r12
+        jz      block_measure_e
+	jmp	block_measure_s
+block_measure_e:
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+        mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+	ret
+
+wait_ms:
+        mov     #3324, r4               ; Number of clock cycles in a ms (chariterized by pulse measure)
+        mov     r4, r6                  ; Get number of inner loop iterations
+wait_ms_loop:
+        dec.w   r6                      ; Subtract from number of clk cycles.Execution takes 2 clock cycles
+        jnz     wait_ms_loop            ; Test for loop termination. Execution takes 2 clock cycles
+        mov     r4, r6                  ; Reset number of clock cycles
+        dec.w   r5                      ; Decrement number of ms total
+        jnz     wait_ms_loop            ; Keep looping if necessary
+        ret    
+ 
+wait_10us:
+        mov     #34, r4                 ; Number of clock cycles in 100 us (3324 was divided by 100)
+        mov     r4, r6                  ; Get number of inner loop iterations
+wait_10us_loop:
+        dec.w   r6                      ; Subtract from number of clk cycles.Execution takes 2 clock cycles
+        jnz     wait_10us_loop          ; Test for loop termination. Execution takes 2 clock cycles
+        mov     r4, r6                  ; Reset number of clock cycles
+        dec.w   r5                      ; Decrement number of ms total
+        jnz     wait_10us_loop          ; Keep looping if necessary
+        ret   
+
+end_of_test:
+	mov	#0x0000, &BCSCTL2
+	nop
+	br #0xffff
+
+/* ----------------------         INTERRUPT VECTORS  --------------- */
+.section .vectors, "a"
+.word end_of_test  ; Interrupt  0 (lowest priority)    <unused>
+.word end_of_test  ; Interrupt  1                      <unused>
+.word end_of_test  ; Interrupt  2                      <unused>
+.word end_of_test  ; Interrupt  3                      <unused>
+.word end_of_test  ; Interrupt  4                      <unused>
+.word end_of_test  ; Interrupt  5                      <unused>
+.word end_of_test  ; Interrupt  6                      <unused>
+.word end_of_test  ; Interrupt  7                      <unused>
+.word end_of_test  ; Interrupt  8                      <unused>
+.word end_of_test  ; Interrupt  9                      <unused>
+.word end_of_test  ; Interrupt 10                      Watchdog timer
+.word end_of_test  ; Interrupt 11                      <unused>
+.word end_of_test  ; Interrupt 12                      <unused>
+.word end_of_test  ; Interrupt 13                      <unused>
+.word end_of_test  ; Interrupt 14                      NMI
+.word main         ; Interrupt 15 (highest priority)   RESET

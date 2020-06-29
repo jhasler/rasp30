@@ -1,0 +1,3 @@
+Benchmark name: divBy2
+Could not find benchmark in bench/clock file(s): /home/ubuntu/Downloads/vtr_release/vtr_flow/benchmarks/misc/benchmark_clocks.clock,/home/ubuntu/Downloads/vtr_release/vtr_flow/benchmarks/misc/user_clocks.clock
+See http://code.google.com/p/vtr-verilog-to-routing/wiki/ClocksFile

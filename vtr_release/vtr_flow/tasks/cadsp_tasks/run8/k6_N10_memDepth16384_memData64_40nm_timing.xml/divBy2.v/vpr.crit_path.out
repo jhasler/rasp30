@@ -1,0 +1,134 @@
+/home/ubuntu/Downloads/vtr_release/vtr_flow/../vpr/vpr k6_N10_memDepth16384_memData64_40nm_timing.xml divBy2 --place_file divBy2.place --route --route_chan_width 2 --cluster_seed_type timing --nodisp
+
+VPR FPGA Placement and Routing.
+Version: Version 6.0 Full Release
+Compiled: Mar 26 2013.
+Original VPR by V. Betz.
+Timing-driven placement enhancements by A. Marquardt.
+Single-drivers enhancements by Andy Ye with additions by.
+Mark Fang, Jason Luu, Ted Campbell
+Heterogeneous stucture support by Jason Luu and Ted Campbell.
+T-VPack clustering integration by Jason Luu.
+Area-driven AAPack added by Jason Luu.
+This is free open source code under MIT license.
+
+Building complex block graph 
+Begin parsing packed FPGA netlist file
+Finished parsing packed FPGA netlist file
+Netlist generated from file divBy2.net
+Timing analysis: ON
+
+Circuit netlist file: divBy2.net
+Circuit placement file: divBy2.place
+Circuit routing file: divBy2.route
+Operation:  RUN_FLOW
+
+Placer: DISABLED
+Router: ENABLED
+RouterOpts.route_type:  DETAILED
+RouterOpts.router_algorithm:  TIMING_DRIVEN
+RouterOpts.base_cost_type:  DELAY_NORMALIZED
+RouterOpts.fixed_channel_width:  2
+RouterOpts.acc_fac:  1.000000
+RouterOpts.bb_factor:  3
+RouterOpts.bend_cost:  0.000000
+RouterOpts.first_iter_pres_fac:  0.500000
+RouterOpts.initial_pres_fac:  0.500000
+RouterOpts.pres_fac_mult:  1.300000
+RouterOpts.max_router_iterations:  50
+RouterOpts.astar_fac:  1.200000
+RouterOpts.criticality_exp:  1.000000
+RouterOpts.max_criticality:  0.990000
+
+RoutingArch.directionality:  UNI_DIRECTIONAL
+RoutingArch.switch_block_type:  WILTON
+RoutingArch.Fs:  3
+
+
+Netlist num_nets:  3
+Netlist num_blocks:  4
+Netlist <EMPTY> blocks:  0
+Netlist clb blocks:  1
+Netlist mult_36 blocks:  0
+Netlist memory blocks:  0
+Netlist inputs pins:  2
+Netlist output pins:  1
+
+Auto-sizing FPGA, try x = 2 y = 2
+Auto-sizing FPGA, try x = 1 y = 1
+FPGA auto-sized to, x = 1 y = 1
+The circuit will be mapped into a 1 x 1 array of clbs.
+
+Resource Usage:
+Netlist      0	blocks of type <EMPTY>
+Architecture 4	blocks of type <EMPTY>
+Netlist      3	blocks of type io
+Architecture 32	blocks of type io
+Netlist      1	blocks of type clb
+Architecture 1	blocks of type clb
+Netlist      0	blocks of type mult_36
+Architecture 0	blocks of type mult_36
+Netlist      0	blocks of type memory
+Architecture 0	blocks of type memory
+
+build rr_graph took 0 seconds
+Confirming Router Algorithm: TIMING_DRIVEN.
+wirelength after first iteration 3, total available wirelength 8, ratio 0.375
+Successfully routed after 1 routing iterations.
+Completed net delay value cross check successfully.
+
+Checking to ensure routing is legal ...
+Completed routing consistency check successfully.
+
+Serial number (magic cookie) for the routing is: -8435
+Circuit successfully routed with a channel width factor of 2.
+
+
+Average number of bends per net: 0.500000  Maximum # of bends: 1
+
+
+The number of routed nets (nonglobal): 2
+Wirelength results (all in units of 1 clb segments):
+	Total wirelength: 3   Average net length: 1.50000
+	Maximum net length: 2
+
+Wirelength results in terms of physical segments:
+	Total wiring segments used: 3   Av. wire segments per net: 1.50000
+	Maximum segments used by a net: 2
+
+	Total local nets with reserved CLB opins: 0
+
+
+X - Directed channels:
+
+j	max occ	av_occ		capacity
+0	1	1.00000  	2
+1	0	0.00000  	2
+
+Y - Directed channels:
+
+i	max occ	av_occ		capacity
+0	1	1.00000  	2
+1	1	1.00000  	2
+
+Total Tracks in X-direction: 4  in Y-direction: 4
+
+Logic Area (in minimum width transistor areas, excludes I/Os and empty grid tiles):
+Total Logic Block Area (Warning, need to add pitch of routing to blocks with height > 3): 14813.4 
+Total Used Logic Block Area: 14813.4 
+
+Routing area (in minimum width transistor areas):
+Total Routing Area: 2386.09  Per logic tile: 2386.09
+
+Segment usage by type (index):
+Segment type       Fractional utilization
+------------       ----------------------
+       0                  0.375
+
+Segment usage by length:
+Segment length       Fractional utilization
+--------------       ----------------------
+        4                   0.375
+
+Critical Path: 7.7751e-10 (s)
+Routing took 0 seconds

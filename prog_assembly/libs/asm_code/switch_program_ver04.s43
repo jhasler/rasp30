@@ -1,0 +1,247 @@
+.include "pmem_defs.asm"
+.include "chip_para_SP.asm"
+
+.global main
+
+main:
+        mov     #DMEM_250, r1           ; Initialize stack pointer
+	mov	#0x4100, r7
+	mov	#0, r10			; Initialize time
+        mov     #5000, r5             	; Number of ms
+init_wait:
+        dec.w   r5 
+        jnz     init_wait
+	mov	#0x0010, &BCSCTL2	; Divide clock 20MHz
+	mov	#0x5A80, &WDTCTL	; Watchdog controller 
+	dint
+	mov	#0x0002, &TUN_MUX
+        mov     #0xBE04, &GP_PER_3      ; Vtun_ext = 5V, enable 6V, esd=6v
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+        mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+	mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+	mov     #0,    &ROW_SEL
+        mov     #0,    &COL_SEL
+	mov	r10, @r7
+	incd	r7
+	mov	r10, @r7
+	incd	r7
+	call	#block_measure
+	call	#switch_inject
+	call	#block_measure
+	mov	#0xFFFF, @r7		; Data End
+	jmp     end_of_test
+
+switch_inject:
+	mov	#0x5500, r11
+	mov	@r11, r12		; No. of FGs 
+        mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+	mov     #0xBE04, &GP_PER_3    	; ########### VTUN_EXT TO 5V
+	mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+    	mov     #0xFFFF, &TUN_MUX       ; Set tunnel mux, <3>:switch <4>:cab <5>:ble
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+        mov     #0x0014, &GP_PER_1      ; IVDD to 6.0V, Set vtun_ext = On
+	mov     #2, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+switch_inject_s:
+	incd	r11
+	mov     @r11,    &ROW_SEL
+	incd	r11
+        mov     @r11,    &COL_SEL
+	incd	r11
+	mov	@r11, r8		; type of block (C or not) (0: normal, 1: program in run mode) 
+        mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+    	mov     #0xFFFF, &TUN_MUX       ; Set tunnel mux, <3>:switch <4>:cab <5>:ble
+	cmp	#0x0000, r8
+	jeq	inject_in_prog_mode
+
+        mov     #0x0000, &PROG_BITS     ; PROG = 0 <- Due to the RASP3.0 Error in vol_swc block
+	mov     #0x0002, &TUN_MUX       ; Set tunnel mux, <3>:switch <4>:cab <5>:ble
+	mov	#0x0040, &GATE_S	
+	mov	#0x0040, &GATE_US_P	; gate_us_p = gnd
+	mov	#0x0040, &GATE_US_N	; gate_us_n = gnd
+	mov 	#0x0026, &DRAIN_CTRL
+        mov     #INJ_TIME_SP_RUN, r5	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	add     #1, r10	        	; Calculate time
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+        mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+    	mov     #0xFFFF, &TUN_MUX       ; Set tunnel mux, <3>:switch <4>:cab <5>:ble
+	mov	#0x0040, &GATE_S	
+	mov	#0x0060, &GATE_US_P	; gate_us_p = ivdd
+	mov	#0x0060, &GATE_US_N	; gate_us_n = ivdd
+	mov 	#0x0026, &DRAIN_CTRL
+        mov     #50000, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	add     #500, r10	        ; Calculate time
+        mov     #50000, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	add     #500, r10	        ; Calculate time
+        mov	#0x0000, &GATE_S	;gate_s = 2.5V
+        mov     #30000, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	add     #300, r10	        ; Calculate time [ms]
+        mov     #30000, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	add     #300, r10	        ; Calculate time [ms]
+	mov	#0x5000, &GATE_S	;gate_s = 3.481V
+        mov     #30000, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	add     #300, r10	        ; Calculate time [ms]
+        mov     #30000, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	add     #300, r10	        ; Calculate time [ms]
+	mov	#0xB000, &GATE_S	;gate_s = 4.572V
+        mov     #30000, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	add     #300, r10	        ; Calculate time [ms]
+        mov     #30000, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	add     #300, r10	        ; Calculate time [ms]
+        mov	#0x0060, &GATE_S	;gate_s = ivdd
+        mov     #30000, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	add     #300, r10	        ; Calculate time [ms]
+        mov     #30000, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	add     #300, r10	        ; Calculate time [ms]
+	jmp	after_inject_pulse
+
+inject_in_prog_mode:
+	mov	#0x0040, &GATE_S	
+	mov	#0x0060, &GATE_US_P	; gate_us_p = ivdd
+	mov	#0x0060, &GATE_US_N	; gate_us_n = ivdd
+	mov 	#0x0026, &DRAIN_CTRL
+        mov     #INJ_TIME_SP_1, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	mov	#0x0000, &GATE_S	;gate_s = 2.5V
+        mov     #INJ_TIME_SP_2, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	mov	#0x5000, &GATE_S	;gate_s = 3.481V
+        mov     #INJ_TIME_SP_3, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	mov	#0xB000, &GATE_S	;gate_s = 4.572V
+        mov     #INJ_TIME_SP_4, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	mov	#0x0060, &GATE_S	;gate_s = ivdd
+        mov     #INJ_TIME_SP_5, r5	         	; Number of 10us to inject
+	call    #wait_10us              ; Call the waiting function
+	add     #INJ_TIME_SP_SUM, r10	        ; Calculate time [ms]
+after_inject_pulse:
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+	mov     #1, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+       	dec.w   r12
+        jz      switch_inject_e
+ 	jmp	switch_inject_s
+switch_inject_e:
+	mov     #0x0004, &GP_PER_1      ; IVDD to 0V, Set vtun_ext = On
+	mov     #2, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+	mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+	mov     #1, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+	mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+	mov     #0x0002, &TUN_MUX       ; Set tunnel mux, <3>:switch <4>:cab <5>:ble
+	mov	#0x0040, &GATE_US_P	; gate_us_p = gnd
+	mov	#0x0040, &GATE_US_N	; gate_us_n = gnd
+	mov     #1, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+	mov     #0x3333, @r7	        ; Record Injection 0x3333 
+	incd	r7
+	mov     r10, @r7	        ; Record time 
+	incd	r7
+	ret
+
+block_measure:
+	mov	#0x5500, r11
+	mov	@r11, r12		; No. of FGs 
+	mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+	mov     #0xBE04, &GP_PER_3    	; ########### VTUN_EXT TO 5V
+	mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+   	mov     #0x0002, &TUN_MUX       ; Reset tunnel mux (gnd), <3>:switch <4>:cab <5>:ble
+block_measure_s:
+	incd	r11
+	mov     @r11,    &ROW_SEL
+	incd	r11
+        mov     @r11,    &COL_SEL
+	incd	r11
+	mov	@r11, r8		; type of block (C or not) (0: normal, 1: measure in run mode) 
+	mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+	cmp	#0x0000, r8
+	jeq	measure_in_prog_mode_1
+        mov     #0x0000, &PROG_BITS     ; PROG = 0 <- Due to the RASP3.0 Error in vol_swc block
+measure_in_prog_mode_1:
+	mov 	#0x0040, &GATE_S	; gnd
+	mov	#0x0040, &GATE_US_P	; gate_us_p = gnd
+	mov	#0x0040, &GATE_US_N	; gate_us_n = gnd
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+        mov     #2, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+	mov	#0x00A4, &DRAIN_CTRL	; 101 cascode off, no use DAC, i2v mux control=fg_inn;
+        mov     #10, r5             	; Number of ms
+        call    #wait_ms                ; Call the waiting function
+	mov     #0xB000, &PROG_BITS     ; Set measure_adc high, Toggle the adc counter's clear_n
+	cmp	#0x0000, r8
+	jeq	measure_in_prog_mode_2
+	mov     #0x3000, &PROG_BITS     ; Set measure_adc high, Toggle the adc counter's clear_n
+measure_in_prog_mode_2:
+        mov     #5, r5             	; Number of ms
+	call    #wait_ms                ; Call the waiting function
+        mov     #0, &ADC                ; Write counter value into ADC via dummy write
+	mov     &ADC, @r7	        ; Get value in counter
+	incd	r7
+	mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+       	dec.w   r12
+        jz      block_measure_e
+	jmp	block_measure_s
+block_measure_e:
+	mov     #0x8000, &PROG_BITS     ; PROG = 1, OV_N = don't care, MEAS_ADC = 0, CLEAR_N = 0
+	mov     #0x0066, &DRAIN_CTRL    ; drain = ivdd, no use DAC, i2v mux control = No connection  
+        mov     #0x0024, &GP_PER_1      ; IVDD to 2.5V, Set vtun_ext = On
+	ret
+
+wait_ms:
+        mov     #3324, r4               ; Number of clock cycles in a ms (chariterized by pulse measure)
+        mov     r4, r6                  ; Get number of inner loop iterations
+wait_ms_loop:
+        dec.w   r6                      ; Subtract from number of clk cycles.Execution takes 2 clock cycles
+        jnz     wait_ms_loop            ; Test for loop termination. Execution takes 2 clock cycles
+        mov     r4, r6                  ; Reset number of clock cycles
+        dec.w   r5                      ; Decrement number of ms total
+        jnz     wait_ms_loop            ; Keep looping if necessary
+        ret    
+ 
+wait_10us:
+        mov     #34, r4                 ; Number of clock cycles in 100 us (3324 was divided by 100)
+        mov     r4, r6                  ; Get number of inner loop iterations
+wait_10us_loop:
+        dec.w   r6                      ; Subtract from number of clk cycles.Execution takes 2 clock cycles
+        jnz     wait_10us_loop          ; Test for loop termination. Execution takes 2 clock cycles
+        mov     r4, r6                  ; Reset number of clock cycles
+        dec.w   r5                      ; Decrement number of ms total
+        jnz     wait_10us_loop          ; Keep looping if necessary
+        ret   
+
+end_of_test:
+	mov	#0x0000, &BCSCTL2
+	nop
+	br #0xffff
+
+/* ----------------------         INTERRUPT VECTORS  --------------- */
+.section .vectors, "a"
+.word end_of_test  ; Interrupt  0 (lowest priority)    <unused>
+.word end_of_test  ; Interrupt  1                      <unused>
+.word end_of_test  ; Interrupt  2                      <unused>
+.word end_of_test  ; Interrupt  3                      <unused>
+.word end_of_test  ; Interrupt  4                      <unused>
+.word end_of_test  ; Interrupt  5                      <unused>
+.word end_of_test  ; Interrupt  6                      <unused>
+.word end_of_test  ; Interrupt  7                      <unused>
+.word end_of_test  ; Interrupt  8                      <unused>
+.word end_of_test  ; Interrupt  9                      <unused>
+.word end_of_test  ; Interrupt 10                      Watchdog timer
+.word end_of_test  ; Interrupt 11                      <unused>
+.word end_of_test  ; Interrupt 12                      <unused>
+.word end_of_test  ; Interrupt 13                      <unused>
+.word end_of_test  ; Interrupt 14                      NMI
+.word main         ; Interrupt 15 (highest priority)   RESET

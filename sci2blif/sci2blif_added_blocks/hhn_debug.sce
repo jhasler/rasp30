@@ -1,0 +1,20 @@
+//**************************** hhn_debug **********************************
+if (blk_name.entries(bl) == "hhn_debug") then
+    mputl("#hhn_debug",fd_w);
+    for ss=1:scs_m.objs(bl).model.ipar(1)
+        hhn_debug_str= '.subckt hhn_debug'+' in[0]=net'+string(blk(blk_objs(bl),2))+'_'+string(ss)+' in[1]=net'+string(blk(blk_objs(bl),3))+'_'+string(ss)+' in[2]=net'+string(blk(blk_objs(bl),4))+'_'+string(ss)+' in[3]=net'+string(blk(blk_objs(bl),5))+'_'+string(ss)+' out[0]=net'+string(blk(blk_objs(bl),2+numofip))+'_'+string(ss)+' out[1]=net'+string(blk(blk_objs(bl),3+numofip))+'_'+string(ss)+' out[2]=net'+string(blk(blk_objs(bl),4+numofip))+'_'+string(ss)+' #hhn_debug_ls =0'+'&hhn_debug_fgswc_ibias ='+string(sprintf('%e',scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(1-1)+ss)))+'&hhn_debug_fgota1_ibias ='+string(sprintf('%e',scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(2-1)+ss)))+'&hhn_debug_fgota1_pbias ='+string(sprintf('%e',scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(3-1)+ss)))+'&hhn_debug_fgota1_nbias ='+string(sprintf('%e',scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(4-1)+ss)))+'&hhn_debug_fgota0_ibias ='+string(sprintf('%e',scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(5-1)+ss)))+'&hhn_debug_fgota0_pbias ='+string(sprintf('%e',scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(6-1)+ss)))+'&hhn_debug_fgota0_nbias ='+string(sprintf('%e',scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(7-1)+ss)))+'&hhn_debug_ota0_ibias ='+string(sprintf('%e',scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(8-1)+ss)))+'&hhn_debug_ota1_ibias ='+string(sprintf('%e',scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(9-1)+ss)))
+        if scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(10-1)+ss) == 1 then hhn_debug_str=hhn_debug_str+'&hhn_debug_cap0_1x_cs =1'; end
+        if scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(10-1)+ss) == 2 then hhn_debug_str=hhn_debug_str+'&hhn_debug_cap0_2x_cs =2'; end
+        if scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(10-1)+ss) == 3 then hhn_debug_str=hhn_debug_str+'&hhn_debug_cap0_1x_cs =3'+'&hhn_debug_cap0_2x_cs =0'; end
+        if scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(10-1)+ss) == 4 then hhn_debug_str=hhn_debug_str+'&hhn_debug_cap0_4x_cs =4'; end
+        if scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(10-1)+ss) == 5 then hhn_debug_str=hhn_debug_str+'&hhn_debug_cap0_1x_cs =5'+'&hhn_debug_cap0_4x_cs =0'; end
+        if scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(10-1)+ss) == 6 then hhn_debug_str=hhn_debug_str+'&hhn_debug_cap0_2x_cs =6'+'&hhn_debug_cap0_4x_cs =0'; end
+        if scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(10-1)+ss) == 7 then hhn_debug_str=hhn_debug_str+'&hhn_debug_cap0_1x_cs =7'+'&hhn_debug_cap0_2x_cs =0'+'&hhn_debug_cap0_4x_cs =0'; end
+        mputl(hhn_debug_str,fd_w);
+        mputl("",fd_w);
+        if scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(11-1)+1) == 1 then
+            plcvpr = %t;
+            plcloc=[plcloc;'net'+string(blk(blk_objs(bl),2+numofip))+'_'+string(ss),string(scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(11-1)+1+2*ss-1))+' '+string(scs_m.objs(bl).model.rpar(scs_m.objs(bl).model.ipar(1)*(11-1)+1+2*ss))+' 0'];
+        end
+    end
+end

@@ -1,0 +1,3 @@
+.model divn_test
+.inputs net1 net2
+.outputs net3

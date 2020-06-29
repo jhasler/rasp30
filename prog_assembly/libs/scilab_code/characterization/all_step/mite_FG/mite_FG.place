@@ -1,0 +1,8 @@
+Netlist file: /home/ubuntu/RASP_Workspace/RASP_Workspace/Step_1/mite_FG/mite_FG.net   Architecture file: /home/ubuntu/rasp30/vpr2swcs/./arch/rasp3_arch.xml
+Array size: 14 x 14 logic blocks
+ 
+#block name x y subblk block number
+#---------- -- -- ------ ------------
+gnd  14 14 0 #0
+out:gnd  7 0 2 #1
+net1_1  9 0 1 #2
