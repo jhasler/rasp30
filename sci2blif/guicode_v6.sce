@@ -40,6 +40,7 @@ exec('/home/ubuntu/rasp30/sci2blif/dsgnmtrcs_fcn.sce',-1);
 //exec("/home/ubuntu/rasp30/sci2blif/dsgnmtrcs.sce",-1);
 exec('/home/ubuntu/rasp30/sci2blif/bcd_fcn.sce',-1);
 exec("/home/ubuntu/rasp30/sci2blif/demo_examples/example_inputs.sce");
+exec('/home/ubuntu/rasp30/prog_assembly/libs/scilab_code/sftreg_miteADC.sce', -1);
 
 //Add custom menus
 file_menu = uimenu("Parent", gui, "Label", gettext("Examples"),'ForegroundColor',[1,1,1]);
