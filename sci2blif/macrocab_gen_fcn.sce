@@ -30,6 +30,12 @@ endfunction
 function Start_MC_design_callback()
     global macrocab_name folder_name;
     
+    // Check to see if the macroblock name was read properly
+    if macrocab_name == [] then messagebox('Macrocab name improperly read, try again', "Macroblock name error", "error"); abort; end
+
+    // Check to see if the macroblock name starts with a number
+    if isdigit(part(macrocab_name,1)) then messagebox('Macrocab name cannot start with a number', "Macroblock name error", "error"); abort; end
+
     // Macro cab block name overlap check
     fd_r = mopen("/home/ubuntu/rasp30/vpr2swcs/block_list",'r');block_list=mgetl(fd_r);mclose(fd_r);  // Default value: frame. 
     l_block_list=size(block_list,1);
@@ -53,12 +59,33 @@ endfunction
 function Generate_MC_callback()
     clear blk;
     global macrocab_name bl_level;
-    
+
+    // Check to see if the block level has been assigned
+    if bl_level == [] then messagebox('Please define level of the block.', "Block category error", "error"); abort; end
+
+    // Check to see if the macroblock name starts with a number
+    if isdigit(part(macrocab_name,1)) then messagebox('Macrocab name cannot start with a number', "Macroblock name error", "error"); abort; end
+
+     // Check to see if the macroblock name was read properly
+    if macrocab_name == [] then messagebox('Macrocab name improperly read, try again', "Macroblock name error", "error"); abort; end
+
+    // Macro cab block name overlap check
+    fd_r = mopen("/home/ubuntu/rasp30/vpr2swcs/block_list",'r');block_list=mgetl(fd_r);mclose(fd_r);  // Default value: frame. 
+    l_block_list=size(block_list,1);
+    for ii=1:l_block_list
+        if block_list(ii) == macrocab_name then messagebox('Please change the name of macro-cab block.', "Macroblock name error", "error"); abort; end
+    end
+    file_list=listfiles("/home/ubuntu/rasp30/xcos_blocks/*.sci");
+    l_file_list=size(file_list,1);
+    for ii=1:l_file_list
+        if file_list(ii) == "/home/ubuntu/rasp30/xcos_blocks/"+macrocab_name+".sci" then messagebox('Please change the name of macro-cab block.', "Macroblock name error", "error"); abort; end
+    end
+
     xcos(macrocab_name+".xcos");
     importXcosDiagram(macrocab_name+".xcos");
     no=length(scs_m.objs);
     
-    objnum=1; numoflink=0; numofblk=0; blk_objs=[]; link_name=zeros(1,no);
+    objnum=1; numoflink=0; numofblk=0; blk_objs=[]; link_name=zeros(1,no); routing_exception=%F;
     
     j=1;
     for i =1:no
@@ -98,6 +125,10 @@ function Generate_MC_callback()
                 fgswc_matrix(j_fgswc,2) = string(scs_m.objs(bl).model.ipar(1));
                 fgswc_matrix(j_fgswc,3) = string(scs_m.objs(bl).model.ipar(2));
                 if scs_m.objs(bl).model.rpar(1) == "T" then
+                    // Add exception for any FGs in routing
+                    if(scs_m.objs(bl).model.ipar(2) < 15 ) then
+                        routing_exception = %T;
+                    end
                     fgswc_matrix(j_fgswc,4) = scs_m.objs(bl).model.rpar(2);
                     fgswc_matrix(j_fgswc,5) = scs_m.objs(bl).model.rpar(3);
                     sum_p=sum_p+1;
@@ -172,8 +203,15 @@ function Generate_MC_callback()
     mclose(fd_w);
     
     fd_w= mopen("rasp3_arch_"+macrocab_name+"_3.xml",'wt');
-    if numofinput == 1 then mputl(msprintf("\t\t\t\t")+"<complete name=""crossbar"" input=""cab.I[12:0]"" output="""+macrocab_name+".in[0]""/>",fd_w); end
-    if numofinput ~= 1 then mputl(msprintf("\t\t\t\t")+"<complete name=""crossbar"" input=""cab.I[12:0]"" output="""+macrocab_name+".in["+string(numofinput-1)+":0]""/>",fd_w); end
+    // Use direct tag for FGs in routing
+    if routing_exception then
+        if numofinput == 1 then mputl(msprintf("\t\t\t\t")+"<direct name=""crossbar"" input=""cab.I[0]"" output="""+macrocab_name+".in[0]""/>",fd_w); end
+        if numofinput ~= 1 then mputl(msprintf("\t\t\t\t")+"<direct name=""crossbar"" input=""cab.I["+string(numofinput-1)+":0]"" output="""+macrocab_name+".in["+string(numofinput-1)+":0]""/>",fd_w); end
+    else
+        if numofinput == 1 then mputl(msprintf("\t\t\t\t")+"<complete name=""crossbar"" input=""cab.I[12:0]"" output="""+macrocab_name+".in[0]""/>",fd_w); end
+        if numofinput ~= 1 then mputl(msprintf("\t\t\t\t")+"<complete name=""crossbar"" input=""cab.I[12:0]"" output="""+macrocab_name+".in["+string(numofinput-1)+":0]""/>",fd_w); end
+    end
+
     if numofoutput == 1 then mputl(msprintf("\t\t\t\t")+"<complete name=""crossbar"" input="""+macrocab_name+"[0].out[0]"" output=""cab.O[4]""/>",fd_w); end
     if numofoutput ~= 1 then mputl(msprintf("\t\t\t\t")+"<complete name=""crossbar"" input="""+macrocab_name+"[0].out["+string(numofoutput-1)+":0]"" output=""cab.O[4:"+string(4-(numofoutput-1))+"]""/>",fd_w); end
     mclose(fd_w);
@@ -843,6 +881,15 @@ function Generate_MC_callback()
     unix_w("cp genswcs_gen5.py "+dir_frame+"genswcs_frame5.py");
     unix_w("cat "+dir_frame+"genswcs_frame1.py "+dir_frame+"genswcs_gen2.py "+dir_frame+"genswcs_frame3.py "+dir_frame+"genswcs_gen4.py "+dir_frame+"genswcs_frame5.py "+dir_frame+"genswcs_frame6.py > "+dir_py+"genswcs.py");
     
+    // Update routing exception list to be used by swcsFromLi in genu
+    routing_exception_file = mopen("/home/ubuntu/rasp30/vpr2swcs/routing_exception_list", "at")
+    for input_index=1:1:numofinput
+        ex_str = macrocab_name + "[0].in[" + string(input_index-1) + "]";
+        mputl(ex_str, routing_exception_file);
+    end
+    mclose(routing_exception_file);
+
+
     /////////////////////////////////////////////////////
     // Macro cab block name update for overlap checking
     ////////////////////////////////////////////////////

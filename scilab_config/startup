@@ -14,6 +14,8 @@ then
    sudo cp /home/ubuntu/rasp30/scilab_config/rasp.desktop /usr/share/applications/rasp.desktop 
 fi
 
+chmod -R ugo=rwx /home/ubuntu/rasp30/
+setfacl -PRdm u::rwx,g::rwx,o::rwx /home/ubuntu/RASP_Workspace/
 
 /home/ubuntu/scilab-5.4.1/bin/scilab -f /home/ubuntu/rasp30/sci2blif/rasp_design.sce
 

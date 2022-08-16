@@ -1,4 +1,5 @@
 import pdb, copy
+import sys
 
 def recStrExpand0(x):
 	""" takes a string like: x[0:1].y[0:1] and returns a list: ['x[0].y[0]', 'x[0].y[1]', 'x[1].y[0]', 'x[1].y[1]'] """
@@ -260,6 +261,15 @@ class complexBlock(pblock):
 	""" after each block deals w/ making its own custom local interconnect matrix we look up the switch address for each on switch """
 	def swcsFromLi(self):
 		verbose = 1
+		# create a set for exceptions from routing
+		routing_exception = set()
+		try:
+			ex_file = open('/home/ubuntu/rasp30/vpr2swcs/routing_exception_list', 'r')
+			for line in ex_file:
+				routing_exception.add(line.rstrip())
+			ex_file.close()
+		except:
+			print "cant open file:", sys.exc_info()[0]
 		print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 		for x in range(len(self.li)):
 			for y in range(len(self.li[0])):
@@ -285,6 +295,9 @@ class complexBlock(pblock):
 						if swc_name1 in ['cab.O[0]','cab.O[1]','cab.O[2]', 'cab.O[3]' ] and swc_name0 =='mmap_local_swc[0].out[0]':
 							continue
 							print "NO LI needed"
+						if swc_name1 in routing_exception:
+							print "no LI needed dont worry!"
+							continue
 						if swc_name1 in ['vmm4x4_SR[0].in[0]','vmm8x4_SR[0].in[0]']:
 							swc_name0='cab.I[6]'
 						elif swc_name1 in ['vmm4x4_SR[0].in[1]','vmm8x4_SR[0].in[1]']:
