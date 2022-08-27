@@ -905,7 +905,460 @@ function Generate_MC_callback()
     
 endfunction
 
+//Deletes a block by deleting
+//Lines from rasp3.arch, rasp3a.arch, rasp30.py, rasp30a.py, genswcs, block_list, and routing_exception list
+//Matching .sci and .sce files 
+function Delete_MC_callback()
+    global macrocab_name folder_name;
 
+    namecheck = 0;
+
+    // Check macroblock list against input name
+    fd_r = mopen("/home/ubuntu/rasp30/vpr2swcs/block_list",'r');block_list=mgetl(fd_r);mclose(fd_r);  // Default value: frame. 
+    l_block_list=size(block_list,1);
+    for ii=1:l_block_list
+        if block_list(ii) == macrocab_name then namecheck = 1; end;
+    end
+    file_list=listfiles("/home/ubuntu/rasp30/xcos_blocks/*.sci");
+    l_file_list=size(file_list,1);
+    for ii=1:l_file_list
+        if file_list(ii) == "/home/ubuntu/rasp30/xcos_blocks/"+macrocab_name+".sci" then namecheck=1; end;
+    end
+
+    // If input macroblock isn't in block list, throw error and exit
+    if namecheck == 0 then messagebox('Block does not exist.', "Macroblock name error", "error"); abort; end
+
+    //Delete relevent lines in frames
+    deleteFrameFileLines("rasp3_arch_frame1.xml", macrocab_name);
+    deleteFrameFileLines("rasp3a_arch_frame1.xml", macrocab_name);
+    deleteFrameFileLines("rasp3_arch_frame2.xml", macrocab_name);
+    deleteFrameFileLines("rasp3a_arch_frame2.xml", macrocab_name);
+    deleteFrameFileLines("rasp3_arch_frame3.xml", macrocab_name);
+    deleteFrameFileLines("rasp3a_arch_frame3.xml", macrocab_name);
+    deleteFrameFileLines("rasp30_frame2_1.py", macrocab_name);
+    deleteFrameFileLines("rasp30a_frame2_1.py", macrocab_name);
+    deleteFrameFileLines("rasp30_frame3_1.py", macrocab_name);
+    deleteFrameFileLines( "rasp30a_frame3_1.py", macrocab_name);
+    deleteFrameFileLines("rasp30_frame4.py", macrocab_name);
+    deleteFrameFileLines("rasp30a_frame4.py", macrocab_name);
+    deleteFrameFileLines("rasp30_frame5.py", macrocab_name);
+    deleteFrameFileLines("rasp30a_frame5.py", macrocab_name);
+    deleteFrameFileLines("rasp30_frame7.py", macrocab_name);
+    deleteFrameFileLines("rasp30a_frame7.py", macrocab_name);
+    deleteFrameFileLines("rasp30_frame8_1.py", macrocab_name);
+    deleteFrameFileLines("rasp30a_frame8_1.py", macrocab_name);
+    deleteFrameFileLines("rasp30_frame8_2.py", macrocab_name);
+    deleteFrameFileLines("rasp30a_frame8_2.py", macrocab_name);
+    deleteFrameFileLines("rasp30_frame9.py", macrocab_name);
+    deleteFrameFileLines("rasp30a_frame9.py", macrocab_name);
+    deleteFrameFileLines("rasp30_frame10.py", macrocab_name);
+    deleteFrameFileLines("rasp30a_frame10.py", macrocab_name);
+    deleteFrameFileLines("rasp30_frame11.py", macrocab_name);
+    deleteFrameFileLines("rasp30a_frame11.py", macrocab_name);
+    deleteFrameFileLines("genswcs_frame5.py", macrocab_name);
+
+    //Regenerate frames
+    combineFiles();
+    //Recreate rasp3.arch, rasp3a.arch, rasp30.py, rasp30a.py, and genswcs from the frames
+    updateFrametoFiles();
+
+    //Delete block name in block_list and routing_exception_list
+    deleteLineinList("block_list", macrocab_name);
+    deleteLineinList("routing_exception_list", macrocab_name);
+
+    //Delete relevant files
+    unix_w("rm /home/ubuntu/rasp30/xcos_blocks/" + macrocab_name + ".sci");
+    unix_w("rm /home/ubuntu/rasp30/sci2blif/rasp_design_added_blocks/" + macrocab_name + ".sce");
+    unix_w("rm /home/ubuntu/rasp30/sci2blif/sci2blif_added_blocks/" + macrocab_name + ".sce");
+    unix_w("rm /home/ubuntu/rasp30/sci2blif/xcos_ref/macrocab_generation/" + macrocab_name + ".xcos");
+    unix_w("rm /home/ubuntu/rasp30/sci2blif/block_info/bi_" + macrocab_name + ".sci");
+    
+    disp("Deleted Macrocab");
+endfunction
+
+//Recreates rasp3.arch, rasp3a.arch, rasp30.py, rasp30a.py, and genswcs from the frames
+function updateFrametoFiles()
+    //Directories of the different files
+    dir_frame ="/home/ubuntu/rasp30/vpr2swcs/macroblk_generation/frame/";
+    dir_py="/home/ubuntu/rasp30/vpr2swcs/";
+    dir_arch="/home/ubuntu/rasp30/vpr2swcs/arch/";
+
+    //Lists to iterate between both chips
+    rasp_xml_list={"rasp3";"rasp3a";};
+    l_rasp_xml_list=size(rasp_xml_list,1);
+
+    rasp_py_list={"rasp30";"rasp30a";};
+    l_rasp_py_list=size(rasp_py_list,1);
+
+    //Generate arch xml files
+    for ii=1:l_rasp_xml_list
+        unix_w("cat "+dir_frame+rasp_xml_list(ii)+"_arch_frame1.xml "+dir_frame+rasp_xml_list(ii)+"_arch_frame2.xml "+dir_frame+rasp_xml_list(ii)+"_arch_frame3.xml "+dir_frame+rasp_xml_list(ii)+"_arch_frame4.xml "+"> "+dir_arch+rasp_xml_list(ii)+"_arch.xml");
+    end   
+  
+    //Generate py files
+    for ii=1:l_rasp_py_list
+        unix_w("cat "+dir_frame+rasp_py_list(ii)+"_frame1.py "+dir_frame+rasp_py_list(ii)+"_gen2.py "+dir_frame+rasp_py_list(ii)+"_gen3.py "+dir_frame+rasp_py_list(ii)+"_frame4.py "+dir_frame+rasp_py_list(ii)+"_frame5.py "+dir_frame+rasp_py_list(ii)+"_frame6.py "+dir_frame+rasp_py_list(ii)+"_frame7.py "+dir_frame+rasp_py_list(ii)+"_gen8.py "+dir_frame+rasp_py_list(ii)+"_frame9.py "+dir_frame+rasp_py_list(ii)+"_frame10.py "+dir_frame+rasp_py_list(ii)+"_frame11.py "+dir_frame+rasp_py_list(ii)+"_frame12.py "+"> "+dir_py+rasp_py_list(ii)+".py");
+    end
+
+    //Generate genswcs
+    unix_w("cat "+dir_frame+"genswcs_frame1.py "+dir_frame+"genswcs_gen2.py "+dir_frame+"genswcs_frame3.py "+dir_frame+"genswcs_gen4.py "+dir_frame+"genswcs_frame5.py "+dir_frame+"genswcs_frame6.py > "+dir_py+"genswcs.py");
+
+endfunction
+
+//Combines the partial frame numbers (i.e 2_1, 2_2) together into the gen frames
+//Note that each of these frames are only single lines
+function combineFiles()
+    prefix = "/home/ubuntu/rasp30/vpr2swcs/macroblk_generation/frame/";
+
+    //rasp30 frame2_1 + frame2_2 = frame_gen2
+    line1 = getLine(prefix + "rasp30_frame2_1.py");
+    line2 = getLine(prefix + "rasp30_frame2_2.py");
+    writeLine(prefix + "rasp30_gen2.py", line1+line2);
+
+    //rasp30 frame3_1 + frame3_2 = frame_gen3
+    line1 = getLine(prefix + "rasp30_frame3_1.py");
+    line2 = getLine(prefix + "rasp30_frame3_2.py");
+    writeLine(prefix + "rasp30_gen3.py", line1+line2);
+
+    //rasp30 frame8_1 + frame8_2 = frame_gen8
+    line1 = getLine(prefix + "rasp30_frame8_1.py");
+    line2 = getLine(prefix + "rasp30_frame8_2.py");
+    line3 = getLine(prefix + "rasp30_frame8_3.py");
+    writeLine(prefix + "rasp30_gen8.py", line1+line2+line3);
+
+    //rasp30a frame2_1 + frame2_2 = frame_gen2
+    line1 = getLine(prefix + "rasp30a_frame2_1.py");
+    line2 = getLine(prefix + "rasp30a_frame2_2.py");
+    writeLine(prefix + "rasp30a_gen2.py", line1+line2);
+
+    //rasp30a frame3_1 + frame3_2 = frame_gen3
+    line1 = getLine(prefix + "rasp30a_frame3_1.py");
+    line2 = getLine(prefix + "rasp30a_frame3_2.py");
+    writeLine(prefix + "rasp30a_gen3.py", line1+line2);
+
+    //rasp30a frame8_1 + frame8_2 = frame_gen8
+    line1 = getLine(prefix + "rasp30a_frame8_1.py");
+    line2 = getLine(prefix + "rasp30a_frame8_2.py");
+    line3 = getLine(prefix + "rasp30a_frame8_3.py");
+    writeLine(prefix + "rasp30a_gen8.py", line1+line2+line3);
+
+    //genswcs frame2_1 + frame2_2 = frame_gen2
+    line1 = getLine(prefix + "genswcs_frame2_1.py");
+    line2 = getLine(prefix + "genswcs_frame2_2.py");
+    writeLine(prefix + "genswcs_gen2.py", line1+line2);
+
+    //genswcs frame4_1 + frame4_2 = frame_gen2
+    line1 = getLine(prefix + "genswcs_frame4_1.py");
+    line2 = getLine(prefix + "genswcs_frame4_2.py");
+    writeLine(prefix + "genswcs_gen4.py", line1+line2);
+    
+endfunction
+
+//Writes a line to a file
+function writeLine(fileName, line)
+    f_d = mopen(fileName, 'w');
+        mputl(line,f_d);
+        mclose(fileName);
+endfunction
+
+//Retrieves all lines from a file
+function [line] = getLine(fileName)
+    f_d = mopen(fileName, 'r+');
+        line = mgetl(f_d);
+        mclose(fileName);
+endfunction
+
+//Deletes a line from either block_list or routing_exception_list
+function deleteLineinList(fileName, mcName)
+    //Directory prefix
+    prefix = "/home/ubuntu/rasp30/vpr2swcs/";
+    fileNameComplete = prefix + fileName;
+
+    //Read all lines in the file
+    allLines = getLine(fileNameComplete);
+   
+    //Open the file for writing
+    f_d = mopen(fileNameComplete, 'w');
+    s = size(allLines);
+
+    //While not at the end of the file
+    i = 1;
+    while i <= s(1)
+        //Read a line
+        line = allLines(i);
+        
+        //If the line is not the block to be deleted 
+        if(line ~= mcName) then
+            //Write it back into the file
+            mputl(line,f_d);
+        end
+            i = i+1;    
+    end
+
+    mclose(fileNameComplete);
+endfunction
+
+//Master function to delete lines from the frames
+function deleteFrameFileLines(fileName, mcName)
+    //Frame directory prefix
+    prefix = "/home/ubuntu/rasp30/vpr2swcs/macroblk_generation/frame/";
+    fileNameComplete = prefix + fileName;
+
+    //Read all lines in the file
+    allLines = getLine(fileNameComplete);
+
+    //Open the file for writing
+    f_d = mopen(fileNameComplete, 'w');
+    s = size(allLines);
+
+    //While lines are still left in the file
+    i = 1;
+    while i <= s(1)
+        j = 0;
+        check = 0;
+        line = allLines(i);
+        newLine = "";
+
+        //Call the correct function for the input file name
+        select fileName
+            case "rasp3_arch_frame1.xml" then [check,j] = checkArchFrames(line, mcName,1);
+            case "rasp3a_arch_frame1.xml" then [check,j] = checkArchFrames(line, mcName,1);
+            case "rasp3_arch_frame2.xml" then [check,j] = checkArchFrames(line, mcName,2);
+            case "rasp3a_arch_frame2.xml" then [check,j] = checkArchFrames(line, mcName,2);
+            case "rasp3_arch_frame3.xml" then [check,j] = checkArchFrames(line, mcName,3);
+            case "rasp3a_arch_frame3.xml" then [check,j] = checkArchFrames(line, mcName,3);
+            case "rasp30_frame2_1.py" then [check,j, newLine] = checkPyFrames(line, mcName,2);
+            case "rasp30a_frame2_1.py" then [check,j, newLine] = checkPyFrames(line, mcName,2);
+            case "rasp30_frame3_1.py" then [check,j, newLine] = checkPyFrames(line, mcName,3);
+            case "rasp30a_frame3_1.py" then [check,j, newLine] = checkPyFrames(line, mcName,3);
+            case "rasp30_frame4.py" then [check,j, newLine] = checkPyFrames(line, mcName,4);
+            case "rasp30a_frame4.py" then [check,j, newLine] = checkPyFrames(line, mcName,4);
+            case "rasp30_frame5.py" then [check,j, newLine] = checkPyFrames(line, mcName,5);
+            case "rasp30a_frame5.py" then [check,j, newLine] = checkPyFrames(line, mcName,5);
+            case "rasp30_frame7.py" then [check,j, newLine] = checkPyFrames(line, mcName,7);
+            case "rasp30a_frame7.py" then [check,j, newLine] = checkPyFrames(line, mcName,7);
+            case "rasp30_frame8_1.py" then [check,j, newLine] = checkPyFrames(line, mcName,81);
+            case "rasp30a_frame8_1.py" then [check,j, newLine] = checkPyFrames(line, mcName,81);
+            case "rasp30_frame8_2.py" then [check,j, newLine] = checkPyFrames(line, mcName,82);
+            case "rasp30a_frame8_2.py" then [check,j, newLine] = checkPyFrames(line, mcName,82);
+            case "rasp30_frame9.py" then [check,j, newLine] = checkPyFrames(line, mcName,9);
+            case "rasp30a_frame9.py" then [check,j, newLine] = checkPyFrames(line, mcName,9);
+            case "rasp30_frame10.py" then [check,j, newLine] = checkPyFrames(line, mcName,10);
+            case "rasp30a_frame10.py" then [check,j, newLine] = checkPyFrames(line, mcName,10);
+            case "rasp30_frame11.py" then [check,j, newLine] = checkPyFrames(line, mcName,11);
+            case "rasp30a_frame11.py" then [check,j, newLine] = checkPyFrames(line, mcName,11);
+            case "genswcs_frame5.py" then [check,j] = checkGenswcs(line, mcName);
+            else disp("Error in deleteFileLines: Invalid filename input"); check = 0;
+        end
+        //If the macrocab name was found, and the file has more than one line
+        if check == 1 & j ~= -1 then
+                    //Skip j number of lines 
+                    i = i+j;
+        //If the file has more than one line
+        elseif j == -1
+            //Write the modified line back
+            mputl(newLine,f_d);
+        //If the macrocab name was not found
+        else
+            //Write the line back to the file
+            mputl(line,f_d);
+        end
+            i = i+1;        
+    end
+    mclose(fileNameComplete);
+endfunction 
+
+//Checks a line from one of the arch frames for the macrocab to be deleted
+function [check,j] = checkArchFrames(line,mcName,frameNum)
+    //Split the line around double quotes
+    lineSplit = strsplit(line,'""');
+    sizeSplit = size(lineSplit);
+    nameCheck = "";
+
+    //If the split resulted in 6+ strings and we are testing frame 3
+    if sizeSplit(1) >= 6 & frameNum == 3 then 
+        //Split the 6th string again around a period
+        lineSplit2 = strsplit(lineSplit(6),'.');
+        //This gives us the name of the macrocab to check
+        nameCheck = lineSplit2(1);
+        //Skip 1 additional line if macrocab name matches
+        j = 1;
+    //If the split resulted in 2+ strings and we are testing frame 2 or 1
+    elseif sizeSplit(1) >=2 & (frameNum == 2 | frameNum == 1)
+        //The macrocab name is in the second string
+        nameCheck = lineSplit(2);
+        //If frame 1, skip 7 additional lines if name matches
+        if frameNum == 1 then
+            j = 7;
+        //If frame 2, skip 4 additional lines if name matches    
+        elseif frameNum == 2 then
+            j = 4;
+        end
+    end
+    
+    //If the extracted name matches, check is positive
+    if nameCheck == mcName then
+        check = 1;
+    //If not, skip no lines and check is negative
+    else
+        j = 0;
+        check = 0;
+    end
+endfunction
+
+//Checks a line from genswcs for the macrocab to be deleted
+function [check,j] = checkGenswcs(line,mcName)
+    //Split the line around single quotes
+    lineSplit = strsplit(line,"''");
+    sizeSplit = size(lineSplit);
+    nameCheck = "";
+
+    //If the split resulted in 2+ strings
+    if sizeSplit(1) >=2 then
+        //Check the second string for the name
+        nameCheck = lineSplit(2);
+    //Default to just taking first string (always incorrrect)
+    else
+        nameCheck = lineSplit(1);
+    end
+
+    //If the name matches
+    if nameCheck == mcName then
+        //Check is positive, and skip one line
+        check = 1;
+        j = 1;
+    else
+        j = 0;
+        check = 0;
+    end
+endfunction
+
+//Checks the .py frames for the macrocab to be deleted
+function [check,j,lineNew] = checkPyFrames(line,mcName,frameNum)
+
+//If frame2, frame3, frame7, frame8_1 or frame8_2
+//These frames are all only 1 line
+if frameNum == 2 | frameNum == 3 | frameNum == 7 | frameNum == 81 | frameNum == 82 then
+    delimiter = "";
+    splitToken = "";
+    lineNew = "";
+
+    //Assign a start to the line, a delimiter for the first split, and a splitToken for the second split
+    if frameNum == 2 then
+        lineNew = "                li_sm_0b = [''fgota[0].out[0]''";
+        splitToken = "[";
+        delimiter = ",";
+    elseif frameNum == 3 then
+        lineNew = "                li_sm_1 = [''fgota[0].in[0:1]''";
+        splitToken = "[";
+        delimiter = ",";
+    elseif frameNum == 7 then
+        lineNew = "                self.dev_types =[''fgota'']*1 ";
+        splitToken = "''";
+        delimiter = "+";
+    elseif frameNum == 81 then
+        lineNew = "                self.dev_pins ={''fgota_in'':2";
+        splitToken = "''";
+        delimiter = ",";
+    elseif frameNum == 82 then
+        lineNew = "";
+        splitToken = "''";
+        delimiter = ",";
+    end
+
+    //Split the line by the assigned delimeter
+    lineSplit = strsplit(line,delimiter);
+    sizeStr = size(lineSplit);  
+    
+    check = 0;
+    i = 1;
+    //While haven't read each split string
+    //Skipping first split because we know it won't match
+    while i < sizeStr(1)
+        i = i+1;
+        //Split string by assigned splitToken
+        lineSplit2 = strsplit(lineSplit(i),splitToken);
+
+        //If the macrocab name does not match, then add string back to frame line
+        if (frameNum == 2 | frameNum ==3) & "''" + mcName ~= lineSplit2(1) then
+            lineNew = lineNew + delimiter + lineSplit(i);
+        elseif (frameNum == 7) & mcName ~= lineSplit2(2) then
+            lineNew = lineNew + delimiter + lineSplit(i);
+        elseif frameNum == 81 & mcName + "_in" ~= lineSplit2(2) then
+            lineNew = lineNew + delimiter + lineSplit(i);
+        elseif frameNum == 82 & mcName + "_out" ~= lineSplit2(2) then
+            lineNew = lineNew + delimiter + lineSplit(i);
+        end
+    end
+
+    //Return j=-1 to tell deleteFrameFileLines that this is a 1 line file
+    j = -1;
+
+//If frame4, frame5, frame9, frame10 or frame11
+//These frames are multi-line
+elseif frameNum == 4 |  frameNum == 5 | frameNum == 9 | frameNum == 10 | frameNum == 11 then
+    //Split around a left bracket
+    lineSplit = strsplit(line,"[");
+    nameCheck = "";
+    //If frame is 5,4, or 9
+    if frameNum == 5 | frameNum == 4 | frameNum == 9 then
+        //Macrocab name is the first split string (whitespace removed)
+        nameCheck = stripblanks(lineSplit(1),%t);
+    //If the frame is 11
+    elseif frameNum == 11 then
+        //Split an additional time
+        splitSize = size(lineSplit);
+        //Take the second split if possible
+        //(first is always wrong, default)
+        if  splitSize(1) >= 2 then
+            lineSplit = lineSplit(2);
+        else
+            lineSplit = lineSplit(1);
+        end
+    end
+    //If the frame is 10 or 11
+    if frameNum == 10 | frameNum == 11 then
+        //Split again around "_"
+        lineSplit2 = strsplit(lineSplit(1),"_");
+        //Check to see how many "_" the macrocab name has
+        compare = strsplit(mcName,"_");
+        numArr = size(compare);
+
+        numSplit = size(lineSplit2);
+        nameCheck = "";
+        i = 1;
+        //While less than the number of split "_" in the macrocab name
+        //And less than the number of "_" splits in the line
+        while i <= numArr(1) & i <= numSplit(1)
+            //Special case where macrocab has no "_"
+            if i == 1 then
+                nameCheck = lineSplit2(i);
+            //Add a "_" to the nameCheck to reconstruct macrocab name from frame line
+            else
+                nameCheck = nameCheck + "_" + lineSplit2(i);
+            end
+            i = i+1;
+        end
+        //Strip whitespace
+        nameCheck = stripblanks(nameCheck,%t);
+    end
+    //If macrocab names match
+    if "''" + mcName == nameCheck then
+        //Return positive check
+        check = 1;
+        //Skip 0 lines unless frame 11
+        j = 0;
+        if frameNum == 11 then
+            j = 1;
+        end
+    else
+        check = 0;
+        j = 0;
+    end
+    //Returned line not used because j =/= -1
+    lineNew = line;
+end
+endfunction
 
 
 

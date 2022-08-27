@@ -271,6 +271,10 @@ function Program_Design_callback(handles)
             disp("Programming Completed...Ready to Take Data");
             close(winH);
             filebrowser();
+            //Play a sound to indicate programming is finished
+            //Sound is housed in a .wav file, can be changed by user if desired
+            //Defaults is Mario coin sound
+            unix_w('aplay /home/ubuntu/rasp30/sci2blif/Sound.wav');
         end
     else messagebox(["You do not have a ' + fname+ '.swcs file in the current directory." "Please create one by compiling a design or netlist."], "No Switch List Detected", "warning");
     end
