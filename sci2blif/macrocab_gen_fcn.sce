@@ -124,11 +124,13 @@ function Generate_MC_callback()
                 fgswc_matrix(j_fgswc,1) = scs_m.objs(bl).model.rpar(1);
                 fgswc_matrix(j_fgswc,2) = string(scs_m.objs(bl).model.ipar(1));
                 fgswc_matrix(j_fgswc,3) = string(scs_m.objs(bl).model.ipar(2));
+
+                // Add exception for any FGs in routing
+                if(scs_m.objs(bl).model.ipar(2) < 15 ) then
+                    routing_exception = %T;
+                end
+                
                 if scs_m.objs(bl).model.rpar(1) == "T" then
-                    // Add exception for any FGs in routing
-                    if(scs_m.objs(bl).model.ipar(2) < 15 ) then
-                        routing_exception = %T;
-                    end
                     fgswc_matrix(j_fgswc,4) = scs_m.objs(bl).model.rpar(2);
                     fgswc_matrix(j_fgswc,5) = scs_m.objs(bl).model.rpar(3);
                     sum_p=sum_p+1;
@@ -882,12 +884,14 @@ function Generate_MC_callback()
     unix_w("cat "+dir_frame+"genswcs_frame1.py "+dir_frame+"genswcs_gen2.py "+dir_frame+"genswcs_frame3.py "+dir_frame+"genswcs_gen4.py "+dir_frame+"genswcs_frame5.py "+dir_frame+"genswcs_frame6.py > "+dir_py+"genswcs.py");
     
     // Update routing exception list to be used by swcsFromLi in genu
-    routing_exception_file = mopen("/home/ubuntu/rasp30/vpr2swcs/routing_exception_list", "at")
-    for input_index=1:1:numofinput
-        ex_str = macrocab_name + "[0].in[" + string(input_index-1) + "]";
-        mputl(ex_str, routing_exception_file);
+    if routing_exception then
+        routing_exception_file = mopen("/home/ubuntu/rasp30/vpr2swcs/routing_exception_list", "at")
+        for input_index=1:1:numofinput
+            ex_str = macrocab_name + "[0].in[" + string(input_index-1) + "]";
+            mputl(ex_str, routing_exception_file);
+        end
+        mclose(routing_exception_file);
     end
-    mclose(routing_exception_file);
 
 
     /////////////////////////////////////////////////////
