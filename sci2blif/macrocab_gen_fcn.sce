@@ -215,7 +215,7 @@ function Generate_MC_callback()
     end
 
     if numofoutput == 1 then mputl(msprintf("\t\t\t\t")+"<complete name=""crossbar"" input="""+macrocab_name+"[0].out[0]"" output=""cab.O[4]""/>",fd_w); end
-    if numofoutput ~= 1 then mputl(msprintf("\t\t\t\t")+"<complete name=""crossbar"" input="""+macrocab_name+"[0].out["+string(numofoutput-1)+":0]"" output=""cab.O[4:"+string(4-(numofoutput-1))+"]""/>",fd_w); end
+    if numofoutput ~= 1 then mputl(msprintf("\t\t\t\t")+"<direct name=""crossbar"" input="""+macrocab_name+"[0].out["+string(numofoutput-1)+":0]"" output=""cab.O[4:"+string(4-(numofoutput-1))+"]""/>",fd_w); end
     mclose(fd_w);
     
     // python
